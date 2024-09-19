@@ -1,14 +1,17 @@
 #include <Adafruit_LiquidCrystal.h>
 
 
+
 //                INICIALIZACION DE VARIABLES
 
 
-unsigned short int size = 0;
-//unsigned short int capacidad = 15;
-const short int pulsador1 = 2;
-const short int pulsador2 = 3;
-const short int analogPin = 0;
+signed short int size = -20; // Cantidad de datos entrando
+unsigned short int sizeArreglo = 0; // posiciones reales en el arreglo
+const signed short int max = 102;
+signed short int tramos = 0;
+const unsigned short int pulsador1 = 2;
+const unsigned short int pulsador2 = 3;
+const unsigned short int analogPin = 0;
 
 float val = 0;
 float** arreglo = nullptr; // Puntero inicial
@@ -20,8 +23,9 @@ Adafruit_LiquidCrystal lcd_1(0);
 //               REGISTRO DE ACTIVACION
 
 bool verificarcuadrada(float** arreglo, unsigned short int filas);
-bool senialTriangular(float** arreglo, int filas);
-int predominante(int cuadra, int triangu, int senoi);
+bool senialTriangular(float** arreglo, unsigned short int filas);
+bool verificarsenoidal(float** arreglo, unsigned short int filas);
+unsigned short int predominante(unsigned short int cuadra, unsigned short int triangu,unsigned short int senoi);
 
 float calcularAmplitud(float** arreglo, unsigned short int size);
 float calcularPeriodo(float** arreglo, unsigned short int size);
@@ -35,8 +39,8 @@ void setup()
     pinMode(pulsador2, INPUT);
 
     //CREANDO MATRIZ DE DATOS
-    arreglo = new float*[size];
-    for (int i = 0; i<size; i++)
+    arreglo = new float*[max];
+    for (unsigned short int i = 0; i<max; i++)
     {
         arreglo[i] = new float [2];
     }
@@ -44,99 +48,139 @@ void setup()
 
 void loop()
 {
+    //delay(2000);
+    lcd_1.clear();
     while (digitalRead(pulsador1) == LOW){
         //val = analogRead(analogPin);
         //Serial.println(val/100);
     }
     if (digitalRead(pulsador1)==HIGH){
         inicio = millis();
-        bool triangular, cuadra, bandera = true;
+        float periodo, frecuencia, amplitud;
+        bool triangular, cuadra, senoi, bandera = false;
         unsigned short int contCuadrada = 0, contTriangular = 0, contSenoidal = 0;
-        Serial.println("Adquisicion...\n");
+        Serial.println("Iniciando Adquisicion...\n");
         while (digitalRead(pulsador2) == LOW){
             val = analogRead(analogPin);
             tiempoVal = millis() - inicio;
             val = val/100;
 
-            //Serial.println(val);
+            Serial.println(val);
             //Serial.println(size);
             //Serial.println(tiempoVal);
             //Serial.println("------");
-            //delay(70);
-
-            // Alternativa 1 de reemplazo.
-            if (size>50){
-                //delay(1);
+            if (size >= max){
+                Serial.println("------");
                 // 				IDENTIFICAR CUADRADA
-
-                cuadra = verificarcuadrada(arreglo, size);
+                cuadra = verificarcuadrada(arreglo, sizeArreglo);
                 if(cuadra){contCuadrada++;}
+                else {
+                    // 				IDENTIFICAR TRIANGULAR
 
-                // 				IDENTIFICAR TRIANGULAR
+                    triangular = senialTriangular(arreglo, sizeArreglo);
+                    if(triangular){contTriangular++;}
+                    else if (senoi = verificarsenoidal(arreglo, sizeArreglo)) {contSenoidal++;}
+                }
 
-                triangular = senialTriangular(arreglo, size);
-                if(triangular){contTriangular++;}
-                else{contSenoidal++;}
+                bandera = true;
                 size = 0;
+                sizeArreglo = 0;
             }
-            else if (bandera){arreglo[size] = new float[2];}
-
-            arreglo[size][0] = val; 		//Dato en posicion 0
-            arreglo[size][1] = tiempoVal; 	  //Tiempo en la posicion 1
-            ++size;
+            if(bandera){
+                arreglo[sizeArreglo][0] = val; 		//Dato en posicion 0
+                arreglo[sizeArreglo][1] = tiempoVal; 	  //Tiempo en la posicion 1
+                size++;
+                sizeArreglo++;
+            }
+            else if (size>=0){
+                arreglo[sizeArreglo][0] = val; 		//Dato en posicion 0
+                arreglo[sizeArreglo][1] = tiempoVal; 	  //Tiempo en la posicion 1
+                size++;
+                sizeArreglo++;
+            }
+            else{size++;}
         }
-        delay(100);
 
         //              INVOCACION DE AMPLITUD Y FRECUENCIA.
-        float periodo = calcularPeriodo(arreglo, size);
-        float frecuencia = calcularFrecuencia(periodo);
-        float amplitud = calcularAmplitud(arreglo,size);
-
+        periodo = calcularPeriodo(arreglo, sizeArreglo);
+        frecuencia = calcularFrecuencia(periodo);
+        amplitud = calcularAmplitud(arreglo, sizeArreglo);
 
         // 				IDENTIFICAR CUADRADA
 
-        cuadra = verificarcuadrada(arreglo, size);
+        cuadra = verificarcuadrada(arreglo, sizeArreglo);
         if(cuadra){contCuadrada++;}
+        else {
+            // 				IDENTIFICAR TRIANGULAR
 
-        // 				IDENTIFICAR TRIANGULAR
+            triangular = senialTriangular(arreglo, sizeArreglo);
+            if(triangular){contTriangular++;}
+            else if (senoi = verificarsenoidal(arreglo, sizeArreglo)) {contSenoidal++;}
+        }
 
-        triangular = senialTriangular(arreglo, size);
-        if(triangular){contTriangular++;}
-        else{contSenoidal++;}
-
-
-        Serial.print("Frecuencia: ");
-        Serial.println(frecuencia);
-        Serial.print("Amplitud:");
-        Serial.println(amplitud);
-
-        int predo = predominante(contCuadrada, contTriangular, contSenoidal);
+        unsigned short int predo = predominante(contCuadrada, contTriangular, contSenoidal);
 
         switch (predo) {
         case 1:
-            lcd_1.print("CUA");
+            lcd_1.setCursor(0,0);
+            lcd_1.print("F=");
+            lcd_1.print(frecuencia);
+            lcd_1.print("Hz");
+            lcd_1.setCursor(9, 0);
+            lcd_1.print("A=");
+            lcd_1.print(amplitud);
+            lcd_1.print("V");
+            lcd_1.setCursor(0, 1);
+            lcd_1.print(" Cuadrada ");
             break;
         case 2:
-            lcd_1.print("TRI");
+            lcd_1.setCursor(0,0);
+            lcd_1.print("F=");
+            lcd_1.print(frecuencia);
+            lcd_1.print("Hz");
+            lcd_1.setCursor(9, 0);
+            lcd_1.print("A=");
+            lcd_1.print(amplitud);
+            lcd_1.print("V");
+            lcd_1.setCursor(0, 1);
+            lcd_1.print(" Triangular ");
             break;
         case 3:
-            lcd_1.print("SEN");
+            lcd_1.setCursor(0,0);
+            lcd_1.print("F=");
+            lcd_1.print(frecuencia);
+            lcd_1.print("Hz");
+            lcd_1.setCursor(9, 0);
+            lcd_1.print("A=");
+            lcd_1.print(amplitud);
+            lcd_1.print("V");
+            lcd_1.setCursor(0, 1);
+            lcd_1.print(" Senoidal ");
             break;
         case 4:
-            lcd_1.print("DES");
+            lcd_1.setCursor(0,0);
+            lcd_1.print("F=");
+            lcd_1.print(frecuencia);
+            lcd_1.print("Hz");
+            lcd_1.setCursor(9,0);
+            lcd_1.print("A=");
+            lcd_1.print(amplitud);
+            lcd_1.print("V");
+            lcd_1.setCursor(0, 1);
+            lcd_1.print(" Desconocida ");
             break;
         default:
             break;
         }
 
         // Liberar la memoria al final
-        for (int i = 0; i<size; i++){
+        for (int i = 0; i<max; i++){
             delete[] arreglo[i];
         }
         delete[] arreglo;
 
     }
-    //while (1); //frenar la ejecucion pero no terminarla
+    while (1); //frenar la ejecucion pero no terminarla
 }
 
 
@@ -146,14 +190,12 @@ bool verificarcuadrada(float** arreglo, unsigned short int filas){
     //Recibe el apuntador al arreglo de datos, guarda su primer valor, e itera entre sus posiciones
     //para luego compararlo con el resto, si encuantra 3 valores distintos retorna false(0) y si
     //solo encuentra 2 valores en todos los datos retorna true(1)
-    if (filas < 2) {
-        return false;
-    }
+    if (filas < 2) {return false;}
     float primerValor = arreglo[0][0];
     float segundoValor;
     bool encontradoSegundoValor = false;
 
-    for(int i = 1; i < filas-1; i++){
+    for(unsigned short int i = 1; i < filas-2; i++){
         if (arreglo[i][0] != primerValor) {
             if (!encontradoSegundoValor) {
                 segundoValor = arreglo[i][0];
@@ -162,6 +204,7 @@ bool verificarcuadrada(float** arreglo, unsigned short int filas){
                 return false;
             }
         }
+        if (arreglo[i-1][0]<arreglo[i][0] && arreglo[i][0]==arreglo[i+2][0]){return true;}
     };
     return true;
 }
@@ -169,54 +212,110 @@ bool verificarcuadrada(float** arreglo, unsigned short int filas){
 bool senialTriangular(float** arreglo, unsigned short int filas){
     //esta funcion verifica si una funcion es triangular o no, retorna true
     //si es triangular, o false si no lo es.
-    float valorMax = -999999;
-    float valorMin = 999999;
-    for (int i = 0; i < filas-1; ++i) {
-        if (arreglo[i][0] < valorMin) {
-            valorMin = arreglo[i][0];
-        }
-        if (arreglo[i][0] > valorMax) {
-            valorMax = arreglo[i][0];
-        }
-    }
+    if (filas < 10){return false;}
+    for (unsigned short int i = 5; i < filas-2; i++){
+        float deltaTiempo = (arreglo[i][1])-(arreglo[i-1][1]);
+        float deltaValor = (arreglo[i][0])-(arreglo[i-1][0]);
+        float pendiente1 = (deltaValor)/(deltaTiempo);				// PENDIENTE ANTERIOR
 
-    for (int i = 2; i < filas-1; i++){
-        if ((arreglo[i][0]==arreglo[i+1][0]) && (arreglo[i][1]!=arreglo[i+1][1])){
+        float deltaTiempo2 = (arreglo[i-1][1])-(arreglo[i-2][1]);
+        float deltaValor2 = (arreglo[i-1][0])-(arreglo[i-2][0]);
+        float pendiente2 = (deltaValor2)/(deltaTiempo2);			// PENDIENTE ANTERIORx2
+
+        float deltaTiempo3 = (arreglo[i+2][1])-(arreglo[i][1]);
+        float deltaValor3 = (arreglo[i+2][0])-(arreglo[i][0]);
+        float pendiente3 = (deltaValor3)/(deltaTiempo3);			// PENDIENTE POSTERIOR
+
+        if (arreglo[i][0]==arreglo[i+1][0] || (arreglo[i][0]==arreglo[i-1][0])){
             return false;
         }
-        if (arreglo[i][0]>=valorMax*0.92 && (arreglo[i-1][0])<arreglo[i][0] && arreglo[i][0]>arreglo[i+1][0]){
-            float deltaTiempo = (arreglo[i][1])-(arreglo[i-1][1]);
-            float deltaValor = (arreglo[i][0])-(arreglo[i-1][0]);
-            float pendiente1 = (deltaValor)/(deltaTiempo);
+        if ((arreglo[i-1][0]<arreglo[i][0]) && (arreglo[i][0]>arreglo[i+1][0]) || (arreglo[i-1][0]>arreglo[i][0]) && (arreglo[i][0]<arreglo[i+1][0])){
+            float deltaTiempo4 = (arreglo[i-2][1])-(arreglo[i-3][1]);
+            float deltaValor4 = (arreglo[i-2][0])-(arreglo[i-3][0]);
+            float pendiente4 = (deltaValor)/(deltaTiempo);
 
-            float deltaTiempo2 = (arreglo[i-1][1])-(arreglo[i-2][1]);
-            float deltaValor2 = (arreglo[i-1][0])-(arreglo[i-2][0]);
-            float pendiente2 = (deltaValor2)/(deltaTiempo2);
+            float deltaTiempo5 = (arreglo[i-3][1])-(arreglo[i-4][1]);
+            float deltaValor5 = (arreglo[i-3][0])-(arreglo[i-4][0]);
+            float pendiente5 = (deltaValor)/(deltaTiempo);
 
-            //float deltaTiempo3 = (arreglo[i+2][1])-(arreglo[i][1]);
-            //float deltaValor3 = (arreglo[i+2][0])-(arreglo[i][0]);
-            //float pendiente3 = (deltaValor3)/(deltaTiempo3);
-            if(pendiente2>=pendiente1*0.88 && pendiente2<=pendiente1*1.249){
-                return true;
-            }
+            float deltaTiempo6 = (arreglo[i-4][1])-(arreglo[i-5][1]);
+            float deltaValor6 = (arreglo[i-4][0])-(arreglo[i-5][0]);
+            float pendiente6 = (deltaValor)/(deltaTiempo);
+
+            float promPendientes = abs(pendiente1+pendiente2+pendiente3+pendiente4+pendiente5)/5;
+
+            //QUE EL PROMEDIO DE LAS 5 PENDIENTES ANTERIORES SEA APROX A LA PENDIENTE ACTUAL
+            if (pendiente1>=promPendientes*0.88 && pendiente1<=promPendientes*1.249){return true;}
+            //QUE LA PENDIENTE 2 SEA SEMEJANTE A LA PENDIENTE 1
+            if(pendiente2>=pendiente1*0.88 && pendiente2<=pendiente1*1.249){return true;}
+            //QUE LA PENDIENTE 3 SEA SEMEJANTE A LA PENDIENTE 1 MULTIPLICADA POR (-1)
+            if (pendiente3>=(pendiente1*0.88)*(-1) && pendiente3<=(pendiente1*1.249)*(-1)){return true;}
+            //QUE LA PENDIENTE ANTERIOR Y POSTERIOR SEAN 0 APROX (RETORNA CERO)
+            if ((pendiente1 >= -0.00218096 && pendiente1 <= 0.00218096) && (pendiente3 >= -0.00218096 && pendiente3 <= 0.00218096)){return false;}
+        }
+        if(arreglo[i-1][0]<arreglo[i][0] && arreglo[i][0]<arreglo[i+1][0]){
+            //QUE LA DIFERENCIA ENTRE DOS PENDIENTES CONSECUTIVAS SEA 0 APROX
+            if(pendiente3-pendiente1>-0.000218096 && pendiente3-pendiente1<0.000218096){return true;}
+            //QUE LAS PENDIENTES CONSECUTIVAS SEAN IGUALES APROX
+            if(pendiente3>=pendiente1*0.99999999999 && pendiente3<=pendiente1*1.000000001){return true;}
         }
     }
     return false;
 }
 
-int predominante(int cuadra, int triangu, int senoi){
+bool verificarsenoidal(float** arreglo, unsigned short int filas){
+    //
+    //
+    float suavidad, pendiente, pendientet;
+    short int cambiosSuaves = 0, totalCambios = 0;
+    bool bandera = true;
+    for (unsigned short int i = 1; i < filas-1; i++){
+        pendiente=(arreglo[i][0]-arreglo[i-1][0])/arreglo[i][1]-arreglo[i-1][1];
+        pendientet+=(arreglo[i+1][0]-arreglo[i][0])/arreglo[i][1]-arreglo[i-1][1];
+        if (pendiente<0){
+            pendiente=pendiente*(-1);
+        }
+        if (pendiente>0){
+            if(pendientet>0){
+                if (pendientet>=pendiente*0.88 && pendientet<=pendiente*1.249){
+                    return true;
+                }
+            }
+            else{
+                pendientet=pendientet*(-1);
+                if (pendientet>=pendiente*0.88 && pendientet<=pendiente*1.249){
+                    return true;
+                }
+            }
+        }
+        if (arreglo[i][0]==arreglo[i+1][0] || arreglo[i][0]==arreglo[i-1][0]){
+            return true;
+        }
+        float diferencia1 = arreglo[i][0] - arreglo[i-1][0];
+        float diferencia2 = arreglo[i+1][0] - arreglo[i][0];
+        if (abs(diferencia2 - diferencia1)<5){
+            cambiosSuaves++;
+        }
+        totalCambios++;
+    }
+    float proporsionSuave = cambiosSuaves/totalCambios;
+    if(proporsionSuave>0.5){return false;}
+    return false;
+}
+
+unsigned short int predominante(unsigned short int cuadra, unsigned short int triangu, unsigned short int senoi){
     //En base a los contadores de señales, calcula el porcentaje de cada uno y retorna
     //su valor en int.
-    int total = cuadra + triangu + senoi;
-    float pcuadra = (cuadra/total)*100, ptriangu = (triangu/total)*100, psenoi = (senoi/total)*100;
-    if (pcuadra>ptriangu && pcuadra>psenoi){
+    float total = (cuadra + triangu + senoi);
+    float pcuadra = (cuadra)/total, ptriangu = (triangu)/total, psenoi = (senoi)/total;
+
+    if (pcuadra>0.51){
         return 1;
-    } else if(ptriangu>pcuadra && ptriangu>psenoi){
+    } else if(ptriangu>0.51){
         return 2;
-    } else if(psenoi>triangu && psenoi>pcuadra){
+    } else if(psenoi>0.51){
         return 3;
     } else {return 4;}
-
 }
 
 //                    FUNCIONES PARA AMPLITUD Y FRECUENCIA.
@@ -226,7 +325,7 @@ float calcularAmplitud(float** arreglo, unsigned short int size){
     // Calcula el valor maximo y minimo y luego halla su promedio, retorna su valor float.
     float valorMax = arreglo[0][0];
     float valorMin = arreglo[0][0];
-    for (int i = 1; i < size; ++i) {
+    for (unsigned short int i = 1; i < size; ++i) {
         if (arreglo[i][0] < valorMin) {
             valorMin = arreglo[i][0];
         }
@@ -234,25 +333,29 @@ float calcularAmplitud(float** arreglo, unsigned short int size){
             valorMax = arreglo[i][0];
         }
     }
-    float amplitud = (valorMax - valorMin) / 2;
-    return amplitud;
+    if (valorMax < 0){valorMax = (-1)*valorMax;}
+    if (valorMin < 0){valorMin = (-1)*valorMin;}
+    return valorMax;
 }
 
-float calcularPeriodo(float** arreglo, int size){
-    //Calcula el periodo del arreglo de datos, encontrando sus cruces por cero, retorna su valor float.
-    if (size < 3){
+float calcularPeriodo(float** arreglo, unsigned short int size){
+    if (size < 3) {
         return 0;
     }
     float tiempoInicial = 0;
     float tiempoFinal = 0;
-    unsigned int Cruce = 0;
-    for (int i = 0; i < size-1; i++) {
-        if ((arreglo[i][0] > 0 && arreglo[i + 1][0] < 0) || (arreglo[i][0] < 0 && arreglo[i + 1][0] > 0)) {
-            Cruce++;
-            if(Cruce == 1){
+    unsigned short int Picos = 0;
+    for (unsigned short int i = 1; i < size - 1; ++i){
+        //Maximo
+        float valorAnterior = arreglo[i - 1][0];
+        float valorActual = arreglo[i][0];
+        float valorSiguiente = arreglo[i + 1][0];
+        if ((valorActual) >= (valorAnterior) && (valorActual) > (valorSiguiente)){
+            Picos++;
+            if (Picos == 1) {
                 tiempoInicial = arreglo[i][1];
             }
-            else if(Cruce == 3){
+            else if (Picos == 2) {
                 tiempoFinal = arreglo[i][1];
                 break;
             }
@@ -261,142 +364,9 @@ float calcularPeriodo(float** arreglo, int size){
     float periodo = (tiempoFinal - tiempoInicial) / 1000.0;
     return periodo;
 }
-
 float calcularFrecuencia(float periodo){
-    // Calcula la fecuncia en base al inverso del periodo y retorna su valor float.
     if (periodo  <= 0){
         return 0;
     }
     return (1.f / periodo);
 }
-
-//			PARA IMPRIMIR EL ARREGLO
-/*
-Serial.println("Elementos en el arreglo:\n");
-for (int i = 0; i < size; ++i) {
-    Serial.println(arreglo[i][1]);
-    Serial.println(arreglo[i][0]);
-    Serial.println("------");
-    }
-*/
-
-/*
- lcd.setCursor(0, 0);  // display position
- lcd.print("T=");
- lcd.print(tempC);     // display the temperature
- lcd.print("C");
-
- lcd.setCursor(8, 0);  // display position
- lcd.print("H=");
- lcd.print(humi);      // display the humidity
- lcd.print("%");
-
- lcd.setCursor(0, 1);  // display position
- lcd.print("Gas=");
- lcd.print(porcentajeGas);     // display the temperature
- lcd.print("%");
- digitalWrite (Led, LOW);
-
-*/
-
-
-//              PARA MOSTRAR HEAP DISPONIBLE
-
-/*
-int freeMemory() {
-  int free_memory;
-  if((int)__brkval == 0) {
-    free_memory = (int)&free_memory - (int)&__heap_start;
-  } else {
-    free_memory = (int)&free_memory - (int)__brkval;
-  }
-  return free_memory;
-}
-*/
-
-/*
-//            FORMA INICIAL DE REEMPLAZO DE MEMORIA
-
-if (size == capacidad) {
-// aumentar la capacidad
-capacidad += 1;
-    if (capacidad < 160) //capacidad limite
-    {
-        float** nuevoArreglo = new float*[capacidad];
-
-        // Copiar los elementos al nuevo arreglo
-        for (int i = 0; i < size; ++i)
-        {
-            nuevoArreglo[i] = arreglo[i];
-        }
-
-        // Liberar el viejo arreglo
-        delete[] arreglo;
-
-        // Asignar el nuevo arreglo
-        arreglo = nuevoArreglo;
-
-        arreglo[size] = new float[2];
-    }
-    else {
-        //analizar primer tramo
-        for(int i = 0; i < 15; i++){
-        // 				IDENTIFICAR CUADRADA
-
-        //bool cuadra = verificarcuadrada(arreglo, size);
-        //lcd_1.print(cuadra);
-
-        // 				IDENTIFICAR TRIANGULAR
-
-        //bool triangular = senialTriangular(arreglo, size);
-        //lcd_1.print(triangular);
-        }
-        else{arreglo[size] = new float[2];}
-*/
-
-/*
-bool verificarsenoidal(float** arreglo, unsigned short int filas){
-  //
-  //
-    float suavidad;
-    float pendiente;
-    float pendientet;
-    bool bandera = true;
-    for (int i = 1; i < filas-1; i++){
-        pendiente=(arreglo[i][0]-arreglo[i-1][0])/0.1;
-        pendientet+=(arreglo[i+1][0]-arreglo[i][0])/0.1;
-        if (pendiente<0){
-          pendiente=pendiente*(-1);
-        }
-        if (pendiente>0){
-          if(pendientet>0){
-            if (pendientet>=pendiente*0.9 && pendientet<=pendiente*1.1){
-              return false;
-            }
-          }
-          else{
-            pendientet=pendientet*(-1);
-            if (pendientet>=pendiente*0.9 && pendientet<=pendiente*1.1){
-              return false;
-            }
-          }
-        }
-        if (arreglo[i][0]==arreglo[i+1][0] || arreglo[i][0]==arreglo[i-1][0]){
-            return false;
-        }
-        if ((arreglo[i][0]>arreglo[i-1][0])&& bandera){
-            suavidad=arreglo[i][0]-arreglo[i-1][0];
-            bandera=false;
-        }
-        if((arreglo[i][0]<arreglo[i-1][0])&& bandera){
-            suavidad=arreglo[i-1][0]-arreglo[i][0];
-            bandera=false;
-        }
-        if(!((arreglo[i+1][0]-arreglo[i][0])<=(suavidad*1.5) && ((arreglo[i+1][0]-arreglo[i][0])>=(-1*(suavidad*1.5))))){
-          return false;
-        }
-    }
-    return true;
-}
-*/
-
