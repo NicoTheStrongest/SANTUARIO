@@ -15,6 +15,5 @@ void mensajeSalida();
 void limpiarPantalla();
 int inicioSesion();
 int menuRegion();
-int menuEstacion();
 
 #endif // FUNCIONESGENERALES_H

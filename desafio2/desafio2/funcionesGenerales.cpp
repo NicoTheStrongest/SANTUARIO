@@ -110,17 +110,7 @@ int menuRegion(){
     return opcionElegida;
 }
 
-int menuEstacion(){
-    //escoge la funcionalidad a realizar en la estacion.
-    prints = "./../../prints/MenuGestionDeEstaciones.txt";
-    menuGeneral(prints);
-    string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
-    const int size = 8;
-    string opcionesValidas[size] = {"1", "2", "3", "4", "5", "6", "7", "0"};
-    int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
-    return opcionElegida;
-}
+
 
 
 
