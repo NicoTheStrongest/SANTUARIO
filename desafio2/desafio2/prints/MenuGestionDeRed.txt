@@ -1,0 +1,12 @@
+=======================================
+      
+    Funcionalidades de red Nacional
+
+1->	Agregar estacion
+2->	Eliminar estacion
+3->	Mostrar monto total de venta
+4->	Fijar precios del combustible
+5->	Trabajar sobre una estacion
+
+Presione 0 para finalizar ejecucion.
+=======================================
