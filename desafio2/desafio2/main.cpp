@@ -54,38 +54,13 @@ int main(){
             }
             if(sesionActiva){
                 // Trabajar sobre la region y la estacion escogida
-                //Menu de funcionalidades de estacion
-                int numGestionEstacion = menuEstacion();
-                if(numGestionEstacion == 1){
-                    //funcionalidad de agregar surtidor
-                }
-                else if(numGestionEstacion == 2){
-                    //funcionalidad de eliminar surtidor
-                }
-                else if(numGestionEstacion == 3){
-                    //funcionalidad de consultar hisorico de transacciones
-                }
-                else if(numGestionEstacion == 4){
-                    //Funcionalida de eporte de litros vendidos
-                }
-                else if(numGestionEstacion == 5){
-                    //Funcionalidad de simular venta
-                }
-                else if(numGestionEstacion == 6){
-                    //Funcionalidad de asignar capacidad de tanque (?)
-                }
-                else if(numGestionEstacion == 7){
-                    //Funcionalidad de verificacion de fuga.
-                }
-                else if(numGestionEstacion == 0){
-                    //salir
-                    sesionActiva = false;
-                }
+
             }
         }
         else if (inicioValido == 0){// Salir
             sesionActiva = false;
         }
+
     }
     mensajeSalida();
 }
