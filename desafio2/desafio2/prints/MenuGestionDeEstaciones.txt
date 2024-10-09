@@ -1,0 +1,15 @@
+=======================================
+      
+    Funcionalidades de red Nacional
+
+1->	Agregar surtidor
+2->	Eliminar sutidor
+3->	Consultar historido de 
+	transacciones
+4->	Reportar litros vendidos
+5->	Simular de venta
+6->	Asignar capacidad del tanque.
+7->	Verificacion de fuga
+
+Presione 0 para finalizar ejecucion.
+=======================================
