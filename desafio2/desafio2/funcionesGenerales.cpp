@@ -100,6 +100,7 @@ int inicioSesion(){
 int menuRegion(){
     //Elije la region sobre la cual desea trabajar
     limpiarPantalla();
+    string prints;
     prints = "./../../prints/MenuRegiones.txt";
     menuGeneral(prints);
     string mensaje1 = "Escoja un opcion: ";
@@ -112,6 +113,7 @@ int menuRegion(){
 
 int menuEstacion(){
     //escoge la funcionalidad a realizar en la estacion.
+    string prints;
     prints = "./../../prints/MenuGestionDeEstaciones.txt";
     menuGeneral(prints);
     string mensaje1 = "Escoja un opcion: ";
