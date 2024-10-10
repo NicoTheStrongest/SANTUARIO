@@ -1,0 +1,34 @@
+norte,centro,sur
+1,badbunny,1001735201,norte,41°24'12.2"N 2°10'26.5"E
+2,sanlucas,1007534567,sur,45°24'12.2"N 4°10'26.5"S
+3,mora,1008976534,norte,51°30'30"N 0°7'33"O
+4,amapolas,1234567890,centro,52°31'N 28"N;13°24'38"E
+5,polaris,1206745265,sur,41°53'30"N 12°29'39"E
+6,nasa,1029384756,centro,52°22'26"N 4°53'27"E
+n1_1,s1_1_1,s1_1_2,s1_1_3
+n1_2,s1_2_1,s1_2_2,s1_2_3
+n2_1,s2_1_1,s2_1_2
+n3_1,s3_1_1,s3_1_2
+n3_2,s3_2_1,s3_2_2,s3_2_3
+n4_1,s4_1_1,s4_1_2
+n5_1,s5_1_1,s5_1_2
+n6_1,s6_1_1,s6_1_2
+s1_1_1,modelo1
+s1_1_2,modelo1
+s1_1_3,modelo1
+s1_2_1,modelo2
+s1_2_2,modelo2
+s1_2_3,modelo2
+s2_1_1,modelo1
+s2_1_2,modelo1
+s3_1_1,modelo3
+s3_1_2,modelo3
+s3_2_1,modelo3
+s3_2_2,modelo3
+s3_2_3,modelo3
+s4_1_1,modelo2
+s4_1_2,modelo2
+s5_1_1,modelo1
+s5_1_2,modelo1
+s6_1_1,modelo3
+s6_1_2,modelo3
