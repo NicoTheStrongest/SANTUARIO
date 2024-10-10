@@ -5,6 +5,9 @@
 
 using namespace std;
 
+
+//              Menu y funciones de interfaz
+
 void menuGeneral(const string& fileName) {
     // Función que abre un archivo, lo imprime y lo cierra
     ifstream archivo(fileName);
@@ -69,6 +72,34 @@ void mensajeSalida(){
     menuGeneral(prints);
 }
 
+int menuGestionDeRed(){
+    //retorna int asociado a la funcionalidad de gestion de red a realizar
+    limpiarPantalla();
+    string prints;
+    prints = "./../../prints/MenuGestionDeRed.txt";
+    menuGeneral(prints);
+    string mensaje1 = "Escoja un opcion: ";
+    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    const int size = 5;
+    string opcionesValidas[size] = {"1", "2", "3", "4", "0"};
+    int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
+    return opcionElegida;
+}
+
+int menuGestionEstaciones(){
+    //retorna int asociado a la funcionalidad de gestion de Estacion a realizar
+    limpiarPantalla();
+    string prints;
+    prints = "./../../prints/MenuGestionDeEstaciones.txt";
+    menuGeneral(prints);
+    string mensaje1 = "Escoja un opcion: ";
+    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    const int size = 8;
+    string opcionesValidas[size] = {"1", "2", "3", "4", "5", "6", "7", "0"};
+    int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
+    return opcionElegida;
+}
+
 void limpiarPantalla(){
     // Imprime varias líneas en blanco para dar la ilusión de limpiar la pantalla
     for (int i = 0; i < 50; ++i) {
@@ -87,48 +118,13 @@ int inicioSesion(){
     //funcionalidad aparte --> verificar gerente.
 
     //menu de regiones
-    prints = "./../../prints/MenuGestionDeRed.txt";
+    prints = "./../../prints/MenuPrincipal.txt";
     menuGeneral(prints);
     string mensaje1 = "Escoja un opcion: ";
     string mensaje2 = "Opción no valida, intenta de nuevo.";
     const int size = 6;
-    string opcionesValidas[size] = {"1", "2", "3", "4", "5", "0"};
-    int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
-    return opcionElegida;
-}
-
-int menuRegion(){
-    //Elije la region sobre la cual desea trabajar
-    limpiarPantalla();
-    string prints;
-    prints = "./../../prints/MenuRegiones.txt";
-    menuGeneral(prints);
-    string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
-    const int size = 4;
     string opcionesValidas[size] = {"1", "2", "3", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
     return opcionElegida;
 }
-
-int menuEstacion(){
-    //escoge la funcionalidad a realizar en la estacion.
-    string prints;
-    prints = "./../../prints/MenuGestionDeEstaciones.txt";
-    menuGeneral(prints);
-    string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
-    const int size = 8;
-    string opcionesValidas[size] = {"1", "2", "3", "4", "5", "6", "7", "0"};
-    int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
-    return opcionElegida;
-}
-
-
-
-
-
-
-
-
 

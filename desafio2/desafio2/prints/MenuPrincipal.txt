@@ -1,10 +1,9 @@
 =======================================
       
-     En que region desea trabajar
+    	    Menu principal
 
-1->	Norte
-2->	Centro
-3->	Sur
+1->	Gestion de red
+2->	Gestion de estaciones
 
 Presione 0 para finalizar ejecucion.
 =======================================
