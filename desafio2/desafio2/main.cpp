@@ -10,57 +10,71 @@
 using namespace std;
 
 /*
-archivo de usuarios
-archivo historico de transacciones por estacion
 archivo base de datos general
+archivo historico de ventas
 */
 
 int main(){
     bool sesionActiva = true;
     while(sesionActiva == true){
         int inicioValido = inicioSesion();
-        if (inicioValido == 1){
-            //funcionalidad de agregar estacion
-        }
-        else if (inicioValido == 2){
-            //funcionalidad de eliminar estacion
-        }
-        else if (inicioValido == 3){
-            //funcionalidad de mostrar monto total
-        }
-        else if (inicioValido == 4){
-            //funcionalidad de fijar precio de combustible (de ultimas)
-        }
-        else if (inicioValido == 5){
-            string region;
-            int numRegion = menuRegion();
-            if (numRegion == 1){// Norte
-                region = "Norte";
-                //metodo de despliegue para las estaciones de norte
-                //Elegir estacion de norte
-            }
-            else if (numRegion == 2){// Centro
-                region = "Centro";
-                //metodo de despliegue para las estaciones de centro
-                //Elegir estacion de centro
-            }
-            else if (numRegion == 3){// Sur
-                region = "Sur";
-                //metodo de despliegue para las estaciones de sur
-                //Elegir estacion de sur
-            }
-            else if (numRegion == 0){// Salir
+        switch (inicioValido) {
+        case 1: {
+            //Gestion de red
+            int opcionGestionRed = menuGestionDeRed();
+            switch (opcionGestionRed) {
+            case 1: //Agregar estacion
+                break;
+            case 2: //Eliminar estacion
+                break;
+            case 3: //Mostrar monto total de venta (por estacion y por categoria de combustible)
+                break;
+            case 4: //Fijar precios de combustible
+                break;
+            case 0: //Salir
                 sesionActiva = false;
+                break;
+            default:
+                break;
             }
-            if(sesionActiva){
-                // Trabajar sobre la region y la estacion escogida
-
-            }
+            break;
         }
-        else if (inicioValido == 0){// Salir
+        case 2: {
+            //Gestion de estaciones
+            int opcionGestionEstaciones = menuGestionEstaciones();
+            switch (opcionGestionEstaciones) {
+            case 1: //Agregar surtidor
+                break;
+            case 2: //Eliminar surtidor
+                break;
+            case 3: //Consultar Historico de transacciones
+                break;
+            case 4: //Reporte de litros vendidos
+                break;
+            case 5: //Simulador de venta
+                break;
+            case 6: //Asignar capacidad de tanques
+                break;
+            case 7: //Sistema nacional de fugas
+                break;
+            case 0: //Salir
+                sesionActiva = false;
+                break;
+            default:
+                break;
+            }
+            break;
+        }
+        case 0: {
+            //Salir
             sesionActiva = false;
+            break;
         }
-
+        default: {
+            break;
+        }
+        }
     }
+    //guardar cambios?
     mensajeSalida();
 }
