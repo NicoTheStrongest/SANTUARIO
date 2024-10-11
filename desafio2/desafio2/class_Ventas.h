@@ -8,6 +8,8 @@
 
 using namespace std;
 
-class Ventas{};
+class Ventas{
+
+};
 
 #endif // CLASS_VENTAS_H

@@ -8,6 +8,16 @@
 
 using namespace std;
 
-class RedNacional{};
+class RedNacional{
+private:
+    string regiones[3];
+    static int numEstaciones;
+public:
+    RedNacional(string nombreRegion);
+    string getRegiones(int posicion) const;
+    string setRegiones(string nombreRegion);
+    ~RedNacional();
+};
+
 
 #endif // CLASS_REDNACIONAL_H

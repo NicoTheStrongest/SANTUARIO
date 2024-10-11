@@ -8,6 +8,16 @@
 
 using namespace std;
 
-class Tanque{};
+class Tanque{
+private:
+    double capacidadRegular;
+    double capacidadPremium;
+    double capacidadEcoExtra;
+    double disponibleRegular;
+    double disponiblePremium;
+    double disponibleEcoExtra;
+public:
+
+};
 
 #endif // CLASS_TANQUE_H
