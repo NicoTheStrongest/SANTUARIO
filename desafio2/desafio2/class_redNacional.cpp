@@ -8,14 +8,22 @@ using namespace std;
 
 //Constructor que inicializa el arreglo de estaciones
 RedNacional::RedNacional(int capacidadInicialEstaciones){
-    int numEstaciones = 0
-    int capacidadEstaciones = capacidadInicialEstaciones;
+    numEstaciones = 0
+    capacidadEstaciones = capacidadInicialEstaciones;
     estaciones = new Estacion*[capacidadEstaciones];
+}
+
+//Getters
+int RedNacional::getnumEstaciones()const{
+    return numEstaciones;
+}
+int RedNacional::getcapacidadEstaciones()const{
+    return capacidadEstaciones;
 }
 
 //Metodo privado para expandir el arreglo de estaciones
 void RedNacional::expandirEstasiones(){
-    int nuevaCapacidad = capacidadEstaciones * 2;
+    int nuevaCapacidad = capacidadEstaciones + 1;
     Estacion** nuevoArreglo = new Estacion*[nuevaCapacidad];
     for(int i = 0; i < numEstaciones; i++){
         nuevoArreglo[i] = estaciones[i];
@@ -27,7 +35,7 @@ void RedNacional::expandirEstasiones(){
 //Metodo privado para liberar el arreglo de estaciones
 void RedNacional::liberarEstaciones(){
     for(int i = 0; i < numEstaciones; i++){
-        delete estaciones[i]
+        delete estaciones[i];
     }
     delete[] estaciones;
 }

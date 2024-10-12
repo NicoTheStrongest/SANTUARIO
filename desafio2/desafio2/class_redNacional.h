@@ -16,6 +16,7 @@ private:
     Estacion** estaciones;
     int numEstaciones;
     int capacidadEstaciones;
+
     void expandirEstaciones();
     void liberarEstaciones();
 public:
@@ -24,9 +25,9 @@ public:
     //Destructor
     ~RedNacional();
     //Getters
-    Estacion getestaciones() const;
-    int getnumEstaciones() const;
-    //Setters
+    //Estacion* getestaciones() const;
+    int getnumEstaciones()const;
+    int getcapacidadEstaciones()const;
     //Metodos
     void agregarEstacion(Estacion* nuevaEstacion);
     void eliminarEstacion(const string& codigoEstacion);
