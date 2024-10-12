@@ -8,7 +8,15 @@
 
 using namespace std;
 
-class Naves{};
+class Naves{
+private:
+    //Atributos
+public:
+    //Constructor
+    //Destructor
+    //Getters, Setters
+    //metodos
+};
 
 
 #endif // CLASS_NAVES_H

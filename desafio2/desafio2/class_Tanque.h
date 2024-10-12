@@ -8,6 +8,17 @@
 
 using namespace std;
 
-class Tanque{};
+class Tanque{
+private:
+    int capacidad,combustibleDisponible;
+public:
+    //Constructor
+    Tanque(int capacidadInicial);
+    //Getters
+    int getcapacidad() const;
+    int getcombustibleDisponible() const;
+    //Setter
+    void setcombustibleDisponible(int cantidad);
+};
 
 #endif // CLASS_TANQUE_H

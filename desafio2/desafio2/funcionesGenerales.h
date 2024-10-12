@@ -8,8 +8,7 @@
 
 using namespace std;
 
-void menuGeneral(const string& fileName);
-
+void leerArchivoPorLinea(const string& fileName);
 
 int opcionesMenuGeneral(const string& mensaje1, const string& mensaje2, const string opcionesValidas[], int size);
 bool menuSalida();
