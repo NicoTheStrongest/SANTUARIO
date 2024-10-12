@@ -5,19 +5,35 @@
 #include <funcionesGenerales.h>
 #include <fstream>
 #include <string>
+#include <class_Estacion.h>
 
 using namespace std;
 
+//Clase para gestionar la red nacional
 class RedNacional{
 private:
-    string regiones[3];
-    static int numEstaciones;
+    //Atributos
+    Estacion** estaciones;
+    int numEstaciones;
+    int capacidadEstaciones;
+    void expandirEstaciones();
+    void liberarEstaciones();
 public:
-    RedNacional(string nombreRegion);
-    string getRegiones(int posicion) const;
-    string setRegiones(string nombreRegion);
+    //Constructor
+    RedNacional(int capacidadInicialEstaciones = 10);
+    //Destructor
     ~RedNacional();
-};
+    //Getters
+    Estacion getestaciones() const;
+    int getnumEstaciones() const;
+    //Setters
+    //Metodos
+    void agregarEstacion(Estacion* nuevaEstacion);
+    void eliminarEstacion(const string& codigoEstacion);
+    void ventasCombustible();
+    void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra);
+    bool verificarFugas(const string& codigoEstacion);
 
+};
 
 #endif // CLASS_REDNACIONAL_H

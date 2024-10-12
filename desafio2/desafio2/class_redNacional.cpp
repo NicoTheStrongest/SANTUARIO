@@ -1,20 +1,64 @@
 #include <iostream>
 #include <funcionesGenerales.h>
+#include <class_RedNacional.h>
 #include <fstream>
 #include <string>
 
 using namespace std;
 
-class RedNacional{
-private:
-    string regiones[3];
-    static int numEstaciones;
-public:
-    RedNacional(string nombreRegion){}
-    string getRegiones(int posicion){}
-    string setRegiones(string nombreRegion){}
-    ~RedNacional();
-};
+//Constructor que inicializa el arreglo de estaciones
+RedNacional::RedNacional(int capacidadInicialEstaciones){
+    int numEstaciones = 0
+    int capacidadEstaciones = capacidadInicialEstaciones;
+    estaciones = new Estacion*[capacidadEstaciones];
+}
+
+//Metodo privado para expandir el arreglo de estaciones
+void RedNacional::expandirEstasiones(){
+    int nuevaCapacidad = capacidadEstaciones * 2;
+    Estacion** nuevoArreglo = new Estacion*[nuevaCapacidad];
+    for(int i = 0; i < numEstaciones; i++){
+        nuevoArreglo[i] = estaciones[i];
+    }
+    delete[] estaciones;
+    estaciones = nuevoArreglo;
+    capacidadEstaciones = nuevaCapacidad;
+}
+//Metodo privado para liberar el arreglo de estaciones
+void RedNacional::liberarEstaciones(){
+    for(int i = 0; i < numEstaciones; i++){
+        delete estaciones[i]
+    }
+    delete[] estaciones;
+}
+
+//Destructor
+RedNacional::~RedNacional(){
+    liberarEstaciones();
+}
+
+//Metodo publico para agregar una estacion
+void RedNacional::agregarEstacion(Estacion* nuevaEstacion){
+
+}
+
+//Metodo publico para eliminar una estacion
+void RedNacional::eliminarEstacion(const string& codigoEstacion){
+
+}
+
+//Metodo publico para calcular el monto total de ventas por estacion segun el combustible
+void ventasCombustible(){
+
+}
+
+//Metodo publico para fijar los precios del combustible
+void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra){
+
+}
+
+//Metodo publico para verificar fugas en las esatciones
+bool verificarFugas(const string& codigoEstacion);
 
 
 
