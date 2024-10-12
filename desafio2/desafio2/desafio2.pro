@@ -5,7 +5,6 @@ CONFIG -= qt
 
 SOURCES += \
         class_Estacion.cpp \
-        class_Naves.cpp \
         class_RedNacional.cpp \
         class_Surtidor.cpp \
         class_Tanque.cpp \
@@ -15,7 +14,6 @@ SOURCES += \
 
 HEADERS += \
     class_Estacion.h \
-    class_Naves.h \
     class_RedNacional.h \
     class_Surtidor.h \
     class_Tanque.h \

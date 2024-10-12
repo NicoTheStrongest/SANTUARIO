@@ -14,21 +14,28 @@ class Estacion{
 private:
     //Atributos
     string nombre,codigoEstacion,gerente,region,coordenadas;
-    Surtidor** Surtidores;
+    Surtidor** surtidores;
     int numSurtidores;
     int capacidadSurtidores;
     int naves;
+
     void expandirSurtidores();
     void liberarSurtidores();
 public:
     //Constructor
-    Estacion(int capacidadInicialSurtidores = 10);
+    Estacion(int capacidadInicialSurtidores = 12,const string& nombre,const string& codigoEstacion,const string& gerente,const string& region,const string& coordenadas);
     //Destructor
     ~Estacion();
     //Getters
     string getnombre()const;
     string getcodigoEstacion()const;
-    string getsurtidor(const string& codigoSurtidor);
+    //Surtidor* getsurtidores()const;
+    string getgerente()const;
+    string getregion()const;
+    string getcoordenadas()const;
+    int getnumSurtidores()const;
+    int getcapacidadSurtidores()const;
+
     //Metodos
     void agregarSurtidor(const string& codigoSurtidor, const string& modelo);
     void eliminarSurtidor(const string& codigoSurtidor);

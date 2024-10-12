@@ -18,10 +18,10 @@ public:
     ventas(const string& fechaHora,const string& tipoCombustible,const string& metodoPago,const string& documentoCliente,const string& codigoSurtidor,double cantidadCombustible,double monto);
     //Getters
     string getfechaHora() const;
-    std::string getTipoCombustible() const;
-    std::string getMetodoPago() const;
-    std::string getDocumentoCliente() const;
-    float getMonto() const;
+    string getTipoCombustible() const;
+    string getMetodoPago() const;
+    string getDocumentoCliente() const;
+    double getMonto() const;
     double getCantidadCombustible() const;
     //metodos
     string fechaHora();
