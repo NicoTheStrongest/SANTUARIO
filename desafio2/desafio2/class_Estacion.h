@@ -44,8 +44,3 @@ public:
     void consultarHistorico();
     void asignarCapacidadTanque();
     void litrosVendidos();
-
-
-};
-
-#endif // CLASS_ESTACION_H

@@ -70,4 +70,3 @@ void Estacion::agregarSurtidor(const Surtidor& nuevoSurtidor) {
 //Metodo para eliminar un surtidor
 void Estacion::eliminarSurtidor(const string& codigo) {
 }
-
