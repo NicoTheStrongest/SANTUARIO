@@ -10,6 +10,7 @@
 using namespace std;
 
 class Surtidor{
+
     //Atributos
     string codigoSurtidor,modelo;
     bool activo;
@@ -36,7 +37,5 @@ public:
     //Metodos
     bool activo()const;
     void registrarVenta(const ventas& nuevaVenta);
-
-};
 
 #endif // CLASS_SURTIDOR_H
