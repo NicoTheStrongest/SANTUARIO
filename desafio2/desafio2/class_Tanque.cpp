@@ -6,7 +6,13 @@
 using namespace std;
 
 class Tanque{
-
+private:
+    //Atributos
+public:
+    //Constructor
+    //Destructor
+    //Getters, Setters
+    //metodos
 };
 
 

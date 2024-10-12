@@ -5,29 +5,35 @@
 #include <funcionesGenerales.h>
 #include <fstream>
 #include <string>
+#include <class_Surtidor.h>
+#include <class_Tanque.h>
 
 using namespace std;
 
 class Estacion{
 private:
-    string nombre;
-    string codigo;
-    string docGerente;
-    string region;
-    string ubicacion;
+    //Atributos
+    string nombre,codigoEstacion,gerente,region,coordenadas;
+    Surtidor** Surtidores;
+    int numSurtidores;
+    int capacidadSurtidores;
+    int naves;
+    void expandirSurtidores();
+    void liberarSurtidores();
 public:
-    Estacion(string nombre, string codigo, string gerente, string region, string ubicacion);
-    string getNombre() const;
-    string getCodigo() const;
-    string getDocGerente() const;
-    string getRegion() const;
-    string getUbicacion() const;
-    string setNombre(string nombreEstacion);
-    string setCodigo(string nuevoCodigo);
-    string setDocGerente(string docGerente);
-    string setRegion(string nuevaRegion); //??
-    string setUbicacion(string nuevaUbicacion);
+    //Constructor
+    Estacion(int capacidadInicialSurtidores = 10);
+    //Destructor
     ~Estacion();
-};
-
-#endif // CLASS_ESTACION_H
+    //Getters
+    string getnombre()const;
+    string getcodigoEstacion()const;
+    string getsurtidor(const string& codigoSurtidor);
+    //Metodos
+    void agregarSurtidor(const string& codigoSurtidor, const string& modelo);
+    void eliminarSurtidor(const string& codigoSurtidor);
+    void activarSurtidor(const string& codigoSurtidor);
+    void desactivarSurtidor(const string& codigoSurtidor);
+    void consultarHistorico();
+    void asignarCapacidadTanque();
+    void litrosVendidos();

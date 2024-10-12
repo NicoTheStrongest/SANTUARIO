@@ -10,14 +10,15 @@ using namespace std;
 
 class Tanque{
 private:
-    double capacidadRegular;
-    double capacidadPremium;
-    double capacidadEcoExtra;
-    double disponibleRegular;
-    double disponiblePremium;
-    double disponibleEcoExtra;
+    int capacidad,combustibleDisponible;
 public:
-
+    //Constructor
+    Tanque(int capacidadInicial);
+    //Getters
+    int getcapacidad() const;
+    int getcombustibleDisponible() const;
+    //Setter
+    void setcombustibleDisponible(int cantidad);
 };
 
 #endif // CLASS_TANQUE_H

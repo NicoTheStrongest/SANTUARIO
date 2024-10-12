@@ -9,6 +9,12 @@
 
 using namespace std;
 
+string LeerArchivoPorLinea(fileName){
+
+}
+void escribirArchivo(fileName){
+
+}
 /*
 archivo base de datos general
 archivo historico de ventas

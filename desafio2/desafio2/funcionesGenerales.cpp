@@ -8,7 +8,7 @@ using namespace std;
 
 //              Menu y funciones de interfaz
 
-void menuGeneral(const string& fileName) {
+void leerArchivoPorLinea(const string& fileName) {
     // Función que abre un archivo, lo imprime y lo cierra
     ifstream archivo(fileName);
 
@@ -55,7 +55,7 @@ bool menuSalida(){
     //muestra menu salida y devulve false si quiere salir y true si quiere ir al menu unicial
     limpiarPantalla();
     string nombre = "./../../prints/MenuSalida.txt";
-    menuGeneral(nombre);
+    leerArchivoPorLinea(nombre);
     string mensaje1 = "Elige una opcion (1, 2): ";
     string mensaje2 = "Opción no valida, intenta de nuevo.";
     const int size = 2;
@@ -69,7 +69,7 @@ void mensajeSalida(){
     //Imprime el mensaje cuando sale del programa.
     limpiarPantalla();
     string prints = "./../../prints/MensajeSalida.txt";
-    menuGeneral(prints);
+    Le(prints);
 }
 
 int menuGestionDeRed(){
@@ -77,7 +77,7 @@ int menuGestionDeRed(){
     limpiarPantalla();
     string prints;
     prints = "./../../prints/MenuGestionDeRed.txt";
-    menuGeneral(prints);
+    leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
     string mensaje2 = "Opción no valida, intenta de nuevo.";
     const int size = 5;
@@ -91,7 +91,7 @@ int menuGestionEstaciones(){
     limpiarPantalla();
     string prints;
     prints = "./../../prints/MenuGestionDeEstaciones.txt";
-    menuGeneral(prints);
+    leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
     string mensaje2 = "Opción no valida, intenta de nuevo.";
     const int size = 8;
@@ -113,13 +113,13 @@ int inicioSesion(){
     //imprimir mesaje de bienvenida.
     limpiarPantalla();
     string prints = "./../../prints/MenuBienvenida.txt";
-    menuGeneral(prints);
+    leerArchivoPorLinea(prints);
 
     //funcionalidad aparte --> verificar gerente.
 
     //menu de regiones
     prints = "./../../prints/MenuPrincipal.txt";
-    menuGeneral(prints);
+    leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
     string mensaje2 = "Opción no valida, intenta de nuevo.";
     const int size = 6;

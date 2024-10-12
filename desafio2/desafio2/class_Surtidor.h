@@ -5,26 +5,37 @@
 #include <funcionesGenerales.h>
 #include <fstream>
 #include <string>
+#include<class_Ventas.h>
 
 using namespace std;
 
 class Surtidor{
-private:
-    string codigo;
-    string modelo;
-    string combustible;
-    string venta;
+
+    //Atributos
+    string codigoSurtidor,modelo;
+    bool activo;
+    ventas** venta;
+    int numVentas;
+    int capacidadVentas;
+    double precioRegular,precioPremium,precioEcoExtra;
+    void expandirVentas();
+    void liberarVentas();
 public:
-    Surtidor();
-    string getCodigo () const;
-    string getModelo () const;
-    string getCombustible () const;
-    string getVenta () const;
-    string setCodigo();
-    string setModelo();
-    string setCombustible();
-    string setVenta();
+    //Constructor
+    Surtidor(int capacidadInicialVentas = 10);
+    //Destructor
     ~Surtidor();
-};
+    //Getters
+    string getcodigoSurtidor() const;
+    string getmodelo() const;
+    double getprecioRegular() const;
+    double getprecioPremium() const;
+    double getprecioEcoExtra() const;
+    ventas* getventa()const;
+    int getnumVentas()const;
+
+    //Metodos
+    bool activo()const;
+    void registrarVenta(const ventas& nuevaVenta);
 
 #endif // CLASS_SURTIDOR_H

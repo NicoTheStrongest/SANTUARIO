@@ -1,5 +1,6 @@
 #include <iostream>
 #include <funcionesGenerales.h>
+#include <class_Surtidor.h>
 #include <fstream>
 #include <string>
 
