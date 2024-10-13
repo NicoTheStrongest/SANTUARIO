@@ -15,9 +15,9 @@ using namespace std;
 class Estacion{
 private:
     //Atributos
-    Surtidor* surtidores; // Arreglo dinamico de surtidores de la estacion
+    static Surtidor* surtidores; // Arreglo dinamico de surtidores de la estacion
     std::string nombre, codigoEstacion, gerente, region, coordenadas; // atributos surtidor
-    int sizeSurtidores = 0;
+    static int sizeSurtidores = 0;
     int naves[6];
 public:
     //Constructor

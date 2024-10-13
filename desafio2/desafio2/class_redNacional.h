@@ -13,8 +13,8 @@
 class RedNacional{
 private:
     //Atributos
-    Estacion* estaciones; // arreglo dinamico de estaciones
-    int sizeEstaciones; // cantidad de estaciones
+    static Estacion* estaciones; // arreglo dinamico de estaciones
+    static int sizeEstaciones; // cantidad de estaciones
 
     void expandirEstaciones(Estacion*& arr, int* size);
 public:
