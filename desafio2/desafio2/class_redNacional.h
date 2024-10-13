@@ -2,32 +2,33 @@
 #define CLASS_REDNACIONAL_H
 
 #include <iostream>
-#include <funcionesGenerales.h>
+
+#include "funcionesGenerales.h"
+#include "class_Estacion.h"
+
 #include <fstream>
 #include <string>
-#include <class_Estacion.h>
 
-using namespace std;
+//using namespace std;
 
 //Clase para gestionar la red nacional
 class RedNacional{
 private:
     //Atributos
-    Estacion** estaciones;
-    int numEstaciones;
-    int capacidadEstaciones;
+    Estacion** estaciones; ///arreglo dinamico de estaciones
+    int sizeEstaciones; // cantidad de estaciones
 
     void expandirEstaciones();
-    void liberarEstaciones();
 public:
     //Constructor
-    RedNacional(int capacidadInicialEstaciones = 10);
+    RedNacional(int capacidadInicialEstaciones = 12);
     //Destructor
     ~RedNacional();
     //Getters
-    //Estacion* getestaciones() const;
-    int getnumEstaciones()const;
-    int getcapacidadEstaciones()const;
+    int getSizetaciones()const;
+    //Setters
+    int setSizeEstaciones(int newSize);
+    int setCapacidadEstaciones();
     //Metodos
     void agregarEstacion(Estacion* nuevaEstacion);
     void eliminarEstacion(const string& codigoEstacion);
