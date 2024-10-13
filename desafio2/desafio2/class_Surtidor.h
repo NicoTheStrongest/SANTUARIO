@@ -2,10 +2,12 @@
 #define CLASS_SURTIDOR_H
 
 #include <iostream>
-#include <funcionesGenerales.h>
+
+#include "funcionesGenerales.h"
+#include "class_Ventas.h"
+
 #include <fstream>
 #include <string>
-#include<class_Ventas.h>
 
 using namespace std;
 
@@ -15,15 +17,13 @@ class Surtidor{
     string codigoSurtidor,modelo;
     bool activo = true;
     Ventas** ventas;
-    int numVentas;
-    int capacidadVentas;
+    int sizeVentas;
     double precioRegular,precioPremium,precioEcoExtra;
 
     void expandirVentas();
-    void liberarVentas();
 public:
     //Constructor
-    Surtidor(int capacidadInicialVentas = 10,const string& codigoSurtidor,const string& modelo,bool activo,double precioRegular,double precioPremium,double precioEcoExtra);
+    Surtidor();
     //Destructor
     ~Surtidor();
     //Getters
@@ -38,7 +38,7 @@ public:
     //ventas* getventa()const;
 
     //Metodos
-    bool activo()const;
-    void registrarVenta(const ventas& nuevaVenta);
+    bool CambiarActivo()const;
+    void registrarVenta(const Ventas& nuevaVenta);
 
 #endif // CLASS_SURTIDOR_H

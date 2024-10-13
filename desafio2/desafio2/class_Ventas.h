@@ -2,7 +2,9 @@
 #define CLASS_VENTAS_H
 
 #include <iostream>
-#include <funcionesGenerales.h>
+
+#include "funcionesGenerales.h"
+
 #include <fstream>
 #include <string>
 
@@ -15,7 +17,10 @@ private:
     double cantidadCombustible, monto;
 public:
     //Constructor
-    ventas(const string& fechaHora,const string& tipoCombustible,const string& metodoPago,const string& documentoCliente,const string& codigoSurtidor,double cantidadCombustible,double monto);
+    Ventas(const string& fechaHora,const string& tipoCombustible,const string& metodoPago,const string& documentoCliente,const string& codigoSurtidor,double cantidadCombustible,double monto);
+    //Destructor
+    ~Ventas();
+
     //Getters
     string getfechaHora() const;
     string getTipoCombustible() const;
@@ -23,8 +28,17 @@ public:
     string getDocumentoCliente() const;
     double getMonto() const;
     double getCantidadCombustible() const;
+
+    //Setters
+    string setFechaHora(string newFechaHora);
+    string setTipoCombustible(string newTipoCombustible);
+    string setMetodoPago(string newMetodoPago);
+    string setDocumentoCliente(string newDocumentoCliente);
+    double setMonto(double newMonto);
+    double setCantidadCombustible(double newCantidadCombustible);
+
     //metodos
-    string fechaHora();
+    string calcularFechaHora();
 };
 
 #endif // CLASS_VENTAS_H

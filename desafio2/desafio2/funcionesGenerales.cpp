@@ -1,5 +1,4 @@
 #include <iostream>
-#include <funcionesGenerales.h>
 #include <fstream>
 #include <string>
 
@@ -128,3 +127,4 @@ int inicioSesion(){
     return opcionElegida;
 }
 
+void lectura(){}

@@ -1,6 +1,5 @@
 #include <iostream>
 #include "class_Estacion.h"
-#include "class_Naves.h"
 #include "class_RedNacional.h"
 #include "class_Surtidor.h"
 #include "class_Tanque.h"
@@ -9,12 +8,6 @@
 
 using namespace std;
 
-string LeerArchivoPorLinea(fileName){
-
-}
-void escribirArchivo(fileName){
-
-}
 /*
 archivo base de datos general
 archivo historico de ventas
