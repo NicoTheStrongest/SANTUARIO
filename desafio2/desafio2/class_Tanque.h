@@ -8,8 +8,6 @@
 #include <fstream>
 #include <string>
 
-//using namespace std;
-
 class Tanque{
 private:
     int capacidadTotal;

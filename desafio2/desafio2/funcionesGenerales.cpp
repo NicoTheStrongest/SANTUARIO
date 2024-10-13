@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 
+#include "funcionesGenerales.h"
+
 using namespace std;
 
 
@@ -68,7 +70,7 @@ void mensajeSalida(){
     //Imprime el mensaje cuando sale del programa.
     limpiarPantalla();
     string prints = "./../../prints/MensajeSalida.txt";
-    Le(prints);
+    leerArchivoPorLinea(prints);
 }
 
 int menuGestionDeRed(){
@@ -127,4 +129,52 @@ int inicioSesion(){
     return opcionElegida;
 }
 
-void lectura(){}
+void leerArchivoClases(){
+    //Lectura del archivo de texto para guardar en los arreglo de las clases
+    string nombreArchivo = "./../../simulacionBaseDatos.txt";
+    fstream archivo(nombreArchivo, ios::in);
+    if (!archivo.is_open()){
+        cout << "Error al abrir el archivo\n";
+        return;
+    }
+
+    string linea;
+
+    while (getline(archivo, linea)){
+        if (linea[0] = '-'){}
+        else if(linea[0]>=48 && linea[0]<=57){}
+    }
+}
+
+
+bool validarNumeros(string cadena){
+    //valida que una cadena solo contenga numeros
+    for (int i = 0; i < (int)cadena.size(); ++i) {
+        if (!(cadena[i]>=48  && cadena[i]<=57)){return false;}
+    }
+    return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

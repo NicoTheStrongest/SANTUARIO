@@ -1,17 +1,10 @@
 #include <iostream>
-#include "class_Estacion.h"
 #include "class_RedNacional.h"
-#include "class_Surtidor.h"
-#include "class_Tanque.h"
-#include "class_Ventas.h"
 #include "funcionesGenerales.h"
 
 using namespace std;
 
-/*
-archivo base de datos general
-archivo historico de ventas
-*/
+//leerArchivoClases();
 
 int main(){
     bool sesionActiva = true;
@@ -23,6 +16,7 @@ int main(){
             int opcionGestionRed = menuGestionDeRed();
             switch (opcionGestionRed) {
             case 1: //Agregar estacion
+
                 break;
             case 2: //Eliminar estacion
                 break;

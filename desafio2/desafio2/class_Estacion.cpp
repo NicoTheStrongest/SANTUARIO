@@ -1,55 +1,59 @@
 #include <iostream>
 
 #include "funcionesGenerales.h"
+#include "class_Estacion.h"
 #include "class_Surtidor.h"
 #include "class_Tanque.h"
 
 #include <fstream>
 #include <string>
 
-//using namespace std;
+using namespace std;
 
-Estacion(){
+Estacion::Estacion(){}
+
+Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO) {
     //Constructor que inicializa el arreglo de surtidores
-    sizeSurtidores = 1;
-    surtidores = new Surtidor*[sizeSurtidores];
+    nombre = nombreO;
+    codigoEstacion = codigoEstacionO;
+    gerente = gerenteO;
+    region = regionO;
+    coordenadas = coordenadasO;
+    sizeSurtidores += 1;
+    expandirSurtidores(surtidores, &sizeSurtidores);
 }
 
-~Estacion() {
-    //Para liberar todo lo dinamico.
-    //liberarSurtidores();
-}
+Estacion::~Estacion() {}
 
-//Getters
-string getnombre(){return nombre;}
-string getcodigoEstacion(){return codigoEstacion;}
-string getgerente(){return gerente;}
-string getregion(){return region;}
-string getcoordenadas(){return coordenadas;}
-int getsizeSurtidores(){return sizeSurtidores;}
+string Estacion:: getnombre() const { return nombre; }
+string Estacion:: getcodigoEstacion()const{return codigoEstacion;}
+string Estacion:: getgerente()const{return gerente;}
+string Estacion:: getregion()const{return region;}
+string Estacion:: getcoordenadas()const{return coordenadas;}
+int Estacion:: getsizeSurtidores()const{return sizeSurtidores;}
 
 //Setters
-string setNombre(string newNombre){
+std::string setNombre(std::string newNombre){
     //Validar formato del parametro
     //nombre = newNombre;
 }
-string setCodigoEstacion(string newCodigoEstacion){
+std::string setCodigoEstacion(std::string newCodigoEstacion){
     //Validar formato del parametro
     //codigoEstacion = newCodigoEstacion;
 }
-string setGerente(string newGerente){
+std::string setGerente(std::string newGerente){
     //Validar formato del parametro
     //gerente = newGerente;
 }
-string setRegion(string newRegion){
+std::string setRegion(std::string newRegion){
     //Validar formato del parametro
     //region = newRegion;
 }
-string setCoordenadas(string newCoordenadas){
+std::string setCoordenadas(std::string newCoordenadas){
     //Validar formato del parametro
     //coordenadas = newCoordenadas;
 }
-int setSizeSurtidores(string newSizeSurtidores){
+int setSizeSurtidores(std::string newSizeSurtidores){
     //Validar formato del parametro
     //sizeSurtidores = newSizeSurtidores;
 }
@@ -58,33 +62,26 @@ int setSizeSurtidores(string newSizeSurtidores){
 //                  METODOS
 
 
-void expandirSurtidores(Surtidor**& arr, int& size) {
+void Estacion:: expandirSurtidores(Surtidor*& arr, int* size) {
     //Metodo privado para expandir el arreglo de surtidores
     // Función que expande un arreglo dinámico
     // Crear un nuevo arreglo con una posición más
-    Surtidor** nuevoArr = new Surtidor*[size + 1];
-    for (int i = 0; i < size+1; ++i) {
-        nuevoArr[i] = new Surtidor[4]; // tamaño del segundo arreglo por definir
-    }
+    Surtidor* nuevoArr = new Surtidor[(*size) + 1];
 
     // Copiar elementos al nuevo arreglo
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            nuevoArr[i][j] = arr[i][j];
-        }
+    for (int i = 0; i < *size; ++i) {
+        nuevoArr[i] = arr[i];
     }
 
     // Liberar la memoria del arreglo original
-    for (int i = 0; i < size; ++i) {
-        delete[] arr[i];
-    }
     delete[] arr;
 
     // Actualizar el puntero para que apunte al nuevo arreglo
     arr = nuevoArr;
 
     // Aumentar el tamaño
-    size += 1;
+    *size += 1;
+
 
     /*
     int nuevaCapacidad = capacidadSurtidores + 1;
@@ -103,16 +100,16 @@ void agregarSurtidor(const Surtidor& nuevoSurtidor) {
 
 }
 
-void eliminarSurtidor(const string& codigo) {
+void eliminarSurtidor(const std::string& codigo) {
     //Metodo para eliminar un surtidor
 
 }
 
-void activarSurtidor(const string& codigoSurtidor){
+void activarSurtidor(const std::string& codigoSurtidor){
     //cuestionable, yo creo que se puede hacer solo con el setter
 }
 
-void desactivarSurtidor(const string& codigoSurtidor){
+void desactivarSurtidor(const std::string& codigoSurtidor){
     //cuestionable, yo creo que se puede hacer solo con el setter
 }
 

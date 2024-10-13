@@ -1,74 +1,69 @@
 #include <iostream>
 
 #include "funcionesGenerales.h"
+#include "class_Surtidor.h"
 #include "class_Ventas.h"
 
 #include <fstream>
 #include <string>
 
-//using namespace std;
+using namespace std;
 
-/*
-Surtidor(){
+Surtidor::Surtidor(){}
+
+Surtidor::Surtidor(string codigoSurtidor, string modelo, bool activo): codigoSurtidor(codigoSurtidor), modelo(modelo){
     //constructor que inicializa el arreglo de ventas
+    precioRegular = 0;
+    precioPremium = 0;
+    precioEcoExtra = 0;
     sizeVentas = 1;
-    ventas = new Ventas*[sizeVentas];
+    expandirVentas(ventas, &sizeVentas);
 }
 
-~Surtidor(){
+Surtidor::~Surtidor(){
     //Destructor, liberar dinamicos
     //liberarVentas();
 }
 
 //Getters
-string getcodigoSurtidor(){return codigoSurtidor;}
+string Surtidor:: getCodigoSurtidor() const {return codigoSurtidor;}
 
-string getmodelo(){return modelo;}
+string Surtidor:: getModelo() const {return modelo;}
 
-bool getactivo(){return activo;}
+bool Surtidor:: getActivo() const {return activo;}
 
-int getnumVentas(){return numVentas;}
+int Surtidor:: getSizeVentas() const {return sizeVentas;}
 
-int getcapacidadVentas(){return capacidadVentas;}
+double Surtidor:: getPrecioRegular() const {return precioRegular;}
 
-double getprecioRegular(){return precioRegular;}
+double Surtidor:: getPrecioPremium() const {return precioRegular;}
 
-double getprecioPremium(){return precioRegular;}
+double Surtidor:: getPrecioEcoExtra() const {return precioEcoExtra;}
 
-double getprecioEcoExtra(){return precioEcoExtra;}
-
-void expandirVentas(Ventas**& arr, int& size){
+void Surtidor:: expandirVentas(Ventas*& arr, int* size){
     //Metodo privado para expandir el arreglo de ventas
-    Ventas** nuevoArr = new Ventas*[size + 1];
-    for (int i = 0; i < size+1; ++i) {
-        nuevoArr[i] = new Ventas[4]; // tamaño del segundo arreglo por definir
-    }
+    Ventas* nuevoArr = new Ventas[(*size) + 1];
 
     // Copiar elementos al nuevo arreglo
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            nuevoArr[i][j] = arr[i][j];
-        }
+    for (int i = 0; i < *size; ++i) {
+        nuevoArr[i] = arr[i];
     }
 
     // Liberar la memoria del arreglo original
-    for (int i = 0; i < size; ++i) {
-        delete[] arr[i];
-    }
     delete[] arr;
 
     // Actualizar el puntero para que apunte al nuevo arreglo
     arr = nuevoArr;
 
     // Aumentar el tamaño
-    size += 1;
+    *size += 1;
 }
-*/
 
-void liberarVentas(){
-    //Metodo privado para liberar el arreglo de ventas
-    for(int i = 0; i < sizeVentas; i++){
-        delete ventas[i];
-    }
-    delete[] ventas;
-}
+
+
+
+
+
+
+
+

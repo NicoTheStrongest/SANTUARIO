@@ -9,36 +9,35 @@
 #include <fstream>
 #include <string>
 
-using namespace std;
-
 class Surtidor{
-
+private:
     //Atributos
-    string codigoSurtidor,modelo;
-    bool activo = true;
-    Ventas** ventas;
+    std::string codigoSurtidor,modelo;
+    bool activo;
+    Ventas* ventas;
     int sizeVentas;
     double precioRegular,precioPremium,precioEcoExtra;
 
-    void expandirVentas();
+    void expandirVentas(Ventas*& arr, int* size);
 public:
     //Constructor
     Surtidor();
+    Surtidor(std::string codigoSurtidor, std::string modelo, bool activo = true);
     //Destructor
     ~Surtidor();
     //Getters
-    string getcodigoSurtidor() const;
-    string getmodelo() const;
-    bool getactivo()const;
-    int getnumVentas()const;
-    int getcapacidadVentas()const;
-    double getprecioRegular() const;
-    double getprecioPremium() const;
-    double getprecioEcoExtra() const;
-    //ventas* getventa()const;
+    std::string getCodigoSurtidor() const;
+    std::string getModelo() const;
+    bool getActivo() const;
+    int getSizeVentas() const;
+    int getCapacidadVentas() const;
+    double getPrecioRegular() const;
+    double getPrecioPremium() const;
+    double getPrecioEcoExtra() const;
 
     //Metodos
     bool CambiarActivo()const;
     void registrarVenta(const Ventas& nuevaVenta);
+};
 
 #endif // CLASS_SURTIDOR_H

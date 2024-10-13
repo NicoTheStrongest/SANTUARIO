@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "funcionesGenerales.h"
+#include "class_Tanque.h"
 
 #include <fstream>
 #include <string>
@@ -20,14 +21,14 @@ Tanque::Tanque(int capacidad, int combustibleDisponible, double capacidadRegular
 }
 
 //Getter
-int getCapacidadTotal(){return capacidadTotal;}
-int getCombustibleDisponibleTotal(){return combustibleDisponibleTotal;}
-double getCapacidadRegular(){return capacidadRegular;}
-double getCapacidadPremium(){return capacidadPremium;}
-double getCapacidadEcoextra(){return capacidadEcoextra;}
-double getDisponibleRegular(){return disponibleRegular;}
-double getDisponiblePremium(){return disponiblePremium;}
-double getDisponibleEcoexptra(){return disponibleEcoexptra;}
+int Tanque:: getCapacidadTotal() const {return capacidadTotal;}
+int Tanque:: getCombustibleDisponibleTotal() const {return combustibleDisponibleTotal;}
+double Tanque:: getCapacidadRegular() const {return capacidadRegular;}
+double Tanque:: getCapacidadPremium() const {return capacidadPremium;}
+double Tanque:: getCapacidadEcoextra() const {return capacidadEcoextra;}
+double Tanque:: getDisponibleRegular() const {return disponibleRegular;}
+double Tanque:: getDisponiblePremium() const {return disponiblePremium;}
+double Tanque:: getDisponibleEcoexptra() const {return disponibleEcoextra;}
 
 //Setter
 

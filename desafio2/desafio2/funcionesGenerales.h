@@ -5,16 +5,15 @@
 #include <fstream>
 #include <string>
 
-using namespace std;
+void leerArchivoPorLinea(const std::string& fileName);
 
-void leerArchivoPorLinea(const string& fileName);
-
-int opcionesMenuGeneral(const string& mensaje1, const string& mensaje2, const string opcionesValidas[], int size);
+int opcionesMenuGeneral(const std::string& mensaje1, const std::string& mensaje2, const std::string opcionesValidas[], int size);
 bool menuSalida();
 void mensajeSalida();
 void limpiarPantalla();
 int inicioSesion();
 int menuGestionDeRed();
 int menuGestionEstaciones();
+bool validarNumeros(std::string cadena);
 
 #endif // FUNCIONESGENERALES_H
