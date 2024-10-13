@@ -9,19 +9,17 @@
 #include <fstream>
 #include <string>
 
-//using namespace std;
-
 //Clase para gestionar la red nacional
 class RedNacional{
 private:
     //Atributos
-    Estacion** estaciones; ///arreglo dinamico de estaciones
+    Estacion* estaciones; // arreglo dinamico de estaciones
     int sizeEstaciones; // cantidad de estaciones
 
-    void expandirEstaciones();
+    void expandirEstaciones(Estacion*& arr, int* size);
 public:
     //Constructor
-    RedNacional(int capacidadInicialEstaciones = 12);
+    RedNacional();
     //Destructor
     ~RedNacional();
     //Getters
@@ -31,11 +29,10 @@ public:
     int setCapacidadEstaciones();
     //Metodos
     void agregarEstacion(Estacion* nuevaEstacion);
-    void eliminarEstacion(const string& codigoEstacion);
+    void eliminarEstacion(const std::string& codigoEstacion);
     void ventasCombustible();
     void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra);
-    bool verificarFugas(const string& codigoEstacion);
-
+    bool verificarFugas(const std::string& codigoEstacion);
 };
 
 #endif // CLASS_REDNACIONAL_H

@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "funcionesGenerales.h"
+#include "class_Ventas.h"
 
 #include <fstream>
 #include <string>
@@ -9,15 +10,20 @@
 using namespace std;
 
 //Constructor
-Ventas::ventas(const string& fechaHora,const string& tipoCombustible,const string& metodoPago,const string& documentoCliente,const string& codigoSurtidor,double cantidadCombustible,double monto){}
+Ventas::Ventas(){}
+Ventas::Ventas(const string fechaHora, const string tipoCombustible, const string metodoPago, const string documentoCliente, const string codigoSurtidor, double cantidadCombustible, double monto)
+    : fechaHora(fechaHora), tipoCombustible(tipoCombustible), metodoPago(metodoPago), documentoCliente(documentoCliente), codigoSurtidor(codigoSurtidor), cantidadCombustible(cantidadCombustible), monto(monto){}
+
+//Destructor
+Ventas::~Ventas(){}
 
 //Getters
-string Ventas::getfechaHora() {return fechaHora;}
-string Ventas::getTipoCombustible() {return tipoCombustible;}
-string Ventas::getMetodoPago() {return metodoPago;}
-string Ventas::getDocumentoCliente() {return documentoCliente;}
-double Ventas::getmonto() {return monto;}
-double getCantidadCombustible() {return cantidadCombustible;}
+string Ventas:: getfechaHora() const {return fechaHora;}
+string Ventas:: getTipoCombustible() const {return tipoCombustible;}
+string Ventas:: getMetodoPago() const {return metodoPago;}
+string Ventas:: getDocumentoCliente() const {return documentoCliente;}
+double Ventas:: getMonto() const {return monto;}
+double Ventas:: getCantidadCombustible() const {return cantidadCombustible;}
 
 //Setters
 string setFechaHora(string newFechaHora){
