@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "funcionesGenerales.h"
 #include "class_Surtidor.h"
 #include "class_Ventas.h"
 
@@ -9,15 +8,25 @@
 
 using namespace std;
 
+/*
+    //Atributos
+    std::string codigoSurtidor,modelo;
+    bool activo;
+    Ventas* ventas;
+    int sizeVentas = 0;
+    int capacidadVentas = 0;
+    std::string codSurtidores[13];
+    int numCodigosSurtidores = 0;
+    double precioRegular,precioPremium,precioEcoExtra;
+*/
+
 Surtidor::Surtidor(){}
 
-Surtidor::Surtidor(string codigoSurtidor, string modelo, bool activo): codigoSurtidor(codigoSurtidor), modelo(modelo){
+Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado): codigoSurtidor(codigoSurtidor), modelo(modelo){
     //constructor que inicializa el arreglo de ventas
     precioRegular = 0;
     precioPremium = 0;
     precioEcoExtra = 0;
-    sizeVentas = 1;
-    expandirVentas(ventas, &sizeVentas);
 }
 
 Surtidor::~Surtidor(){
@@ -30,7 +39,7 @@ string Surtidor:: getCodigoSurtidor() const {return codigoSurtidor;}
 
 string Surtidor:: getModelo() const {return modelo;}
 
-bool Surtidor:: getActivo() const {return activo;}
+bool Surtidor:: getEstado() const {return estado;}
 
 int Surtidor:: getSizeVentas() const {return sizeVentas;}
 
@@ -58,14 +67,14 @@ void Surtidor:: expandirVentas(Ventas*& arr, int* size){
     capacidadVentas = nuevaCapacidad;
 }
 
-void Surtidor:: agregarCodSurtidores(string codigo){
+void Surtidor:: agregarCodSurtidoresLectura(string codigo){
     //Agregar codigos al arreglo de surtidores.
     if(numCodigosSurtidores <= 12){
         codSurtidores[numCodigosSurtidores] = codigo;
         numCodigosSurtidores += 1;
     }
     else{
-        cout<<"No se puede agregar mas sutidores";
+        cout<<"No se pueden agregar mas sutidores";
     }
 }
 

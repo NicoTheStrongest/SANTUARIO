@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "funcionesGenerales.h"
 #include "class_Estacion.h"
 #include "class_Surtidor.h"
 #include "class_Tanque.h"
+#include "class_Ventas.h"
 
 #include <fstream>
 #include <string>
@@ -85,25 +85,37 @@ void Estacion:: expandirSurtidores() {
     // Actualizar el puntero para que apunte al nuevo arreglo
     surtidores = nuevoArr;
     capacidadSurtidores = nuevaCapacidad;
-
-    /*
-    int nuevaCapacidad = capacidadSurtidores + 1;
-    Surtidor* nuevoArreglo = new Surtidor*[nuevaCapacidad];
-    for (int i = 0; i < numSurtidores; i++) {
-        nuevoArreglo[i] = surtidores[i];
-    }
-    delete[] surtidores;
-    surtidores = nuevoArreglo;
-    capacidadSurtidores = nuevaCapacidad;
-    */
 }
 
-void Estacion:: agregarSurtidor(Surtidor& nuevoSurtidor) {
-    //Metodo para agregar un surtidor
-    if (sizeSurtidores == capacidadSurtidores) {
-        expandirSurtidores();  // Si el arreglo está lleno, lo expandimos
+void Estacion:: expandirNaves() {
+    //Metodo privado para expandir el arreglo de surtidores
+    // Crear un nuevo arreglo con una posición más
+    int nuevaCapacidad = capacidadNaves + 1;
+    string* nuevoArr = new string[nuevaCapacidad];
+
+    // Copiar elementos al nuevo arreglo
+    for (int i = 0; i < navesActuales; ++i) {
+        nuevoArr[i] = naves[i];
     }
-    surtidores[sizeSurtidores++] = nuevoSurtidor;
+
+    // Liberar la memoria del arreglo original
+    delete[] naves;
+
+    // Actualizar el puntero para que apunte al nuevo arreglo
+    naves = nuevoArr;
+    capacidadNaves = nuevaCapacidad;
+}
+
+void Estacion:: agregarSurtidor(string codigo, string modelo, bool estado) {
+    //Metodo para agregar un surtidor
+    if(sizeSurtidores == 0){surtidores = new Surtidor[capacidadNaves];}
+    else{
+        if (sizeSurtidores == capacidadSurtidores) {
+            expandirSurtidores();  // Si el arreglo está lleno, lo expandimos
+        }
+    }
+    surtidores[sizeSurtidores] = Surtidor(codigo, modelo, estado);
+    sizeSurtidores++;
 }
 
 void Estacion:: mostrarEstaciones(){
@@ -137,15 +149,16 @@ void reportarLitrosVendidos(){
     // Reportar la cantidad de litros vendida según cada categoría de combustible.
 }
 
-void Estacion:: agregarNave(string codigo){
+void Estacion:: agregarNaveLectura(string codigo){
     //agrega los codios al arreglo de naves
-    if(navesActuales < 6){
-        naves[navesActuales] = codigo;
-        navesActuales += 1;
-    }
+    if(navesActuales == 0){naves = new string[capacidadNaves];}
     else{
-        cout<<"No se pueden agregar mas naves";
+        if (navesActuales == capacidadNaves) {
+            expandirNaves();  // Si el arreglo está lleno, lo expandimos
+        }
     }
+    naves[navesActuales] = codigo;
+    navesActuales++;
 }
 
 void Estacion:: mostrarNaves(){

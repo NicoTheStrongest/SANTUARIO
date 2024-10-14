@@ -5,26 +5,20 @@
 #include <fstream>
 #include <string>
 
-#include "class_Estacion.h"
 #include "class_RedNacional.h"
-// #include "class_Surtidor.h"
-// #include "class_Tanque.h"
-// #include "class_Ventas.h"
+#include "class_Estacion.h"
+#include "class_Surtidor.h"
+#include "class_Tanque.h"
+#include "class_Ventas.h"
 
 //          Funciones de Red
 
-void agregarEstacion();
-
-
-
-
-
+//void nuevaEstacion(RedNacional& red);
 
 void formatoDocumento(std::string* documento);
 
-
 void leerArchivoPorLinea(const std::string& fileName);
-void leerArchivoClases();
+void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& surtidor, Tanque& tanque, Ventas& ventas);
 
 int opcionesMenuGeneral(const std::string& mensaje1, const std::string& mensaje2, const std::string opcionesValidas[], int size);
 bool menuSalida();

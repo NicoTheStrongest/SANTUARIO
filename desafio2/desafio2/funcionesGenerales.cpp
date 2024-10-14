@@ -3,13 +3,18 @@
 #include <string>
 
 #include "funcionesGenerales.h"
+#include "class_RedNacional.h"
+#include "class_Estacion.h"
+#include "class_Surtidor.h"
+#include "class_Tanque.h"
+#include "class_Ventas.h"
 
 using namespace std;
 
 //          Funciones de Red
 
-
-void agregarEstacion(){
+/*
+void nuevaEstacion(RedNacional& red){
     //agregar una estacion al arreglo de Red nacional
     string nombre, documento, codigo, region, gps;
     int cod;
@@ -35,17 +40,11 @@ void agregarEstacion(){
     cout<<"Ingrese las coordenadas de la estacion: ";
     getline(cin, gps);
 
-    //RedNacional::codEstacion += 1;
-    //cod = RedNacional::codEstacion;
-    //codigo = "s"+(to_string(cod));
+    cod = RedNacional::codEstacion;
 
-    //RedNacional.agregarEstacion(nombre, codigo, documento, region, gps);
+    red.agregarEstacion(nombre, codigo, documento, region, gps);
 }
-
-
-
-
-
+*/
 
 
 
@@ -200,7 +199,7 @@ bool validarNumeros(string cadena){
     return true;
 }
 
-void leerArchivoClases(){
+void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& surtidor, Tanque& tanque, Ventas& ventas){
     //Lectura del archivo de texto para guardar en los arreglo de las clases
     string nombreArchivo = "./../../simulacionBaseDatos.txt";
     fstream archivo(nombreArchivo, ios::in);
@@ -212,9 +211,6 @@ void leerArchivoClases(){
     string linea;
 
     while (getline(archivo, linea)){
-        RedNacional jerarquiaSuperior;
-        Estacion leerNaves;
-        Surtidor leerCodigos;
         if (linea[0] == '-'){
             int sizeAux = 3;
             string arreglo[sizeAux];
@@ -224,7 +220,7 @@ void leerArchivoClases(){
                 else{arreglo[j] = lineaRegion; lineaRegion = ""; j++;}
             }
             arreglo[2] = lineaRegion;
-            RedNacional arregloRegiones(arreglo, sizeAux);
+            redNacional.agregarRegiones(arreglo);
         }
         else if(linea[0]>=48 && linea[0]<=57){
             string leerNombre = "";
@@ -243,37 +239,47 @@ void leerArchivoClases(){
                 }
             }
             leerCoordenadas = lineaEstacion;
-            jerarquiaSuperior.agregarEstacion(leerNombre, leerCodigo, leerGerente, leerRegion, leerCoordenadas);
+            redNacional.agregarEstacionLectura(leerNombre, leerCodigo, leerGerente, leerRegion, leerCoordenadas);
         }
         else if(linea[0] == 'n'){
             string lineaNaves = "";
-            bool nave = true;
             for(int i = 0; i < (int)linea.size(); i++){
                 if(linea[i] != ','){lineaNaves += linea[i];}
                 else{
-                    if(nave){
-                        leerNaves.agregarNave(lineaNaves);
-                        leerCodigos.agregarCodSurtidores(lineaNaves);
-                        lineaNaves = "";
-                        nave = false;
-                    }
-                    else{
-                        leerCodigos.agregarCodSurtidores(lineaNaves);
-                        lineaNaves = "";
-                    }
+                    estacion.agregarNaveLectura(lineaNaves);
+                    lineaNaves = "";
                 }
             }
-            leerCodigos.agregarCodSurtidores(lineaNaves);
+            estacion.agregarNaveLectura(lineaNaves);
+            //surtidor.agregarCodSurtidoresLectura(lineaNaves);
         }
         else if(linea[0] == 's'){
-            for(int i = 0; i < (int)linea.size(); i++){
-
+            string lineaNaves = "";
+            int sizeAux = 3;
+            string arregloAux[sizeAux];
+            for(int i = 0, j = 0; i < (int)linea.size(); i++){
+                if(linea[i] != ','){lineaNaves += linea[i];}
+                else{arregloAux[j] = lineaNaves; lineaNaves = ""; j++;}
             }
+            bool estado;
+            if(arregloAux[2] == "activo"){estado = true;}
+            else{estado = false;}
+            estacion.agregarSurtidor(arregloAux[0], arregloAux[1], estado);
         }
     }
 }
 
-
+/*
+    //Atributos
+    std::string codigoSurtidor,modelo;
+    bool activo;
+    Ventas* ventas;
+    int sizeVentas = 0;
+    int capacidadVentas = 0;
+    std::string codSurtidores[13];
+    int numCodigosSurtidores = 0;
+    double precioRegular,precioPremium,precioEcoExtra;
+*/
 
 
 
