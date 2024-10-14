@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "funcionesGenerales.h"
 #include "class_Tanque.h"
 
 #include <fstream>
@@ -9,6 +8,7 @@
 using namespace std;
 
 //Constructor
+Tanque::Tanque(){}
 Tanque::Tanque(int capacidad, int combustibleDisponible, double capacidadRegular, double capacidadPremium, double capacidadEcoextra, double disponibleRegular, double disponiblePremium, double disponibleEcoextra)
     : capacidadTotal(capacidad),
     combustibleDisponibleTotal(combustibleDisponible),
@@ -19,6 +19,9 @@ Tanque::Tanque(int capacidad, int combustibleDisponible, double capacidadRegular
     disponiblePremium(disponiblePremium),
     disponibleEcoextra(disponibleEcoextra) {
 }
+
+//Destructor
+Tanque::~Tanque(){}
 
 //Getter
 int Tanque:: getCapacidadTotal() const {return capacidadTotal;}

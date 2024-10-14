@@ -3,9 +3,9 @@
 
 #include <iostream>
 
-#include "funcionesGenerales.h"
 #include "class_Surtidor.h"
 #include "class_Tanque.h"
+#include "class_Ventas.h"
 
 #include <fstream>
 #include <string>
@@ -18,11 +18,13 @@ private:
     Surtidor* surtidores; // Arreglo dinamico de surtidores de la estacion
     std::string nombre, codigoEstacion, gerente, region, coordenadas; // atributos surtidor
     int sizeSurtidores = 0;
-    int capacidadSurtidores = 0;
-    std::string naves[6];
+    int capacidadSurtidores = 1;
     int navesActuales = 0;
+    int capacidadNaves = 1;
+    string* naves;
 
     void expandirSurtidores();
+    void expandirNaves();
 public:
     //Constructor
     Estacion();
@@ -46,7 +48,7 @@ public:
     int setSizeSurtidores();
 
     //Metodos
-    void agregarSurtidor(Surtidor& nuevoSurtidor);
+    void agregarSurtidor(string codigo, string modelo, bool estado);
     void eliminarSurtidor(const std::string& codigoSurtidor);
     void activarSurtidor(const std::string& codigoSurtidor);
     void desactivarSurtidor(const std::string& codigoSurtidor);
@@ -54,7 +56,7 @@ public:
     void asignarCapacidadTanque();
     void reportarLitrosVendidos();
     void mostrarEstaciones();
-    void agregarNave(string codigo);
+    void agregarNaveLectura(string codigo);
     void mostrarNaves();
 };
 
