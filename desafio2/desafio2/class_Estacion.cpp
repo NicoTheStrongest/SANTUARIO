@@ -11,14 +11,6 @@
 
 using namespace std;
 
-/*
-    //Atributos
-    Surtidor* surtidores; // Arreglo dinamico de surtidores de la estacion
-    std::string nombre, codigoEstacion, gerente, region, coordenadas; // atributos surtidor
-    int sizeSurtidores = 0;
-    int naves[6];
-*/
-
 Estacion::Estacion(){}
 
 Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO) {
@@ -28,6 +20,8 @@ Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, stri
     gerente = gerenteO;
     region = regionO;
     coordenadas = coordenadasO;
+    sizeSurtidores += 1;
+    expandirSurtidores(surtidores, &sizeSurtidores);
 }
 
 Estacion::~Estacion() {}
@@ -97,23 +91,26 @@ void Estacion::setSizeSurtidores(int newSizeSurtidores){
 //                  METODOS
 
 
-void Estacion:: expandirSurtidores() {
-    //Metodo privado para expandir el arreglo de surtidores
+void Estacion:: expandirSurtidores(Surtidor*& arr, int* size) {
+    //Metodo publico para expandir el arreglo de surtidores
+    // Función que expande un arreglo dinámico
     // Crear un nuevo arreglo con una posición más
-    int nuevaCapacidad = capacidadSurtidores + 1;
-    Surtidor* nuevoArr = new Surtidor[nuevaCapacidad];
+    Surtidor* nuevoArr = new Surtidor[(*size) + 1];
 
     // Copiar elementos al nuevo arreglo
-    for (int i = 0; i < sizeSurtidores; ++i) {
-        nuevoArr[i] = surtidores[i];
+    for (int i = 0; i < *size; ++i) {
+        nuevoArr[i] = arr[i];
     }
 
     // Liberar la memoria del arreglo original
-    delete[] surtidores;
+    delete[] arr;
 
     // Actualizar el puntero para que apunte al nuevo arreglo
-    surtidores = nuevoArr;
-    capacidadSurtidores = nuevaCapacidad;
+    arr = nuevoArr;
+
+    // Aumentar el tamaño
+    *size += 1;
+
 
     /*
     int nuevaCapacidad = capacidadSurtidores + 1;
@@ -127,16 +124,9 @@ void Estacion:: expandirSurtidores() {
     */
 }
 
-void Estacion:: agregarSurtidor(Surtidor& nuevoSurtidor) {
+void agregarSurtidor(const Surtidor& nuevoSurtidor) {
     //Metodo para agregar un surtidor
-    if (sizeSurtidores == capacidadSurtidores) {
-        expandirSurtidores();  // Si el arreglo está lleno, lo expandimos
-    }
-    surtidores[sizeSurtidores++] = nuevoSurtidor;
-}
 
-void Estacion:: mostrarEstaciones(){
-    cout << "Nombre: " << nombre << ", Codigo: " << codigoEstacion << std::endl;
 }
 
 void eliminarSurtidor(const std::string& codigo) {
@@ -153,7 +143,7 @@ void desactivarSurtidor(const std::string& codigoSurtidor){
 }
 
 void consultarHistorico(){
-    //metodo publico para imprimir por pantalla o en ur archivo de texto plano el historico
+    //metodo publico para imprimir por pantalla o en un archivo de texto plano el historico
     //de transacciones
 }
 
@@ -164,24 +154,6 @@ void asignarCapacidadTanque(){
 
 void reportarLitrosVendidos(){
     // Reportar la cantidad de litros vendida según cada categoría de combustible.
-}
-
-void Estacion:: agregarNave(string codigo){
-    //agrega los codios al arreglo de naves
-    if(navesActuales < 6){
-        naves[navesActuales] = codigo;
-        navesActuales += 1;
-    }
-    else{
-        cout<<"No se pueden agregar mas naves";
-    }
-}
-
-void Estacion:: mostrarNaves(){
-    //mostar arreglo de naves
-    for (int i = 0; i < 6; ++i) {
-        cout<<naves[i]<<"aa";
-    }
 }
 
 
