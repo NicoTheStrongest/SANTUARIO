@@ -1,4 +1,4 @@
-norte,centro,sur
+-norte,centro,sur
 1,badbunny,1001735201,norte,41°24'12.2"N 2°10'26.5"E
 2,sanlucas,1007534567,sur,45°24'12.2"N 4°10'26.5"S
 3,mora,1008976534,norte,51°30'30"N 0°7'33"O
@@ -13,22 +13,22 @@ n3_2,s3_2_1,s3_2_2,s3_2_3
 n4_1,s4_1_1,s4_1_2
 n5_1,s5_1_1,s5_1_2
 n6_1,s6_1_1,s6_1_2
-s1_1_1,modelo1
-s1_1_2,modelo1
-s1_1_3,modelo1
-s1_2_1,modelo2
-s1_2_2,modelo2
-s1_2_3,modelo2
-s2_1_1,modelo1
-s2_1_2,modelo1
-s3_1_1,modelo3
-s3_1_2,modelo3
-s3_2_1,modelo3
-s3_2_2,modelo3
-s3_2_3,modelo3
-s4_1_1,modelo2
-s4_1_2,modelo2
-s5_1_1,modelo1
-s5_1_2,modelo1
-s6_1_1,modelo3
-s6_1_2,modelo3
+s1_1_1,modelo1,activo
+s1_1_2,modelo1,desactivado
+s1_1_3,modelo1,activo
+s1_2_1,modelo2,activo
+s1_2_2,modelo2,desactivado
+s1_2_3,modelo2,activo
+s2_1_1,modelo1,desactivado
+s2_1_2,modelo1,activo
+s3_1_1,modelo3,desactivado
+s3_1_2,modelo3,activo
+s3_2_1,modelo3,desactivado
+s3_2_2,modelo3,activo
+s3_2_3,modelo3,activo
+s4_1_1,modelo2,desactivado
+s4_1_2,modelo2,activo
+s5_1_1,modelo1,desactivado
+s5_1_2,modelo1,activo
+s6_1_1,modelo3,desactivado
+s6_1_2,modelo3,activo

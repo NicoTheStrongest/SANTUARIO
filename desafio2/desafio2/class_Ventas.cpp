@@ -50,6 +50,7 @@ double setMonto(double newMonto){
     //validar formato del parametro
     //monto = newMonto;
 }
+
 double setCantidadCombustible(double newCantidadCombustible){
     //validar formato del parametro
     //cantidadCombustible = newCantidadCombustible;
