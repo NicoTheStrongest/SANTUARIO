@@ -93,29 +93,42 @@ void Surtidor::setPrecioEcoExtra(double newPrecioEcoextra){
 
 void Surtidor:: expandirVentas(Ventas*& arr, int* size){
     //Metodo privado para expandir el arreglo de ventas
-    Ventas* nuevoArr = new Ventas[(*size) + 1];
+    int nuevaCapacidad = capacidadVentas + 1;
+    Ventas* nuevoArr = new Ventas[nuevaCapacidad];
 
     // Copiar elementos al nuevo arreglo
-    for (int i = 0; i < *size; ++i) {
-        nuevoArr[i] = arr[i];
+    for (int i = 0; i < sizeVentas; ++i) {
+        nuevoArr[i] = ventas[i];
     }
 
     // Liberar la memoria del arreglo original
-    delete[] arr;
+    delete[] ventas;
 
     // Actualizar el puntero para que apunte al nuevo arreglo
-    arr = nuevoArr;
+    ventas = nuevoArr;
+    capacidadVentas = nuevaCapacidad;
+}
 
-    // Aumentar el tamaño
-    *size += 1;
+void Surtidor:: agregarCodSurtidores(string codigo){
+    //Agregar codigos al arreglo de surtidores.
+    if(numCodigosSurtidores <= 12){
+        codSurtidores[numCodigosSurtidores] = codigo;
+        numCodigosSurtidores += 1;
+    }
+    else{
+        cout<<"No se puede agregar mas sutidores";
+    }
+}
+
+void Surtidor:: mostrarCodigos(){
+    //mostrar los codigos del codSurtidores
+    for (int i = 0; i < numCodigosSurtidores; ++i) {
+        cout<<codSurtidores[i];
+    }
 }
 
 bool CambiarActivo(){}
 void registrarVenta(const Ventas& nuevaVenta){}
-
-
-
-
 
 
 

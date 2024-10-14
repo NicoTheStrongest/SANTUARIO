@@ -15,7 +15,10 @@ private:
     std::string codigoSurtidor,modelo;
     bool activo;
     Ventas* ventas;
-    int sizeVentas;
+    int sizeVentas = 0;
+    int capacidadVentas = 0;
+    std::string codSurtidores[13];
+    int numCodigosSurtidores = 0;
     double precioRegular,precioPremium,precioEcoExtra;
 
     void expandirVentas(Ventas*& arr, int* size);
@@ -45,6 +48,8 @@ public:
     //Metodos
     bool CambiarActivo()const;
     void registrarVenta(const Ventas& nuevaVenta);
+    void agregarCodSurtidores(std::string codigo);
+    void mostrarCodigos();
 };
 
 #endif // CLASS_SURTIDOR_H

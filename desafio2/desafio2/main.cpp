@@ -4,9 +4,10 @@
 
 using namespace std;
 
-//leerArchivoClases();
 
 int main(){
+    leerArchivoClases();
+
     bool sesionActiva = true;
     while(sesionActiva == true){
         int inicioValido = inicioSesion();
@@ -16,7 +17,9 @@ int main(){
             int opcionGestionRed = menuGestionDeRed();
             switch (opcionGestionRed) {
             case 1: //Agregar estacion
-
+                agregarEstacion();
+                int n;
+                cin>>n;
                 break;
             case 2: //Eliminar estacion
                 break;
@@ -71,3 +74,9 @@ int main(){
     //guardar cambios?
     mensajeSalida();
 }
+
+/* para imprimir
+for (int i = 0; i < sizeEstaciones; ++i) {
+    estaciones[i].mostrarEstaciones();
+}
+*/

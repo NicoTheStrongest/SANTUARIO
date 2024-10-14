@@ -69,7 +69,8 @@ void Ventas::setMonto(double newMonto){
         cout << "El newMonto debe ser mayor a cero." << endl;
     }
 }
-void Ventas::setCantidadCombustible(double newCantidadCombustible){
+
+double setCantidadCombustible(double newCantidadCombustible){
     //validar formato del parametro
     if(newCantidadCombustible > 0){
         cantidadCombustible = newCantidadCombustible;
