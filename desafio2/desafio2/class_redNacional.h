@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-#include "funcionesGenerales.h"
 #include "class_Estacion.h"
 
 #include <fstream>
@@ -13,13 +12,17 @@
 class RedNacional{
 private:
     //Atributos
+    static const int sizeRegion = 3;
+    string regiones[sizeRegion];
     Estacion* estaciones; // arreglo dinamico de estaciones
-    int sizeEstaciones; // cantidad de estaciones
+    int sizeEstaciones = 0; // cantidad de estaciones
+    int capacidadEstaciones = 0;
 
-    void expandirEstaciones(Estacion*& arr, int* size);
+    void expandirEstaciones();
 public:
     //Constructor
     RedNacional();
+    RedNacional(const string arreglo[], int size);
     //Destructor
     ~RedNacional();
     //Getters
@@ -28,11 +31,12 @@ public:
     int setSizeEstaciones(int newSize);
     int setCapacidadEstaciones();
     //Metodos
-    void agregarEstacion(Estacion* nuevaEstacion);
+    void agregarEstacion(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
     void eliminarEstacion(const std::string& codigoEstacion);
     void ventasCombustible();
     void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra);
     bool verificarFugas(const std::string& codigoEstacion);
+    void mostrarArreglo();
 };
 
 #endif // CLASS_REDNACIONAL_H

@@ -18,7 +18,11 @@ private:
     Surtidor* surtidores; // Arreglo dinamico de surtidores de la estacion
     std::string nombre, codigoEstacion, gerente, region, coordenadas; // atributos surtidor
     int sizeSurtidores = 0;
-    int naves[6];
+    int capacidadSurtidores = 0;
+    std::string naves[6];
+    int navesActuales = 0;
+
+    void expandirSurtidores();
 public:
     //Constructor
     Estacion();
@@ -42,14 +46,16 @@ public:
     int setSizeSurtidores();
 
     //Metodos
-    void agregarSurtidor(const std::string& codigoSurtidor, const std::string& modelo);
+    void agregarSurtidor(Surtidor& nuevoSurtidor);
     void eliminarSurtidor(const std::string& codigoSurtidor);
     void activarSurtidor(const std::string& codigoSurtidor);
     void desactivarSurtidor(const std::string& codigoSurtidor);
     void consultarHistorico();
     void asignarCapacidadTanque();
     void reportarLitrosVendidos();
-    void expandirSurtidores(Surtidor*& arr, int* size);
+    void mostrarEstaciones();
+    void agregarNave(string codigo);
+    void mostrarNaves();
 };
 
 #endif // CLASS_ESTACION_H

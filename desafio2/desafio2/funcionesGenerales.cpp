@@ -6,6 +6,69 @@
 
 using namespace std;
 
+//          Funciones de Red
+
+
+void agregarEstacion(){
+    //agregar una estacion al arreglo de Red nacional
+    string nombre, documento, codigo, region, gps;
+    int cod;
+    cout<<"Ingrese nombre de la estacion: ";
+    getline(cin, nombre);
+
+    cout<<"Ingrese documento del gerente de la estacion: ";
+    getline(cin, documento);
+    formatoDocumento(&documento);
+
+    string prints;
+    prints = "./../../prints/MenuRegion.txt";
+    leerArchivoPorLinea(prints);
+    string mensaje1 = "Escoja un opcion: ";
+    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    const int size = 3;
+    string opcionesValidas[size] = {"1", "2", "3"};
+    int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
+    if(opcionElegida == 1){region = "Norte";}
+    if(opcionElegida == 2){region = "Centro";}
+    if(opcionElegida == 3){region = "Sur";}
+
+    cout<<"Ingrese las coordenadas de la estacion: ";
+    getline(cin, gps);
+
+    //RedNacional::codEstacion += 1;
+    //cod = RedNacional::codEstacion;
+    //codigo = "s"+(to_string(cod));
+
+    //RedNacional.agregarEstacion(nombre, codigo, documento, region, gps);
+}
+
+
+
+
+
+
+
+
+
+
+
+void formatoDocumento(string* documento){
+    //Valida que una cadena solo tengo numero y que tengo size 10;
+    string documento2;
+    bool docValido = validarNumeros(*documento);
+    if ((int)(*documento).size() != 10){docValido = false;}
+    while (docValido == false){
+        cout<<"Formato Invalido\n";
+        cout<<"Ingrese documento del gerente de la estacion: ";
+        getline(cin, documento2);
+        docValido = validarNumeros(documento2);
+        if ((int)documento2.size() != 10){docValido = false;}
+        if (docValido == true){*documento = documento2;}
+    }
+}
+
+
+
 
 //              Menu y funciones de interfaz
 
@@ -129,6 +192,14 @@ int inicioSesion(){
     return opcionElegida;
 }
 
+bool validarNumeros(string cadena){
+    //valida que una cadena solo contenga numeros
+    for (int i = 0; i < (int)cadena.size(); ++i) {
+        if (!(cadena[i]>=48  && cadena[i]<=57)){return false;}
+    }
+    return true;
+}
+
 void leerArchivoClases(){
     //Lectura del archivo de texto para guardar en los arreglo de las clases
     string nombreArchivo = "./../../simulacionBaseDatos.txt";
@@ -141,21 +212,66 @@ void leerArchivoClases(){
     string linea;
 
     while (getline(archivo, linea)){
-        if (linea[0] = '-'){}
-        else if(linea[0]>=48 && linea[0]<=57){}
+        RedNacional jerarquiaSuperior;
+        Estacion leerNaves;
+        Surtidor leerCodigos;
+        if (linea[0] == '-'){
+            int sizeAux = 3;
+            string arreglo[sizeAux];
+            string lineaRegion = "";
+            for(int i = 1, j = 0; i < (int)linea.size(); i++){
+                if(linea[i] != ','){lineaRegion += linea[i];}
+                else{arreglo[j] = lineaRegion; lineaRegion = ""; j++;}
+            }
+            arreglo[2] = lineaRegion;
+            RedNacional arregloRegiones(arreglo, sizeAux);
+        }
+        else if(linea[0]>=48 && linea[0]<=57){
+            string leerNombre = "";
+            string leerCodigo = "";
+            string leerGerente = "";
+            string leerRegion = "";
+            string leerCoordenadas = "";
+            string lineaEstacion = "";
+            for(int i = 0, j = 0; i < (int)linea.size(); i++){
+                if(linea[i] != ','){lineaEstacion += linea[i];}
+                else{
+                    if(j == 0){leerCodigo = lineaEstacion; lineaEstacion = ""; j++;}
+                    else if(j == 1){leerNombre = lineaEstacion; lineaEstacion = ""; j++;}
+                    else if(j == 2){leerGerente = lineaEstacion; lineaEstacion = ""; j++;}
+                    else if(j == 3){leerRegion = lineaEstacion; lineaEstacion = ""; j++;}
+                }
+            }
+            leerCoordenadas = lineaEstacion;
+            jerarquiaSuperior.agregarEstacion(leerNombre, leerCodigo, leerGerente, leerRegion, leerCoordenadas);
+        }
+        else if(linea[0] == 'n'){
+            string lineaNaves = "";
+            bool nave = true;
+            for(int i = 0; i < (int)linea.size(); i++){
+                if(linea[i] != ','){lineaNaves += linea[i];}
+                else{
+                    if(nave){
+                        leerNaves.agregarNave(lineaNaves);
+                        leerCodigos.agregarCodSurtidores(lineaNaves);
+                        lineaNaves = "";
+                        nave = false;
+                    }
+                    else{
+                        leerCodigos.agregarCodSurtidores(lineaNaves);
+                        lineaNaves = "";
+                    }
+                }
+            }
+            leerCodigos.agregarCodSurtidores(lineaNaves);
+        }
+        else if(linea[0] == 's'){
+            for(int i = 0; i < (int)linea.size(); i++){
+
+            }
+        }
     }
 }
-
-
-bool validarNumeros(string cadena){
-    //valida que una cadena solo contenga numeros
-    for (int i = 0; i < (int)cadena.size(); ++i) {
-        if (!(cadena[i]>=48  && cadena[i]<=57)){return false;}
-    }
-    return true;
-}
-
-
 
 
 
