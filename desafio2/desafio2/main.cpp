@@ -1,13 +1,20 @@
 #include <iostream>
-#include "class_RedNacional.h"
 #include "funcionesGenerales.h"
+#include "class_RedNacional.h"
+#include "class_Estacion.h"
+#include "class_Surtidor.h"
+#include "class_Tanque.h"
+#include "class_Ventas.h"
 
 using namespace std;
 
-
 int main(){
-    leerArchivoClases();
-
+    RedNacional redNacional;
+    Estacion estacion;
+    Surtidor surtidor;
+    Tanque tanque;
+    Ventas ventas;
+    leerArchivoClases(redNacional, estacion, surtidor, tanque, ventas);
     bool sesionActiva = true;
     while(sesionActiva == true){
         int inicioValido = inicioSesion();
@@ -17,9 +24,6 @@ int main(){
             int opcionGestionRed = menuGestionDeRed();
             switch (opcionGestionRed) {
             case 1: //Agregar estacion
-                agregarEstacion();
-                int n;
-                cin>>n;
                 break;
             case 2: //Eliminar estacion
                 break;
@@ -71,6 +75,7 @@ int main(){
         }
         }
     }
+    system("pause");
     //guardar cambios?
     mensajeSalida();
 }

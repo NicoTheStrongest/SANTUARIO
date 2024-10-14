@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-#include "funcionesGenerales.h"
-
 #include <fstream>
 #include <string>
 
@@ -20,6 +18,7 @@ private:
     double disponibleEcoextra;
 public:
     //Constructor
+    Tanque();
     Tanque(int capacidad, int combustibleDisponible, double capacidadRegular, double capacidadPremium, double capacidadEcoextra, double disponibleRegular, double disponiblePremium, double disponibleEcoextra);
     //Destructor
     ~Tanque();

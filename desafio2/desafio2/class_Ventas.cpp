@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "funcionesGenerales.h"
 #include "class_Ventas.h"
 
 #include <fstream>

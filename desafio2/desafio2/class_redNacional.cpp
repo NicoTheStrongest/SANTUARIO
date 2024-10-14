@@ -2,6 +2,12 @@
 
 #include "class_RedNacional.h"
 #include "class_Estacion.h"
+<<<<<<< HEAD
+=======
+#include "class_Surtidor.h"
+#include "class_Tanque.h"
+#include "class_Ventas.h"
+>>>>>>> main
 
 #include <fstream>
 #include <string>
@@ -10,10 +16,24 @@
 using namespace std;
 
 
+
 RedNacional::RedNacional(){
     //Constructor que inicializa el arreglo de estaciones
     sizeEstaciones = 1;
     expandirEstaciones(estaciones, &sizeEstaciones);
+
+/*
+Estacion* estaciones; // arreglo dinamico de estaciones
+int sizeEstaciones = 0; // cantidad de estaciones
+int capacidadEstaciones = 2;
+
+static const int sizeRegion = 3;
+string regiones[sizeRegion];
+*/
+
+RedNacional::RedNacional(): sizeEstaciones(0), capacidadEstaciones(2) {
+    estaciones = new Estacion[capacidadEstaciones];
+
 }
 
 RedNacional::~RedNacional(){
@@ -73,8 +93,18 @@ void RedNacional:: expandirEstaciones(Estacion*& arr, int* size){
     */
 }
 
+
 void RedNacional:: agregarEstacion(Estacion* nuevaEstacion){
     //Metodo publico para agregar una estacion
+
+void RedNacional:: agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO){
+    //Metodo publico para agregar una estacion
+    if (sizeEstaciones == capacidadEstaciones) {
+        expandirEstaciones();  // Si el arreglo está lleno, lo expandimos
+    }
+    estaciones[sizeEstaciones] = Estacion(nombreO, codigoEstacionO, gerenteO, regionO, coordenadasO);
+    sizeEstaciones += 1;
+
 }
 
 void RedNacional:: eliminarEstacion(const std::string& codigoEstacion){
@@ -93,6 +123,28 @@ bool RedNacional::verificarFugas(const string& codigoEstacion){
     //Metodo publico para verificar fugas en las esatciones
 }
 
+
+void RedNacional:: mostrarArreglo(){
+    //
+    for (int i = 0; i < sizeEstaciones; ++i) {
+        estaciones[i].mostrarEstaciones();
+    }
+}
+
+
+void RedNacional::agregarRegiones(string arreglo[]){
+    for (int i = 0; i < sizeRegion ; ++i) {
+        regiones[i] = arreglo[i];
+    }
+}
+
+
+
+
+
+
+
+Estacion* RedNacional:: getEstaciones() const {return estaciones;}
 
 /*
 void expandirArreglo(string**& arr, int& size) {

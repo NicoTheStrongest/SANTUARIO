@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-#include "funcionesGenerales.h"
 #include "class_Ventas.h"
 
 #include <fstream>
@@ -12,8 +11,8 @@
 class Surtidor{
 private:
     //Atributos
-    std::string codigoSurtidor,modelo;
-    bool activo;
+    std::string codigoSurtidor, modelo;
+    bool estado;
     Ventas* ventas;
     int sizeVentas = 0;
     int capacidadVentas = 0;
@@ -25,13 +24,13 @@ private:
 public:
     //Constructor
     Surtidor();
-    Surtidor(std::string codigoSurtidor, std::string modelo, bool activo = true);
+    Surtidor(std::string codigoSurtidor, std::string modelo, bool estado = false);
     //Destructor
     ~Surtidor();
     //Getters
     std::string getCodigoSurtidor() const;
     std::string getModelo() const;
-    bool getActivo() const;
+    bool getEstado() const;
     int getSizeVentas() const;
     double getPrecioRegular() const;
     double getPrecioPremium() const;
@@ -49,7 +48,7 @@ public:
     //Metodos
     bool CambiarActivo()const;
     void registrarVenta(const Ventas& nuevaVenta);
-    void agregarCodSurtidores(std::string codigo);
+    void agregarCodSurtidoresLectura(std::string codigo);
     void mostrarCodigos();
 };
 
