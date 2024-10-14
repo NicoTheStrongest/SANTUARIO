@@ -30,10 +30,17 @@ public:
     std::string getModelo() const;
     bool getActivo() const;
     int getSizeVentas() const;
-    int getCapacidadVentas() const;
     double getPrecioRegular() const;
     double getPrecioPremium() const;
     double getPrecioEcoExtra() const;
+
+    //setters
+    void setCodigoSurtidor(std::string newCodigoSurtidor);
+    void setModelo(std::string newModelo);
+    void setSizeVentas(int newSizeVentas);
+    void setPrecioRegular(double newPrecioRegular);
+    void setPrecioPremium(double newPrecioPremium);
+    void setPrecioEcoExtra(double newPrecioEcoextra);
 
     //Metodos
     bool CambiarActivo()const;

@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -26,8 +27,14 @@ int RedNacional:: getSizetaciones() const {
 }
 
 //Setters
-int RedNacional:: setSizeEstaciones(int newSize){
+void RedNacional:: setSizeEstaciones(int newSize){
     // validar el nuevo numero entero.
+    if(newSize > 0){
+        sizeEstaciones = newSize;
+    }
+    else{
+        cout << "newSize debe ser mayor a cero." << endl;
+    }
 }
 
 //                      Metodos
@@ -82,7 +89,7 @@ void RedNacional:: fijarPrecios(double precioRegular,double precioPremium,double
     //Metodo publico para fijar los precios del combustible
 }
 
-bool RedNacional:: verificarFugas(const std::string& codigoEstacion){
+bool RedNacional::verificarFugas(const string& codigoEstacion){
     //Metodo publico para verificar fugas en las esatciones
 }
 

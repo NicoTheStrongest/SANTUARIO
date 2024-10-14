@@ -40,6 +40,57 @@ double Surtidor:: getPrecioPremium() const {return precioRegular;}
 
 double Surtidor:: getPrecioEcoExtra() const {return precioEcoExtra;}
 
+//Setters
+void Surtidor::setCodigoSurtidor(std::string newCodigoSurtidor){
+    //Validar formato del parametro
+    if(newCodigoSurtidor.length() == 6){
+        codigoSurtidor = newCodigoSurtidor;
+    }
+    else{
+        cout << "newCodigoSurtidor debe tener seis caracteres." << endl;
+    }
+}
+void Surtidor::setModelo(std::string newModelo){
+    if(newModelo == "modelo1" || newModelo == "modelo2" || newModelo == "modelo3"){
+        modelo = newModelo;
+    }
+    else{
+        cout << "newModelo debe ser 'modelo1','modelo2' o 'modelo3'" << endl;
+    }
+}
+void Surtidor::setSizeVentas(int newSizeVentas){
+    if(newSizeVentas > 0){
+        sizeVentas = newSizeVentas;
+    }
+    else{
+        cout << "newSizeVentas de ser mayor a cero" << endl;
+    }
+}
+void Surtidor::setPrecioRegular(double newPrecioRegular){
+    if(newPrecioRegular > 0){
+            precioRegular = newPrecioRegular;
+    }
+    else{
+        cout << "newPrecioRegular de ser mayor a cero" << endl;
+    }
+}
+void Surtidor::setPrecioPremium(double newPrecioPremium){
+    if(newPrecioPremium > 0){
+        precioPremium = newPrecioPremium;
+    }
+    else{
+        cout << "newPrecioPremium de ser mayor a cero" << endl;
+    }
+}
+void Surtidor::setPrecioEcoExtra(double newPrecioEcoextra){
+    if(newPrecioEcoextra > 0){
+        precioEcoExtra = newPrecioEcoextra;
+    }
+    else{
+        cout << "newPrecioEcoextra de ser mayor a cero" << endl;
+    }
+}
+
 void Surtidor:: expandirVentas(Ventas*& arr, int* size){
     //Metodo privado para expandir el arreglo de ventas
     Ventas* nuevoArr = new Ventas[(*size) + 1];
@@ -58,6 +109,9 @@ void Surtidor:: expandirVentas(Ventas*& arr, int* size){
     // Aumentar el tamaño
     *size += 1;
 }
+
+bool CambiarActivo(){}
+void registrarVenta(const Ventas& nuevaVenta){}
 
 
 

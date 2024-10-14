@@ -34,12 +34,12 @@ public:
     int getsizeSurtidores()const;
 
     //Setters
-    std::string setNombre();
-    std::string setCodigoEstacion();
-    std::string setGerente();
-    std::string setRegion();
-    std::string setCoordenadas();
-    int setSizeSurtidores();
+    void setNombre(std::string newNombre);
+    void setCodigoEstacion(std::string newCodigoEstacion);
+    void setGerente(std::string newGerente);
+    void setRegion(std::string newRegion);
+    void setCoordenadas(std::string newCoordenadas);
+    void setSizeSurtidores(int newSizeSurtidores);
 
     //Metodos
     void agregarSurtidor(const std::string& codigoSurtidor, const std::string& modelo);

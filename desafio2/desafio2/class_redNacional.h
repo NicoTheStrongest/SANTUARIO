@@ -25,14 +25,14 @@ public:
     //Getters
     int getSizetaciones()const;
     //Setters
-    int setSizeEstaciones(int newSize);
+    void setSizeEstaciones(int newSize);
     int setCapacidadEstaciones();
     //Metodos
     void agregarEstacion(Estacion* nuevaEstacion);
     void eliminarEstacion(const std::string& codigoEstacion);
     void ventasCombustible();
     void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra);
-    bool verificarFugas(const std::string& codigoEstacion);
+    bool verificarFugas(const string& codigoEstacion);
 };
 
 #endif // CLASS_REDNACIONAL_H

@@ -7,6 +7,7 @@
 
 #include <fstream>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, stri
 
 Estacion::~Estacion() {}
 
+//Getters
 string Estacion:: getnombre() const { return nombre; }
 string Estacion:: getcodigoEstacion()const{return codigoEstacion;}
 string Estacion:: getgerente()const{return gerente;}
@@ -33,29 +35,56 @@ string Estacion:: getcoordenadas()const{return coordenadas;}
 int Estacion:: getsizeSurtidores()const{return sizeSurtidores;}
 
 //Setters
-std::string setNombre(std::string newNombre){
+void Estacion::setNombre(std::string newNombre){
     //Validar formato del parametro
-    //nombre = newNombre;
+    if(newNombre.empty()){
+        nombre = newNombre;
+    }
+    else{
+        cout << "El nombre no puede estar vacio." << endl;
+    }
+
 }
-std::string setCodigoEstacion(std::string newCodigoEstacion){
+void Estacion::setCodigoEstacion(std::string newCodigoEstacion){
     //Validar formato del parametro
-    //codigoEstacion = newCodigoEstacion;
+    if(newCodigoEstacion.length() == 1){
+        codigoEstacion = newCodigoEstacion;
+    }
+    else{
+        cout << "El codigo de la estacion deber contener un solo caracter." << endl;
+    }
 }
-std::string setGerente(std::string newGerente){
+void Estacion::setGerente(std::string newGerente){
     //Validar formato del parametro
-    //gerente = newGerente;
+    if (newGerente.length() == 10){
+        gerente = newGerente;
+    }
+    else{
+        cout << "El documento del gerente debe tener diez caracteres." << endl;
+    }
 }
-std::string setRegion(std::string newRegion){
+void Estacion::setRegion(std::string newRegion){
     //Validar formato del parametro
-    //region = newRegion;
+    if(newRegion == "norte" || newRegion == "centro" || newRegion == "sur" ){
+        region = newRegion;
+    }
+    else{
+        cout << "La region debe ser 'norte', 'centro' o 'sur'." << endl;
+    }
+
 }
-std::string setCoordenadas(std::string newCoordenadas){
+void Estacion::setCoordenadas(std::string newCoordenadas){
     //Validar formato del parametro
-    //coordenadas = newCoordenadas;
+    coordenadas = newCoordenadas;
 }
-int setSizeSurtidores(std::string newSizeSurtidores){
+void Estacion::setSizeSurtidores(int newSizeSurtidores){
     //Validar formato del parametro
-    //sizeSurtidores = newSizeSurtidores;
+    if(newSizeSurtidores > 0){
+        sizeSurtidores = newSizeSurtidores;
+    }
+    else{
+        cout << "sizeSurtidores debe ser mayor a cero." << endl;
+    }
 }
 
 
@@ -126,6 +155,7 @@ void asignarCapacidadTanque(){
 void reportarLitrosVendidos(){
     // Reportar la cantidad de litros vendida según cada categoría de combustible.
 }
+
 
 
 /*

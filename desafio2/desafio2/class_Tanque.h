@@ -33,14 +33,14 @@ public:
     double getDisponiblePremium() const;
     double getDisponibleEcoexptra() const;
     //Setter
-    int setCapacidadTotal(int newCapacidad);
-    int setCombustibleDisponibleTotal(int newCombustibleDisponibleTotal);
-    double setCapacidadRegular(double newCapadidadRegular);
-    double setCapacidadPremium(double newCapadidadPremium);
-    double setCapacidadEcoextra(double newCapadidadEcoextra);
-    double setDisponibleRegular(double newDisponibleRegular);
-    double setDisponiblePremium(double newDisponiblePremium);
-    double setDisponibleEcoextra(double newDisponibleEcoextra);
+    void setCapacidadTotal(int newCapacidad);
+    void setCombustibleDisponibleTotal(int newCombustibleDisponibleTotal);
+    void setCapacidadRegular(double newCapacidadRegular);
+    void setCapacidadPremium(double newCapacidadPremium);
+    void setCapacidadEcoextra(double newCapacidadEcoextra);
+    void setDisponibleRegular(double newDisponibleRegular);
+    void setDisponiblePremium(double newDisponiblePremium);
+    void setDisponibleEcoextra(double newDisponibleEcoextra);
 };
 
 #endif // CLASS_TANQUE_H
