@@ -128,36 +128,53 @@ debug/class_Estacion.o: ../../class_Estacion.cpp ../../funcionesGenerales.h \
 		../../class_Estacion.h \
 		../../class_Surtidor.h \
 		../../class_Ventas.h \
-		../../class_Tanque.h
+		../../class_Tanque.h \
+		../../class_RedNacional.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\class_Estacion.o ..\..\class_Estacion.cpp
 
 debug/class_RedNacional.o: ../../class_RedNacional.cpp ../../class_RedNacional.h \
-		../../funcionesGenerales.h \
 		../../class_Estacion.h \
+		../../funcionesGenerales.h \
 		../../class_Surtidor.h \
 		../../class_Ventas.h \
 		../../class_Tanque.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\class_RedNacional.o ..\..\class_RedNacional.cpp
 
 debug/class_Surtidor.o: ../../class_Surtidor.cpp ../../funcionesGenerales.h \
+		../../class_Estacion.h \
 		../../class_Surtidor.h \
-		../../class_Ventas.h
+		../../class_Ventas.h \
+		../../class_Tanque.h \
+		../../class_RedNacional.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\class_Surtidor.o ..\..\class_Surtidor.cpp
 
 debug/class_Tanque.o: ../../class_Tanque.cpp ../../funcionesGenerales.h \
-		../../class_Tanque.h
+		../../class_Estacion.h \
+		../../class_Surtidor.h \
+		../../class_Ventas.h \
+		../../class_Tanque.h \
+		../../class_RedNacional.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\class_Tanque.o ..\..\class_Tanque.cpp
 
 debug/class_Ventas.o: ../../class_Ventas.cpp ../../funcionesGenerales.h \
-		../../class_Ventas.h
+		../../class_Estacion.h \
+		../../class_Surtidor.h \
+		../../class_Ventas.h \
+		../../class_Tanque.h \
+		../../class_RedNacional.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\class_Ventas.o ..\..\class_Ventas.cpp
 
-debug/funcionesGenerales.o: ../../funcionesGenerales.cpp ../../funcionesGenerales.h
+debug/funcionesGenerales.o: ../../funcionesGenerales.cpp ../../funcionesGenerales.h \
+		../../class_Estacion.h \
+		../../class_Surtidor.h \
+		../../class_Ventas.h \
+		../../class_Tanque.h \
+		../../class_RedNacional.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\funcionesGenerales.o ..\..\funcionesGenerales.cpp
 
 debug/main.o: ../../main.cpp ../../class_RedNacional.h \
-		../../funcionesGenerales.h \
 		../../class_Estacion.h \
+		../../funcionesGenerales.h \
 		../../class_Surtidor.h \
 		../../class_Ventas.h \
 		../../class_Tanque.h

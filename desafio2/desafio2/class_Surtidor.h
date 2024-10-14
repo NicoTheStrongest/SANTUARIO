@@ -40,6 +40,7 @@ public:
     //setters
     void setCodigoSurtidor(std::string newCodigoSurtidor);
     void setModelo(std::string newModelo);
+    void setActivo(bool estado);
     void setSizeVentas(int newSizeVentas);
     void setPrecioRegular(double newPrecioRegular);
     void setPrecioPremium(double newPrecioPremium);

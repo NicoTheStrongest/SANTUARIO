@@ -58,6 +58,9 @@ void Surtidor::setModelo(std::string newModelo){
         cout << "newModelo debe ser 'modelo1','modelo2' o 'modelo3'" << endl;
     }
 }
+void Surtidor::setActivo(bool estado){
+    activo = estado;
+}
 void Surtidor::setSizeVentas(int newSizeVentas){
     if(newSizeVentas > 0){
         sizeVentas = newSizeVentas;

@@ -110,27 +110,73 @@ void Estacion:: expandirSurtidores(Surtidor*& arr, int* size) {
 
     // Aumentar el tamaño
     *size += 1;
-
-
-    /*
-    int nuevaCapacidad = capacidadSurtidores + 1;
-    Surtidor* nuevoArreglo = new Surtidor*[nuevaCapacidad];
-    for (int i = 0; i < numSurtidores; i++) {
-        nuevoArreglo[i] = surtidores[i];
-    }
-    delete[] surtidores;
-    surtidores = nuevoArreglo;
-    capacidadSurtidores = nuevaCapacidad;
-    */
 }
 
-void agregarSurtidor(const Surtidor& nuevoSurtidor) {
+void agregarSurtidor() {
     //Metodo para agregar un surtidor
+    string codigo, modelo;
+    cout << "Ingrese el codigo para el nuevo surtidor: " << endl;
+    cin >> codigo;
+    //verificar codigo valido y no repetido
+    for(int i = 0; i < ){
+
+    }
+    cout << "Ingrese el modelo del nuevo surtidor(modelo1, modelo2, modelo3): " << endl;
+    cin >> modelo;
+    while(modelo != "modelo1" || modelo != "modelo2" || modelo != "modelo3"){
+        cout << "Modelo de surtidor no valido, intente nuevamente: " << endl;
+        cin >> modelo;
+    }
+    //Expansion del arreglo
+    //Estacion::expandirSurtidores();
+
 
 }
 
-void eliminarSurtidor(const std::string& codigo) {
+void eliminarSurtidor() {
     //Metodo para eliminar un surtidor
+    string codigo;
+    cout << "Ingrese el codigo del surtidor que desea eliminar: " << endl;
+    cin >> codigo;
+    int posicion = -1;
+    //Encontrar surtidor en el arreglo
+    for(int i = 0; i < tamanio; i++){
+        if(arreglo[i] == codigo){
+            posicion = i;
+            break;
+        }
+    }
+    if(posicion == -1){
+        cout << "Surtidor " << codigo << "no existe." << endl;
+    }
+    //Inicializa el arreglo
+    string* nuevoArreglo = new string[tamanio -1];
+    //Copia los elementos hasta encontrar al surtidor
+    for(int i = 0; i < posicion; i++){
+        nuevoArreglo[i] = arreglo[i];
+    }
+    for(int j = pos; j < tamanio -1; j++){
+        nuevoArreglo = arreglo[j + 1];
+    }
+    delete arreglo[posicion];
+    arreglo = nuevoArreglo;
+    /*
+    //Desplazar los elementos
+    for(int i = posicion; i < tamanio - 1; i++){
+        arreglo[i] = arreglo[i + 1];
+    }
+    tamanio--;
+    //inicializo el arreglo
+    string* nuevoarreglo = new string[tamanio];
+    //copio los elementos
+    for(int i = 0; i < tamanio; i++){
+        nuevoarreglo[i] = arreglo[i];
+    }
+    //Liberar la memoria
+    delete[] arreglo;
+    //apuntar al nuevo arreglo
+    arreglo = nuevoarreglo;
+*/
 
 }
 

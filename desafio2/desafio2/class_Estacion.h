@@ -22,7 +22,7 @@ private:
     std::string naves[6];
     int navesActuales = 0;
 
-    void expandirSurtidores();
+    void expandirSurtidores(Surtidor*& arr, int* size);
 public:
     //Constructor
     Estacion();
