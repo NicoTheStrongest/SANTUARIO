@@ -32,9 +32,9 @@ public:
     double getDisponiblePremium() const;
     double getDisponibleEcoexptra() const;
     //Setter
-    void setCapacidadTotal(int newCapacidad);
-    void setCombustibleDisponibleTotal(int newCombustibleDisponibleTotal);
-    void setCapacidadRegular(double newCapacidadRegular);
+    void setCapacidadTotal (int newCapacidad);
+    void setCombustibleDisponibleTotal (int newCombustibleDisponibleTotal);
+    void setCapacidadRegular (double newCapacidadRegular);
     void setCapacidadPremium(double newCapacidadPremium);
     void setCapacidadEcoextra(double newCapacidadEcoextra);
     void setDisponibleRegular(double newDisponibleRegular);
