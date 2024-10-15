@@ -10,14 +10,14 @@ using namespace std;
 
 //Constructor
 Ventas::Ventas(){}
-Ventas::Ventas(const string codigoVenta,const string fechaHora, const string tipoCombustible, const string metodoPago, const string documentoCliente, double cantidadCombustible, double monto)
-    : codigoVenta(codigoVenta), fechaHora(fechaHora), tipoCombustible(tipoCombustible), metodoPago(metodoPago), documentoCliente(documentoCliente), cantidadCombustible(cantidadCombustible), monto(monto){}
+Ventas::Ventas(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto)
+    : codigoVentas(codigoSurtidor), tipoCombustible(tipoCombustible), fechaHora(fechaHora), cantidadCombustible(cantidadCombustible), metodoPago(metodoPago), documentoCliente(documentoCliente), monto(monto){}
 
 //Destructor
 Ventas::~Ventas(){}
 
 //Getters
-string Ventas:: getCodigoVenta()const {return codigoVenta;}
+string Ventas:: getCodigoVentas()const{return codigoVentas;}
 string Ventas:: getfechaHora() const {return fechaHora;}
 string Ventas:: getTipoCombustible() const {return tipoCombustible;}
 string Ventas:: getMetodoPago() const {return metodoPago;}
@@ -50,7 +50,7 @@ void Ventas::setMetodoPago(string newMetodoPago){
     }
 }
 
-void Ventas::setDocumentoCliente(string newDocumentoCliente){
+void Ventas:: setDocumentoCliente(string newDocumentoCliente){
     //validar formato del parametro
     if(newDocumentoCliente.length() == 10){
         documentoCliente = newDocumentoCliente;
@@ -70,7 +70,7 @@ void Ventas::setMonto(double newMonto){
     }
 }
 
-void Ventas::setCantidadCombustible(double newCantidadCombustible){
+void Ventas:: setCantidadCombustible(double newCantidadCombustible){
     //validar formato del parametro
     if(newCantidadCombustible > 0){
         cantidadCombustible = newCantidadCombustible;
@@ -91,7 +91,16 @@ string fechaHora(){
     return string(fechaHora);
 }
 
-//Metodo para mostrar todos los detalles de ventas
+void Ventas:: mostrarVentas(){
+    cout<<codigoVentas<<"//"<<tipoCombustible<<"//"<<fechaHora<<"//"<<metodoPago<<"//"<<documentoCliente<<"//"<<cantidadCombustible<<"//"<<monto;
+    cout<<endl;
+}
+
+/*
+//Atributos
+std::string codigoVentas, tipoCombustible, fechaHora, metodoPago, documentoCliente;
+int cantidadCombustible, monto;
+*/
 
 
 

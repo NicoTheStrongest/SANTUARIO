@@ -63,6 +63,11 @@ public:
     void mostrarEstaciones();
     void agregarNaveLectura(string codigo);
     void mostrarNaves();
+
+    bool surtidoresInactivos(string codigoEstacion);
+    void eliminarSurtidoresNavesEstacion(bool eliminar, string codigo);
+    Surtidor* getSurtidores() const;
+
 };
 
 #endif // CLASS_ESTACION_H

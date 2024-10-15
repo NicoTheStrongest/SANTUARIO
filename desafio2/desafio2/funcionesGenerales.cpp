@@ -3,53 +3,8 @@
 #include <string>
 
 #include "funcionesGenerales.h"
-#include "class_RedNacional.h"
-#include "class_Estacion.h"
-#include "class_Surtidor.h"
-#include "class_Tanque.h"
-#include "class_Ventas.h"
 
 using namespace std;
-
-//          Funciones de Red
-
-/*
-void nuevaEstacion(RedNacional& red){
-    //agregar una estacion al arreglo de Red nacional
-    string nombre, documento, codigo, region, gps;
-    int cod;
-    cout<<"Ingrese nombre de la estacion: ";
-    getline(cin, nombre);
-
-    cout<<"Ingrese documento del gerente de la estacion: ";
-    getline(cin, documento);
-    formatoDocumento(&documento);
-
-    string prints;
-    prints = "./../../prints/MenuRegion.txt";
-    leerArchivoPorLinea(prints);
-    string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
-    const int size = 3;
-    string opcionesValidas[size] = {"1", "2", "3"};
-    int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
-    if(opcionElegida == 1){region = "Norte";}
-    if(opcionElegida == 2){region = "Centro";}
-    if(opcionElegida == 3){region = "Sur";}
-
-    cout<<"Ingrese las coordenadas de la estacion: ";
-    getline(cin, gps);
-
-    cod = RedNacional::codEstacion;
-
-    red.agregarEstacion(nombre, codigo, documento, region, gps);
-}
-*/
-
-
-
-
-
 
 void formatoDocumento(string* documento){
     //Valida que una cadena solo tengo numero y que tengo size 10;
@@ -65,9 +20,6 @@ void formatoDocumento(string* documento){
         if (docValido == true){*documento = documento2;}
     }
 }
-
-
-
 
 //              Menu y funciones de interfaz
 
@@ -198,88 +150,6 @@ bool validarNumeros(string cadena){
     }
     return true;
 }
-
-void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& surtidor, Tanque& tanque, Ventas& ventas){
-    //Lectura del archivo de texto para guardar en los arreglo de las clases
-    string nombreArchivo = "./../../simulacionBaseDatos.txt";
-    fstream archivo(nombreArchivo, ios::in);
-    if (!archivo.is_open()){
-        cout << "Error al abrir el archivo\n";
-        return;
-    }
-
-    string linea;
-
-    while (getline(archivo, linea)){
-        if (linea[0] == '-'){
-            int sizeAux = 3;
-            string arreglo[sizeAux];
-            string lineaRegion = "";
-            for(int i = 1, j = 0; i < (int)linea.size(); i++){
-                if(linea[i] != ','){lineaRegion += linea[i];}
-                else{arreglo[j] = lineaRegion; lineaRegion = ""; j++;}
-            }
-            arreglo[2] = lineaRegion;
-            //redNacional.agregarRegiones(arreglo);
-        }
-        else if(linea[0]>=48 && linea[0]<=57){
-            string leerNombre = "";
-            string leerCodigo = "";
-            string leerGerente = "";
-            string leerRegion = "";
-            string leerCoordenadas = "";
-            string lineaEstacion = "";
-            for(int i = 0, j = 0; i < (int)linea.size(); i++){
-                if(linea[i] != ','){lineaEstacion += linea[i];}
-                else{
-                    if(j == 0){leerCodigo = lineaEstacion; lineaEstacion = ""; j++;}
-                    else if(j == 1){leerNombre = lineaEstacion; lineaEstacion = ""; j++;}
-                    else if(j == 2){leerGerente = lineaEstacion; lineaEstacion = ""; j++;}
-                    else if(j == 3){leerRegion = lineaEstacion; lineaEstacion = ""; j++;}
-                }
-            }
-            leerCoordenadas = lineaEstacion;
-            redNacional.agregarEstacionLectura(leerNombre, leerCodigo, leerGerente, leerRegion, leerCoordenadas);
-        }
-        else if(linea[0] == 'n'){
-            string lineaNaves = "";
-            for(int i = 1; i < (int)linea.size(); i++){
-                if(linea[i] != ','){lineaNaves += linea[i];}
-                else{
-                    estacion.agregarNaveLectura(lineaNaves);
-                    lineaNaves = "";
-                }
-            }
-            estacion.agregarNaveLectura(lineaNaves);
-            surtidor.agregarCodSurtidoresLectura(lineaNaves);
-        }
-        else if(linea[0] == 's'){
-            string lineaNaves = "";
-            int sizeAux = 3;
-            string arregloAux[sizeAux];
-            for(int i = 1, j = 0; i < (int)linea.size(); i++){
-                if(linea[i] != ','){lineaNaves += linea[i];}
-                else{arregloAux[j] = lineaNaves; lineaNaves = ""; j++;}
-            }
-            bool estado;
-            if(arregloAux[2] == "activo"){estado = true;}
-            else{estado = false;}
-            estacion.agregarSurtidorLectura(arregloAux[0], arregloAux[1], estado);
-        }
-    }
-}
-
-/*
-    //Atributos
-    std::string codigoSurtidor,modelo;
-    bool activo;
-    Ventas* ventas;
-    int sizeVentas = 0;
-    int capacidadVentas = 0;
-    std::string codSurtidores[13];
-    int numCodigosSurtidores = 0;
-    double precioRegular,precioPremium,precioEcoExtra;
-*/
 
 
 

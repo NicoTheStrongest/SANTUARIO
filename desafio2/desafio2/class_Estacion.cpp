@@ -41,7 +41,6 @@ void Estacion::setNombre(std::string newNombre){
     else{
         cout << "El nombre no puede estar vacio." << endl;
     }
-
 }
 void Estacion::setCodigoEstacion(std::string newCodigoEstacion){
     //Validar formato del parametro
@@ -84,7 +83,6 @@ void Estacion::setSizeSurtidores(int newSizeSurtidores){
         cout << "sizeSurtidores debe ser mayor a cero." << endl;
     }
 }
-
 
 //                  METODOS
 
@@ -152,8 +150,8 @@ void Estacion::agregarSurtidor() {
     cout << "Surtidor " << codigo << " agregado exitosamente." << endl;
 }
 
-//Metodo para agregar surtidor al arreglo
-void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado){
+void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado) {
+    //Metodo para agregar un surtidor
     if(sizeSurtidores == 0){surtidores = new Surtidor[capacidadSurtidores];}
     else{
         if (sizeSurtidores == capacidadSurtidores) {
@@ -164,7 +162,10 @@ void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado
     sizeSurtidores++;
 }
 
-//Metodo para obtener codigo del surtidor
+void Estacion:: mostrarEstaciones(){
+    cout<<codigoEstacion<<"->\t"<<nombre<<endl;
+}
+
 string Estacion::obtenerCodigosurtidor(){
     string codigo;
     cout << "Ingrese el codigo del surtidor que desea eliminar: " << endl;
@@ -179,7 +180,7 @@ string Estacion::obtenerCodigosurtidor(){
 }
 
 
-void Estacion::eliminarSurtidor(string codigo) {
+void Estacion:: eliminarSurtidor(string codigo) {
     //Metodo para eliminar un surtidor
     int posicion = -1;
     //Encontrar surtidor en el arreglo
@@ -211,6 +212,44 @@ void Estacion::eliminarSurtidor(string codigo) {
     sizeSurtidores--;
     cout << "Surtidor " << codigo << " eliminado con exito." << endl;
 
+
+void Estacion:: eliminarSurtidoresNavesEstacion(bool eliminar, string codigo){
+    //Metodo publico para eliminar una surtidores y naves asociados a una estacion.
+    if(eliminar == false){
+        cout <<"No se pueden eliminar los surtidores ni las naves de la estacion "<<codigo<<endl;
+        system("pause");
+        return;
+    }
+    else{
+        //Eliminar surtidores.
+        //contar codigos que inician por el codigo
+        int menosSize = 0;
+        string codigoSurtidor;
+        for (int i = 0; i < sizeSurtidores; ++i) {
+            codigoSurtidor = (surtidores[i].getCodigoSurtidor())[0];
+            if(codigoSurtidor == codigo){menosSize++;}
+        }
+        Surtidor* nuevoArr = new Surtidor[sizeSurtidores - menosSize];
+        //Copia los elementos hasta encontrar al surtidor
+        for(int i = 0, j = 0; i < sizeSurtidores; i++){
+            codigoSurtidor = (surtidores[i].getCodigoSurtidor())[0];
+            if(codigoSurtidor != codigo){nuevoArr[j] = surtidores[i]; j++;}
+        }
+        //Elimina el arreglo antiguo
+        delete[] surtidores;
+        //Actualiza el arreglo
+        surtidores = nuevoArr;
+        //Actualiza el tamaño del arreglo
+        sizeSurtidores = sizeSurtidores - menosSize;
+        cout << "Estacion " << codigo << " eliminada con exito." << endl;
+
+        //eliminar naves.
+        string codNaves;
+        for (int i = 0; i < navesActuales; ++i) {
+            codNaves = naves[i][0];
+            if (codNaves == codigo){naves[i] = "libre";}
+        }
+    }
 }
 
 void Estacion:: activarSurtidor(){
@@ -289,13 +328,13 @@ void Estacion::consultarHistorico(){
 }
 */
 
-void asignarCapacidadTanque(){
+void Estacion:: asignarCapacidadTanque(){
     // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
     //100 y 200 litros para cada una de las categorías
 
 }
 
-void reportarLitrosVendidos(){
+void Estacion:: reportarLitrosVendidos(){
     // Reportar la cantidad de litros vendida según cada categoría de combustible.
 }
 
@@ -334,16 +373,30 @@ void Estacion:: agregarNaveLectura(string codigo){
 
 void Estacion:: mostrarNaves(){
     //mostar arreglo de naves
-    for (int i = 0; i < 6; ++i) {
-        cout<<naves[i]<<"aa";
+    for (int i = 0; i < navesActuales; ++i) {
+        cout<<naves[i]<<endl;
     }
 }
+
+bool Estacion:: surtidoresInactivos(string codigoEstacion){
+    //verificar si una estacion tiene surtidores inactivos
+    string codSurtidor;
+    bool estado;
+    for (int i = 0; i < sizeSurtidores; ++i) {
+        codSurtidor = (surtidores[i].getCodigoSurtidor())[0];
+        if(codSurtidor == codigoEstacion){
+            estado = surtidores[i].getEstado();
+            if(estado){return false;}
+        }
+    }
+    return true;
+}
+
+Surtidor* Estacion:: getSurtidores() const {return surtidores;}
 
 void Estacion::mostrarEstaciones(){
     cout << codigoEstacion << "->\t" << nombre << endl;
 }
-
-
 
 /*
 Estacion::Estacion(int capacidadInicialSurtidores, const string& nombre, const string& codigoEstacion, const string& gerente, const string& region, const string& coordenadas)

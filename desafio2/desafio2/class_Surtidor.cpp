@@ -8,21 +8,10 @@
 
 using namespace std;
 
-/*
-    //Atributos
-    std::string codigoSurtidor,modelo;
-    bool activo;
-    Ventas* ventas;
-    int sizeVentas = 0;
-    int capacidadVentas = 0;
-    std::string codSurtidores[13];
-    int numCodigosSurtidores = 0;
-    double precioRegular,precioPremium,precioEcoExtra;
-*/
-
 Surtidor::Surtidor(){}
 
-Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado): codigoSurtidor(codigoSurtidor), modelo(modelo){
+Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado)
+    : codigoSurtidor(codigoSurtidor), modelo(modelo), estado(estado){
     //constructor que inicializa el arreglo de ventas
     precioRegular = 0;
     precioPremium = 0;
@@ -126,6 +115,18 @@ void Surtidor:: expandirVentas(){
     capacidadVentas = nuevaCapacidad;
 }
 
+void Surtidor:: agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto){
+    //
+    if(sizeVentas == 0){ventas = new Ventas[capacidadVentas];}
+    else{
+        if (sizeVentas == capacidadVentas) {
+            expandirVentas();  // Si el arreglo está lleno, lo expandimos
+        }
+    }
+    ventas[sizeVentas] = Ventas(codigoSurtidor, tipoCombustible, fechaHora, cantidadCombustible, metodoPago, documentoCliente, monto);
+    sizeVentas++;
+}
+
 void Surtidor:: agregarCodSurtidoresLectura(string codigo){
     //Agregar codigos al arreglo de surtidores.
     if(numCodigosSurtidores <= 12){
@@ -190,7 +191,8 @@ void Surtidor::eliminarVentaSurtidor(string codigo){
     sizeVentas = nuevoSizeVentas;
 }
 
+void Surtidor:: mostrarAtributos(){
+    cout<<codigoSurtidor<<"->\t"<<modelo<<"->\t"<<estado<<endl;
+}
 
-
-
-
+Ventas* Surtidor:: getVentas() const {return ventas;}
