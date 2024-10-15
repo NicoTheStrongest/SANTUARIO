@@ -15,12 +15,12 @@ private:
     bool estado;
     Ventas* ventas;
     int sizeVentas = 0;
-    int capacidadVentas = 0;
+    int capacidadVentas = 1;
     std::string codSurtidores[13];
     int numCodigosSurtidores = 0;
     double precioRegular,precioPremium,precioEcoExtra;
 
-    void expandirVentas(Ventas*& arr, int* size);
+    void expandirVentas();
 public:
     //Constructor
     Surtidor();
@@ -42,6 +42,10 @@ public:
     void registrarVenta(const Ventas& nuevaVenta);
     void agregarCodSurtidoresLectura(std::string codigo);
     void mostrarCodigos();
+    void mostrarAtributos();
+    void agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
+    Ventas* getVentas() const;
+
 };
 
 #endif // CLASS_SURTIDOR_H

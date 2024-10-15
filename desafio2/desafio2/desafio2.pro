@@ -9,6 +9,7 @@ SOURCES += \
         class_Surtidor.cpp \
         class_Tanque.cpp \
         class_Ventas.cpp \
+        fLecturaEscritura.cpp \
         funcionesGenerales.cpp \
         main.cpp
 
@@ -18,4 +19,5 @@ HEADERS += \
     class_Surtidor.h \
     class_Tanque.h \
     class_Ventas.h \
+    fLecturaEscritura.h \
     funcionesGenerales.h

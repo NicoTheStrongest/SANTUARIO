@@ -31,17 +31,18 @@ Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, stri
 
 Estacion::~Estacion() {}
 
+
+//          getters y setters
 string Estacion:: getnombre() const { return nombre; }
 string Estacion:: getcodigoEstacion()const{return codigoEstacion;}
 string Estacion:: getgerente()const{return gerente;}
 string Estacion:: getregion()const{return region;}
 string Estacion:: getcoordenadas()const{return coordenadas;}
 int Estacion:: getsizeSurtidores()const{return sizeSurtidores;}
+int Estacion:: getCapacidadSurtidores()const{return capacidadSurtidores;}
 
-//Setters
 std::string setNombre(std::string newNombre){
     //Validar formato del parametro
-    //nombre = newNombre;
 }
 std::string setCodigoEstacion(std::string newCodigoEstacion){
     //Validar formato del parametro
@@ -63,7 +64,6 @@ int setSizeSurtidores(std::string newSizeSurtidores){
     //Validar formato del parametro
     //sizeSurtidores = newSizeSurtidores;
 }
-
 
 //                  METODOS
 
@@ -106,7 +106,7 @@ void Estacion:: expandirNaves() {
     capacidadNaves = nuevaCapacidad;
 }
 
-void Estacion:: agregarSurtidor(string codigo, string modelo, bool estado) {
+void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado) {
     //Metodo para agregar un surtidor
     if(sizeSurtidores == 0){surtidores = new Surtidor[capacidadNaves];}
     else{
@@ -119,33 +119,72 @@ void Estacion:: agregarSurtidor(string codigo, string modelo, bool estado) {
 }
 
 void Estacion:: mostrarEstaciones(){
-    cout << "Nombre: " << nombre << ", Codigo: " << codigoEstacion << std::endl;
+    cout<<codigoEstacion<<"->\t"<<nombre<<endl;
 }
 
-void eliminarSurtidor(const std::string& codigo) {
+void Estacion:: eliminarSurtidor(string codigo) {
     //Metodo para eliminar un surtidor
 
 }
 
-void activarSurtidor(const std::string& codigoSurtidor){
+void Estacion:: eliminarSurtidoresNavesEstacion(bool eliminar, string codigo){
+    //Metodo publico para eliminar una surtidores y naves asociados a una estacion.
+    if(eliminar == false){
+        cout <<"No se pueden eliminar los surtidores ni las naves de la estacion "<<codigo<<endl;
+        system("pause");
+        return;
+    }
+    else{
+        //Eliminar surtidores.
+        //contar codigos que inician por el codigo
+        int menosSize = 0;
+        string codigoSurtidor;
+        for (int i = 0; i < sizeSurtidores; ++i) {
+            codigoSurtidor = (surtidores[i].getCodigoSurtidor())[0];
+            if(codigoSurtidor == codigo){menosSize++;}
+        }
+        Surtidor* nuevoArr = new Surtidor[sizeSurtidores - menosSize];
+        //Copia los elementos hasta encontrar al surtidor
+        for(int i = 0, j = 0; i < sizeSurtidores; i++){
+            codigoSurtidor = (surtidores[i].getCodigoSurtidor())[0];
+            if(codigoSurtidor != codigo){nuevoArr[j] = surtidores[i]; j++;}
+        }
+        //Elimina el arreglo antiguo
+        delete[] surtidores;
+        //Actualiza el arreglo
+        surtidores = nuevoArr;
+        //Actualiza el tamaño del arreglo
+        sizeSurtidores = sizeSurtidores - menosSize;
+        cout << "Estacion " << codigo << " eliminada con exito." << endl;
+
+        //eliminar naves.
+        string codNaves;
+        for (int i = 0; i < navesActuales; ++i) {
+            codNaves = naves[i][0];
+            if (codNaves == codigo){naves[i] = "libre";}
+        }
+    }
+}
+
+void Estacion:: activarSurtidor(){
     //cuestionable, yo creo que se puede hacer solo con el setter
 }
 
-void desactivarSurtidor(const std::string& codigoSurtidor){
+void Estacion:: desactivarSurtidor(){
     //cuestionable, yo creo que se puede hacer solo con el setter
 }
 
-void consultarHistorico(){
+void Estacion:: consultarHistorico(){
     //metodo publico para imprimir por pantalla o en ur archivo de texto plano el historico
     //de transacciones
 }
 
-void asignarCapacidadTanque(){
+void Estacion:: asignarCapacidadTanque(){
     // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
     //100 y 200 litros para cada una de las categorías
 }
 
-void reportarLitrosVendidos(){
+void Estacion:: reportarLitrosVendidos(){
     // Reportar la cantidad de litros vendida según cada categoría de combustible.
 }
 
@@ -163,11 +202,26 @@ void Estacion:: agregarNaveLectura(string codigo){
 
 void Estacion:: mostrarNaves(){
     //mostar arreglo de naves
-    for (int i = 0; i < 6; ++i) {
-        cout<<naves[i]<<"aa";
+    for (int i = 0; i < navesActuales; ++i) {
+        cout<<naves[i]<<endl;
     }
 }
 
+bool Estacion:: surtidoresInactivos(string codigoEstacion){
+    //verificar si una estacion tiene surtidores inactivos
+    string codSurtidor;
+    bool estado;
+    for (int i = 0; i < sizeSurtidores; ++i) {
+        codSurtidor = (surtidores[i].getCodigoSurtidor())[0];
+        if(codSurtidor == codigoEstacion){
+            estado = surtidores[i].getEstado();
+            if(estado){return false;}
+        }
+    }
+    return true;
+}
+
+Surtidor* Estacion:: getSurtidores() const {return surtidores;}
 
 /*
 Estacion::Estacion(int capacidadInicialSurtidores, const string& nombre, const string& codigoEstacion, const string& gerente, const string& region, const string& coordenadas)

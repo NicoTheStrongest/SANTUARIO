@@ -8,21 +8,10 @@
 
 using namespace std;
 
-/*
-    //Atributos
-    std::string codigoSurtidor,modelo;
-    bool activo;
-    Ventas* ventas;
-    int sizeVentas = 0;
-    int capacidadVentas = 0;
-    std::string codSurtidores[13];
-    int numCodigosSurtidores = 0;
-    double precioRegular,precioPremium,precioEcoExtra;
-*/
-
 Surtidor::Surtidor(){}
 
-Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado): codigoSurtidor(codigoSurtidor), modelo(modelo){
+Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado)
+    : codigoSurtidor(codigoSurtidor), modelo(modelo), estado(estado){
     //constructor que inicializa el arreglo de ventas
     precioRegular = 0;
     precioPremium = 0;
@@ -49,7 +38,7 @@ double Surtidor:: getPrecioPremium() const {return precioRegular;}
 
 double Surtidor:: getPrecioEcoExtra() const {return precioEcoExtra;}
 
-void Surtidor:: expandirVentas(Ventas*& arr, int* size){
+void Surtidor:: expandirVentas(){
     //Metodo privado para expandir el arreglo de ventas
     int nuevaCapacidad = capacidadVentas + 1;
     Ventas* nuevoArr = new Ventas[nuevaCapacidad];
@@ -65,6 +54,18 @@ void Surtidor:: expandirVentas(Ventas*& arr, int* size){
     // Actualizar el puntero para que apunte al nuevo arreglo
     ventas = nuevoArr;
     capacidadVentas = nuevaCapacidad;
+}
+
+void Surtidor:: agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto){
+    //
+    if(sizeVentas == 0){ventas = new Ventas[capacidadVentas];}
+    else{
+        if (sizeVentas == capacidadVentas) {
+            expandirVentas();  // Si el arreglo está lleno, lo expandimos
+        }
+    }
+    ventas[sizeVentas] = Ventas(codigoSurtidor, tipoCombustible, fechaHora, cantidadCombustible, metodoPago, documentoCliente, monto);
+    sizeVentas++;
 }
 
 void Surtidor:: agregarCodSurtidoresLectura(string codigo){
@@ -85,7 +86,8 @@ void Surtidor:: mostrarCodigos(){
     }
 }
 
+void Surtidor:: mostrarAtributos(){
+    cout<<codigoSurtidor<<"->\t"<<modelo<<"->\t"<<estado<<endl;
+}
 
-
-
-
+Ventas* Surtidor:: getVentas() const {return ventas;}

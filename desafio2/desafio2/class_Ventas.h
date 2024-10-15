@@ -5,19 +5,23 @@
 #include <fstream>
 #include <string>
 
+using namespace std;
+
 class Ventas{
 private:
     //Atributos
-    std::string fechaHora, tipoCombustible, metodoPago, documentoCliente, codigoSurtidor;
-    double cantidadCombustible, monto;
+    std::string codigoVentas, tipoCombustible, fechaHora, metodoPago, documentoCliente;
+    int cantidadCombustible;
+    int  monto;
 public:
     //Constructor
     Ventas();
-    Ventas(const std::string fechaHora,const std::string tipoCombustible,const std::string metodoPago,const std::string documentoCliente,const std::string codigoSurtidor,double cantidadCombustible,double monto);
+    Ventas(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
     //Destructor
     ~Ventas();
 
     //Getters
+    string getCodigoVentas() const;
     std::string getfechaHora() const;
     std::string getTipoCombustible() const;
     std::string getMetodoPago() const;
@@ -35,6 +39,7 @@ public:
 
     //metodos
     std::string calcularFechaHora();
+    void mostrarVentas();
 };
 
 #endif // CLASS_VENTAS_H

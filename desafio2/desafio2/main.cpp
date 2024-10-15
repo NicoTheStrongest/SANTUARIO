@@ -1,4 +1,6 @@
 #include <iostream>
+
+#include "fLecturaEscritura.h"
 #include "funcionesGenerales.h"
 #include "class_RedNacional.h"
 #include "class_Estacion.h"
@@ -24,12 +26,32 @@ int main(){
             int opcionGestionRed = menuGestionDeRed();
             switch (opcionGestionRed) {
             case 1: //Agregar estacion
+                {
+                redNacional.agregarEstacion();
+                }
                 break;
             case 2: //Eliminar estacion
+                {
+                string codigo = redNacional.obtenerCodigoEstacion();
+                bool eliminar = estacion.surtidoresInactivos(codigo);
+                redNacional.eliminarEstacion(eliminar, codigo);
+                estacion.eliminarSurtidoresNavesEstacion(eliminar, codigo);
+                //surtidor.eliminarVentasEstacion(eliminar, codigo);
+                }
                 break;
             case 3: //Mostrar monto total de venta (por estacion y por categoria de combustible)
+                {
+                Estacion* ptrEstacion = redNacional.getEstaciones();
+                int sizeEstacion = redNacional.getSizetaciones();
+                Ventas* ptrVentas = surtidor.getVentas();
+                int sizeVentas = surtidor.getSizeVentas();
+                mostrarMontoTotal(ptrEstacion, sizeEstacion, ptrVentas, sizeVentas);
+                }
                 break;
             case 4: //Fijar precios de combustible
+                {
+                //
+                }
                 break;
             case 0: //Salir
                 sesionActiva = false;
@@ -44,8 +66,16 @@ int main(){
             int opcionGestionEstaciones = menuGestionEstaciones();
             switch (opcionGestionEstaciones) {
             case 1: //Agregar surtidor
+                // {
+                // estacion.agregarSurtidor();
+                // }
                 break;
             case 2: //Eliminar surtidor
+                // {
+                // string codigo = estacion.obtenerCodigoSurtidor();
+                // estacion.eliminarSurtidor(codigo);
+                // surtidor.eliminarVentaSurtidor(codigo);
+                // }
                 break;
             case 3: //Consultar Historico de transacciones
                 break;
@@ -79,6 +109,14 @@ int main(){
     //guardar cambios?
     mensajeSalida();
 }
+
+/*
+Estacion* nico = redNacional.getEstaciones();
+int size = redNacional.getSizetaciones();
+for (int i = 0; i < size; ++i) {
+    nico[i].mostrarEstaciones();
+}
+*/
 
 /* para imprimir
 for (int i = 0; i < sizeEstaciones; ++i) {

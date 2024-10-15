@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "funcionesGenerales.h"
 #include "class_Estacion.h"
 #include "class_Surtidor.h"
 #include "class_Tanque.h"
@@ -21,33 +22,33 @@ private:
     int sizeEstaciones = 0; // cantidad de estaciones
     int capacidadEstaciones = 2;
 
+    double precios[3][3];
+
     static const int sizeRegion = 3;
     string regiones[sizeRegion];
 
     void expandirEstaciones();
 public:
-    static int codEstacion;
-
-    //Constructor
+    //Constructor - Destructor
     RedNacional();
-    //Destructor
     ~RedNacional();
-    //Getters
+
+    //Getters - Setters
     int getSizetaciones()const;
-    //Setters
     int setSizeEstaciones(int newSize);
     int setCapacidadEstaciones();
+    Estacion* getEstaciones()const;
+
     //Metodos
     void agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
-    void eliminarEstacion(const std::string& codigoEstacion);
+    void agregarEstacion();
+    void eliminarEstacion(bool bandera, string codigoEliminar);
+    string obtenerCodigoEstacion();
     void ventasCombustible();
     void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra);
     bool verificarFugas(const std::string& codigoEstacion);
-    void mostrarArreglo();
-
+    void mostrarArregloEstaciones();
     void agregarRegiones(string arreglo[]);
-
-    Estacion* getEstaciones()const;
 };
 
 #endif // CLASS_REDNACIONAL_H

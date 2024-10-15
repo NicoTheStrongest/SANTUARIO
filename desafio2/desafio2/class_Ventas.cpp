@@ -10,13 +10,14 @@ using namespace std;
 
 //Constructor
 Ventas::Ventas(){}
-Ventas::Ventas(const string fechaHora, const string tipoCombustible, const string metodoPago, const string documentoCliente, const string codigoSurtidor, double cantidadCombustible, double monto)
-    : fechaHora(fechaHora), tipoCombustible(tipoCombustible), metodoPago(metodoPago), documentoCliente(documentoCliente), codigoSurtidor(codigoSurtidor), cantidadCombustible(cantidadCombustible), monto(monto){}
+Ventas::Ventas(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto)
+    : codigoVentas(codigoSurtidor), tipoCombustible(tipoCombustible), fechaHora(fechaHora), cantidadCombustible(cantidadCombustible), metodoPago(metodoPago), documentoCliente(documentoCliente), monto(monto){}
 
 //Destructor
 Ventas::~Ventas(){}
 
 //Getters
+string Ventas:: getCodigoVentas()const{return codigoVentas;}
 string Ventas:: getfechaHora() const {return fechaHora;}
 string Ventas:: getTipoCombustible() const {return tipoCombustible;}
 string Ventas:: getMetodoPago() const {return metodoPago;}
@@ -25,32 +26,32 @@ double Ventas:: getMonto() const {return monto;}
 double Ventas:: getCantidadCombustible() const {return cantidadCombustible;}
 
 //Setters
-string setFechaHora(string newFechaHora){
+string Ventas:: setFechaHora(string newFechaHora){
     //validar formato del parametro
     //fechaHora = newFechaHora;
 }
 
-string setTipoCombustible(string newTipoCombustible){
+string Ventas:: setTipoCombustible(string newTipoCombustible){
     //validar formato del parametro
     //tipoCombustible = newTipoCombustible;
 }
 
-string setMetodoPago(string newMetodoPago){
+string Ventas:: setMetodoPago(string newMetodoPago){
     //validar formato del parametro
     //metodoPago = newMetodoPago;
 }
 
-string setDocumentoCliente(string newDocumentoCliente){
+string Ventas:: setDocumentoCliente(string newDocumentoCliente){
     //validar formato del parametro
     //documentoCliente = newDocumentoCliente;
 }
 
-double setMonto(double newMonto){
+double Ventas:: setMonto(double newMonto){
     //validar formato del parametro
     //monto = newMonto;
 }
 
-double setCantidadCombustible(double newCantidadCombustible){
+double Ventas:: setCantidadCombustible(double newCantidadCombustible){
     //validar formato del parametro
     //cantidadCombustible = newCantidadCombustible;
 }
@@ -65,6 +66,32 @@ string fechaHora(){
     strftime(fechaHora, sizeof(fechaHora), "%Y-%m-%d %H:%M:%S", tiempoLocal);
     return string(fechaHora);
 }
+
+void Ventas:: mostrarVentas(){
+    cout<<codigoVentas<<"//"<<tipoCombustible<<"//"<<fechaHora<<"//"<<metodoPago<<"//"<<documentoCliente<<"//"<<cantidadCombustible<<"//"<<monto;
+    cout<<endl;
+}
+
+
+
+/*
+//Atributos
+std::string codigoVentas, tipoCombustible, fechaHora, metodoPago, documentoCliente;
+int cantidadCombustible, monto;
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -38,26 +38,36 @@ public:
     std::string getregion()const;
     std::string getcoordenadas()const;
     int getsizeSurtidores()const;
+    int getCapacidadSurtidores()const;
 
     //Setters
-    std::string setNombre();
-    std::string setCodigoEstacion();
-    std::string setGerente();
-    std::string setRegion();
-    std::string setCoordenadas();
-    int setSizeSurtidores();
+    void setNombre(string newNombre);
+    void setCodigoEstacion(string newCodigoEstacion);
+    void setGerente(string newGerente);
+    void setRegion(string newRegion);
+    void setCoordenadas(string newCordenadas);
+    void setSizeSurtidores(int newSizeSurtidores);
+    void setCapacidadSurtidores(int newCapacidadSurtidores);
 
     //Metodos
-    void agregarSurtidor(string codigo, string modelo, bool estado);
-    void eliminarSurtidor(const std::string& codigoSurtidor);
-    void activarSurtidor(const std::string& codigoSurtidor);
-    void desactivarSurtidor(const std::string& codigoSurtidor);
+    void agregarSurtidor();
+    void agregarSurtidorLectura(string codigo, string modelo, bool estado);
+    void eliminarSurtidor(string codigo);
+    void activarSurtidor();
+    void desactivarSurtidor();
+    string obtenerCodigosurtidor();
     void consultarHistorico();
-    void asignarCapacidadTanque();
     void reportarLitrosVendidos();
+    void simularVenta();
+    void asignarCapacidadTanque();
     void mostrarEstaciones();
     void agregarNaveLectura(string codigo);
     void mostrarNaves();
+
+    bool surtidoresInactivos(string codigoEstacion);
+    void eliminarSurtidoresNavesEstacion(bool eliminar, string codigo);
+    Surtidor* getSurtidores() const;
+
 };
 
 #endif // CLASS_ESTACION_H
