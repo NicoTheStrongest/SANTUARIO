@@ -20,11 +20,11 @@ private:
     int numCodigosSurtidores = 0;
     double precioRegular,precioPremium,precioEcoExtra;
 
-    void expandirVentas(Ventas*& arr, int* size);
+    void expandirVentas();
 public:
     //Constructor
     Surtidor();
-    Surtidor(std::string codigoSurtidor, std::string modelo, bool estado = false);
+    Surtidor(std::string codigoSurtidor, std::string modelo, bool estado = true);
     //Destructor
     ~Surtidor();
     //Getters
@@ -32,16 +32,25 @@ public:
     std::string getModelo() const;
     bool getEstado() const;
     int getSizeVentas() const;
-    int getCapacidadVentas() const;
     double getPrecioRegular() const;
     double getPrecioPremium() const;
     double getPrecioEcoExtra() const;
 
+    //setters
+    void setCodigoSurtidor(std::string newCodigoSurtidor);
+    void setModelo(std::string newModelo);
+    void setEstado(bool estado);
+    void setSizeVentas(int newSizeVentas);
+    void setPrecioRegular(double newPrecioRegular);
+    void setPrecioPremium(double newPrecioPremium);
+    void setPrecioEcoExtra(double newPrecioEcoextra);
+
     //Metodos
-    bool CambiarActivo()const;
     void registrarVenta(const Ventas& nuevaVenta);
     void agregarCodSurtidoresLectura(std::string codigo);
     void mostrarCodigos();
+    void detallesVentas();
+    void eliminarVentaSurtidor(std::string codigo);
 };
 
 #endif // CLASS_SURTIDOR_H

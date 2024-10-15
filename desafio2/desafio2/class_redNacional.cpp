@@ -9,23 +9,23 @@
 #include <fstream>
 #include <string>
 
+
 using namespace std;
 
-/*
 Estacion* estaciones; // arreglo dinamico de estaciones
 int sizeEstaciones = 0; // cantidad de estaciones
 int capacidadEstaciones = 2;
 
 static const int sizeRegion = 3;
 string regiones[sizeRegion];
-*/
 
-RedNacional::RedNacional(): sizeEstaciones(0), capacidadEstaciones(2) {
+
+RedNacional::RedNacional() : sizeEstaciones(0), capacidadEstaciones(2){
     estaciones = new Estacion[capacidadEstaciones];
 }
 
 RedNacional::~RedNacional(){
-
+    //Destructor para liberar arreglo de estaciones luego de guardarlas
 }
 
 //Getters
@@ -34,18 +34,23 @@ int RedNacional:: getSizetaciones() const {
 }
 
 //Setters
-int RedNacional:: setSizeEstaciones(int newSize){
+void RedNacional:: setSizeEstaciones(int newSize){
     // validar el nuevo numero entero.
+    if(newSize > 0){
+        sizeEstaciones = newSize;
+    }
+    else{
+        cout << "newSize debe ser mayor a cero." << endl;
+    }
 }
 
 //                      Metodos
 
 
 void RedNacional:: expandirEstaciones(){
-    //Metodo privado para expandir el arreglo de estaciones
+    //Metodo publico para expandir el arreglo de estaciones
     // Crear un nuevo arreglo con una posición más
-    int nuevaCapadidad = capacidadEstaciones + 1;
-    Estacion* nuevoArr = new Estacion[nuevaCapadidad];
+    Estacion* nuevoArr = new Estacion[sizeEstaciones + 1];
 
     // Copiar elementos al nuevo arreglo
     for (int i = 0; i < sizeEstaciones; ++i) {
@@ -57,16 +62,25 @@ void RedNacional:: expandirEstaciones(){
 
     // Actualizar el puntero para que apunte al nuevo arreglo
     estaciones = nuevoArr;
-    capacidadEstaciones = nuevaCapadidad;
+
+    // Aumentar el tamaño
+    sizeEstaciones++;
+
+}
+
+
+void RedNacional:: agregarEstacion(){
+    //Metodo publico para agregar una estacion
 }
 
 void RedNacional:: agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO){
     //Metodo publico para agregar una estacion
     if (sizeEstaciones == capacidadEstaciones) {
-        expandirEstaciones();  // Si el arreglo está lleno, lo expandimos
+        expandirEstaciones();
     }
     estaciones[sizeEstaciones] = Estacion(nombreO, codigoEstacionO, gerenteO, regionO, coordenadasO);
     sizeEstaciones += 1;
+
 }
 
 void RedNacional:: eliminarEstacion(const std::string& codigoEstacion){
@@ -81,9 +95,10 @@ void RedNacional:: fijarPrecios(double precioRegular,double precioPremium,double
     //Metodo publico para fijar los precios del combustible
 }
 
-bool RedNacional:: verificarFugas(const std::string& codigoEstacion){
+bool RedNacional::verificarFugas(const string& codigoEstacion){
     //Metodo publico para verificar fugas en las esatciones
 }
+
 
 void RedNacional:: mostrarArreglo(){
     //
@@ -92,17 +107,12 @@ void RedNacional:: mostrarArreglo(){
     }
 }
 
+
 void RedNacional::agregarRegiones(string arreglo[]){
     for (int i = 0; i < sizeRegion ; ++i) {
         regiones[i] = arreglo[i];
     }
 }
-
-
-
-
-
-
 
 Estacion* RedNacional:: getEstaciones() const {return estaciones;}
 
@@ -135,6 +145,7 @@ void expandirArreglo(string**& arr, int& size) {
     size += 1;
 }
 */
+
 
 
 

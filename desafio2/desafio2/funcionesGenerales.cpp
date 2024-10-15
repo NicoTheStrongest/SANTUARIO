@@ -220,7 +220,7 @@ void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& s
                 else{arreglo[j] = lineaRegion; lineaRegion = ""; j++;}
             }
             arreglo[2] = lineaRegion;
-            redNacional.agregarRegiones(arreglo);
+            //redNacional.agregarRegiones(arreglo);
         }
         else if(linea[0]>=48 && linea[0]<=57){
             string leerNombre = "";
@@ -243,7 +243,7 @@ void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& s
         }
         else if(linea[0] == 'n'){
             string lineaNaves = "";
-            for(int i = 0; i < (int)linea.size(); i++){
+            for(int i = 1; i < (int)linea.size(); i++){
                 if(linea[i] != ','){lineaNaves += linea[i];}
                 else{
                     estacion.agregarNaveLectura(lineaNaves);
@@ -251,20 +251,20 @@ void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& s
                 }
             }
             estacion.agregarNaveLectura(lineaNaves);
-            //surtidor.agregarCodSurtidoresLectura(lineaNaves);
+            surtidor.agregarCodSurtidoresLectura(lineaNaves);
         }
         else if(linea[0] == 's'){
             string lineaNaves = "";
             int sizeAux = 3;
             string arregloAux[sizeAux];
-            for(int i = 0, j = 0; i < (int)linea.size(); i++){
+            for(int i = 1, j = 0; i < (int)linea.size(); i++){
                 if(linea[i] != ','){lineaNaves += linea[i];}
                 else{arregloAux[j] = lineaNaves; lineaNaves = ""; j++;}
             }
             bool estado;
             if(arregloAux[2] == "activo"){estado = true;}
             else{estado = false;}
-            estacion.agregarSurtidor(arregloAux[0], arregloAux[1], estado);
+            estacion.agregarSurtidorLectura(arregloAux[0], arregloAux[1], estado);
         }
     }
 }
