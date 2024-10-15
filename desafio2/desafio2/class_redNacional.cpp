@@ -58,7 +58,8 @@ int setCapacidadEstaciones(){}
 void RedNacional:: expandirEstaciones(){
     //Metodo publico para expandir el arreglo de estaciones
     // Crear un nuevo arreglo con una posición más
-    Estacion* nuevoArr = new Estacion[sizeEstaciones + 1];
+    capacidadEstaciones = capacidadEstaciones + 1;
+    Estacion* nuevoArr = new Estacion[capacidadEstaciones];
 
     // Copiar elementos al nuevo arreglo
     for (int i = 0; i < sizeEstaciones; ++i) {
@@ -70,24 +71,18 @@ void RedNacional:: expandirEstaciones(){
 
     // Actualizar el puntero para que apunte al nuevo arreglo
     estaciones = nuevoArr;
-
-    // Aumentar el tamaño
-    sizeEstaciones++;
-
-}
-
-
-void RedNacional:: agregarEstacion(){
-    //Metodo publico para agregar una estacion
 }
 
 void RedNacional:: agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO){
     //Metodo publico para agregar una estacion
-    if (sizeEstaciones == capacidadEstaciones) {
-        expandirEstaciones();
+    if(sizeEstaciones == 0){estaciones = new Estacion[capacidadEstaciones];}
+    else{
+        if (sizeEstaciones == capacidadEstaciones) {
+            expandirEstaciones();
+        }
     }
     estaciones[sizeEstaciones] = Estacion(nombreO, codigoEstacionO, gerenteO, regionO, coordenadasO);
-    sizeEstaciones += 1;
+    sizeEstaciones++;
 
 }
 

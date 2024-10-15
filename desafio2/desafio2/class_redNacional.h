@@ -42,7 +42,6 @@ public:
     //Metodos
     void agregarEstacion();
     void agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
-    void agregarEstacion();
     void eliminarEstacion(bool bandera, string codigoEliminar);
     string obtenerCodigoEstacion();
     void ventasCombustible();

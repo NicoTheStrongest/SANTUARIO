@@ -68,7 +68,6 @@ void Estacion::setRegion(std::string newRegion){
     else{
         cout << "La region debe ser 'norte', 'centro' o 'sur'." << endl;
     }
-
 }
 void Estacion::setCoordenadas(std::string newCoordenadas){
     //Validar formato del parametro
@@ -90,7 +89,8 @@ void Estacion::setSizeSurtidores(int newSizeSurtidores){
 void Estacion:: expandirSurtidores() {
     //Metodo publico para expandir el arreglo de surtidores
     // Crear un nuevo arreglo con una posición más
-    Surtidor* nuevoArr = new Surtidor[sizeSurtidores + 1];
+    capacidadSurtidores = capacidadSurtidores + 1;
+    Surtidor* nuevoArr = new Surtidor[capacidadSurtidores];
 
     // Copiar elementos al nuevo arreglo
     for (int i = 0; i < sizeSurtidores; ++i) {
@@ -101,13 +101,8 @@ void Estacion:: expandirSurtidores() {
     delete[] surtidores;
 
     // Actualizar el puntero para que apunte al nuevo arreglo
-
     surtidores = nuevoArr;
-
-    // Aumentar el tamaño
-    sizeSurtidores++;
 }
-
 
 void Estacion::agregarSurtidor() {
     //Metodo para agregar un surtidor
@@ -123,7 +118,7 @@ void Estacion::agregarSurtidor() {
     }
     //Menu para seleccionar el modelo del surtidor
     int opcion;
-    do {
+    do{
         cout << "Seleccione el modelo del surtidor: " << endl;
         cout << "1. Modelo 1 " << endl;
         cout << "2. Modelo 2 " << endl;
@@ -143,12 +138,12 @@ void Estacion::agregarSurtidor() {
             cout << "Opcion no valida. Por favor, intente nuevamente. " << endl;
             break;
         }
-
-    }while(opcion < 1 || opcion > 3);
+    } while((opcion < 1) || (opcion > 3));
 
     agregarSurtidorLectura(codigo,modelo,true);
     cout << "Surtidor " << codigo << " agregado exitosamente." << endl;
 }
+
 
 void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado) {
     //Metodo para agregar un surtidor
@@ -162,9 +157,7 @@ void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado
     sizeSurtidores++;
 }
 
-void Estacion:: mostrarEstaciones(){
-    cout<<codigoEstacion<<"->\t"<<nombre<<endl;
-}
+void Estacion:: mostrarEstaciones(){cout<<codigoEstacion<<"->\t"<<nombre<<endl;}
 
 string Estacion::obtenerCodigosurtidor(){
     string codigo;
@@ -211,7 +204,7 @@ void Estacion:: eliminarSurtidor(string codigo) {
     //Actualiza el tamaño del arreglo
     sizeSurtidores--;
     cout << "Surtidor " << codigo << " eliminado con exito." << endl;
-
+}
 
 void Estacion:: eliminarSurtidoresNavesEstacion(bool eliminar, string codigo){
     //Metodo publico para eliminar una surtidores y naves asociados a una estacion.
@@ -338,7 +331,7 @@ void Estacion:: reportarLitrosVendidos(){
     // Reportar la cantidad de litros vendida según cada categoría de combustible.
 }
 
-void simularVenta(){}
+void Estacion:: simularVenta(){}
 
 void Estacion:: expandirNaves() {
     //Metodo privado para expandir el arreglo de surtidores
@@ -393,10 +386,6 @@ bool Estacion:: surtidoresInactivos(string codigoEstacion){
 }
 
 Surtidor* Estacion:: getSurtidores() const {return surtidores;}
-
-void Estacion::mostrarEstaciones(){
-    cout << codigoEstacion << "->\t" << nombre << endl;
-}
 
 /*
 Estacion::Estacion(int capacidadInicialSurtidores, const string& nombre, const string& codigoEstacion, const string& gerente, const string& region, const string& coordenadas)
