@@ -161,6 +161,7 @@ void mostrarCodigos(){}
 void detallesVentas(){}
 
 //Metodo para eliminar las ventas asociadas a un surtidor
+/*
 void Surtidor::eliminarVentaSurtidor(string codigo){
     int ventaSurtidor = 0;
     for(int i = 0; i < sizeVentas; i++){
@@ -190,6 +191,7 @@ void Surtidor::eliminarVentaSurtidor(string codigo){
     //Actualiza el tamaño del arreglo
     sizeVentas = nuevoSizeVentas;
 }
+*/
 
 void Surtidor:: mostrarAtributos(){
     cout<<codigoSurtidor<<"->\t"<<modelo<<"->\t"<<estado<<endl;
