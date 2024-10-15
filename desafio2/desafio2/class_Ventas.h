@@ -30,16 +30,17 @@ public:
     double getCantidadCombustible() const;
 
     //Setters
-    std::string setFechaHora(std::string newFechaHora);
-    std::string setTipoCombustible(std::string newTipoCombustible);
-    std::string setMetodoPago(std::string newMetodoPago);
-    std::string setDocumentoCliente(std::string newDocumentoCliente);
-    double setMonto(double newMonto);
-    double setCantidadCombustible(double newCantidadCombustible);
+    void setFechaHora(std::string newFechaHora);
+    void setTipoCombustible(std::string newTipoCombustible);
+    void setMetodoPago(std::string newMetodoPago);
+    void setDocumentoCliente(std::string newDocumentoCliente);
+    void setMonto(double newMonto);
+    void setCantidadCombustible(double newCantidadCombustible);
 
     //metodos
     std::string calcularFechaHora();
     void mostrarVentas();
+    void detallesVentas();
 };
 
 #endif // CLASS_VENTAS_H

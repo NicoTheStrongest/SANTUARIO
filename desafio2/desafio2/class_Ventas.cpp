@@ -26,34 +26,58 @@ double Ventas:: getMonto() const {return monto;}
 double Ventas:: getCantidadCombustible() const {return cantidadCombustible;}
 
 //Setters
-string Ventas:: setFechaHora(string newFechaHora){
-    //validar formato del parametro
-    //fechaHora = newFechaHora;
+void Ventas::setFechaHora(string newFechaHora){
+    fechaHora = newFechaHora;
 }
 
-string Ventas:: setTipoCombustible(string newTipoCombustible){
+void Ventas::setTipoCombustible(string newTipoCombustible){
     //validar formato del parametro
-    //tipoCombustible = newTipoCombustible;
+    if(newTipoCombustible == "regular" || newTipoCombustible == "premium" || newTipoCombustible == "ecoextra"){
+        tipoCombustible = newTipoCombustible;
+    }
+    else{
+        cout << "newTipoCombustible de ser 'regular', 'premium' o 'ecoextra'" << endl;
+    }
 }
 
-string Ventas:: setMetodoPago(string newMetodoPago){
+void Ventas::setMetodoPago(string newMetodoPago){
     //validar formato del parametro
-    //metodoPago = newMetodoPago;
+    if(newMetodoPago == "efectivo" || newMetodoPago == "Tdebito" || newMetodoPago == "Tcredito"){
+        metodoPago = newMetodoPago;
+    }
+    else{
+        cout << "newMetodoPago de ser 'efectivo', 'Tdebito' o 'Tcredito'" << endl;
+    }
 }
 
-string Ventas:: setDocumentoCliente(string newDocumentoCliente){
+void Ventas:: setDocumentoCliente(string newDocumentoCliente){
     //validar formato del parametro
-    //documentoCliente = newDocumentoCliente;
+    if(newDocumentoCliente.length() == 10){
+        documentoCliente = newDocumentoCliente;
+    }
+    else{
+        cout << "newDocumentoCliente debe tener diez caracteres" << endl;
+    }
 }
 
-double Ventas:: setMonto(double newMonto){
+void Ventas::setMonto(double newMonto){
     //validar formato del parametro
-    //monto = newMonto;
+    if(newMonto > 0){
+        monto = newMonto;
+    }
+    else{
+        cout << "El newMonto debe ser mayor a cero." << endl;
+    }
 }
 
-double Ventas:: setCantidadCombustible(double newCantidadCombustible){
+void Ventas:: setCantidadCombustible(double newCantidadCombustible){
     //validar formato del parametro
-    //cantidadCombustible = newCantidadCombustible;
+    if(newCantidadCombustible > 0){
+        cantidadCombustible = newCantidadCombustible;
+    }
+    else{
+        cout << "newCantidadCombustible dede ser mayor a cero." << endl;
+    }
 }
 
 //              METODOS
@@ -72,26 +96,11 @@ void Ventas:: mostrarVentas(){
     cout<<endl;
 }
 
-
-
 /*
 //Atributos
 std::string codigoVentas, tipoCombustible, fechaHora, metodoPago, documentoCliente;
 int cantidadCombustible, monto;
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

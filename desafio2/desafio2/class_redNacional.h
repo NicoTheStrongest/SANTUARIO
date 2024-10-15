@@ -35,11 +35,12 @@ public:
 
     //Getters - Setters
     int getSizetaciones()const;
-    int setSizeEstaciones(int newSize);
+    void setSizeEstaciones(int newSize);
     int setCapacidadEstaciones();
     Estacion* getEstaciones()const;
 
     //Metodos
+    void agregarEstacion();
     void agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
     void agregarEstacion();
     void eliminarEstacion(bool bandera, string codigoEliminar);

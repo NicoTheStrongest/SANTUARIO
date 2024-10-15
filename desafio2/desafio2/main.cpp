@@ -80,10 +80,13 @@ int main(){
             case 3: //Consultar Historico de transacciones
                 break;
             case 4: //Reporte de litros vendidos
+
                 break;
             case 5: //Simulador de venta
+
                 break;
             case 6: //Asignar capacidad de tanques
+
                 break;
             case 7: //Sistema nacional de fugas
                 break;
@@ -105,7 +108,6 @@ int main(){
         }
         }
     }
-    system("pause");
     //guardar cambios?
     mensajeSalida();
 }

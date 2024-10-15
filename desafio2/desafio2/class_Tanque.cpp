@@ -35,44 +35,84 @@ double Tanque:: getDisponibleEcoexptra() const {return disponibleEcoextra;}
 
 //Setter
 
-int setCapacidadTotal(int newCapacidad){
+void Tanque::setCapacidadTotal(int newCapacidad){
     //validar formato del parametro
-    //capacidadTotal = newCapacidad;
+    if(newCapacidad > 0){
+        capacidadTotal = newCapacidad;
+    }
+    else{
+        cout << "newCapacidad debe ser mayor a cero." << endl;
+    }
 }
 
-int setCombustibleDisponibleTotal(int newCombustibleDisponibleTotal){
+void Tanque::setCombustibleDisponibleTotal(int newCombustibleDisponibleTotal){
     //validar formato del parametro
-    //combustibleDisponibleTotal = newCombustibleDisponibleTotal;
+    if(newCombustibleDisponibleTotal > 0){
+        combustibleDisponibleTotal = newCombustibleDisponibleTotal;
+    }
+    else{
+        cout << "newCombustibleDisponibleTotal debe ser mayor a cero." << endl;
+    }
 }
 
-double setCapacidadRegular(double newCapadidadRegular){
+void Tanque::setCapacidadRegular(double newCapacidadRegular){
     //validar formato del parametro
-    //capadidadRegular = newCapadidadRegular;
+    if(newCapacidadRegular > 0 && (newCapacidadRegular >= 100 || newCapacidadRegular <= 200)){
+        capacidadRegular = newCapacidadRegular;
+    }
+    else{
+        cout << "newCapadidadRegular debe estar entre 100 y 200 litros." << endl;
+    }
 }
 
-double setCapacidadPremium(double newCapadidadPremium){
+void Tanque::setCapacidadPremium(double newCapacidadPremium){
     //validar formato del parametro
-    //capadidadPremium = newCapadidadPremium;
+    if(newCapacidadPremium > 0 && (newCapacidadPremium >= 100 || newCapacidadPremium <= 200)){
+        capacidadPremium = newCapacidadPremium;
+    }
+    else{
+        cout << "newCapacidadPremium debe estar entre 100 y 200 litros." << endl;
+    }
 }
 
-double setCapacidadEcoextra(double newCapadidadEcoextra){
+void Tanque::setCapacidadEcoextra(double newCapacidadEcoextra){
     //validar formato del parametro
-    //capadidadEcoextra = newCapadidadEcoextra;
+    if(newCapacidadEcoextra > 0 && (newCapacidadEcoextra >= 100 || newCapacidadEcoextra <= 200)){
+        capacidadEcoextra = newCapacidadEcoextra;
+    }
+    else{
+        cout << "newCapacidadEcoextra debe estar entre 100 y 200 litros." << endl;
+    }
 }
 
-double setDisponibleRegular(double newDisponibleRegular){
+void Tanque::setDisponibleRegular(double newDisponibleRegular){
     //validar formato del parametro
-    //disponibleRegular = newDisponibleRegular;
+    if(newDisponibleRegular >= 0){
+        disponibleRegular = newDisponibleRegular;
+    }
+    else{
+        cout << "newDisponibleRegular debe ser mayor o igual a cero." << endl;
+    }
 }
 
-double setDisponiblePremium(double newDisponiblePremium){
+void Tanque::setDisponiblePremium(double newDisponiblePremium){
     //validar formato del parametro
-    //disponiblePremium = newDisponiblePremium;
+    if(newDisponiblePremium >= 0){
+        disponiblePremium = newDisponiblePremium;
+    }
+    else{
+        cout << "newDisponiblePremium debe ser mayor o igual a cero." << endl;
+    }
 }
 
-double setDisponibleEcoextra(double newDisponibleEcoextra){
+void Tanque::setDisponibleEcoextra(double newDisponibleEcoextra){
     //validar formato del parametro
-    //disponibleEcoextra = newDisponibleEcoextra;
+    if(newDisponibleEcoextra >= 0){
+        disponibleEcoextra = newDisponibleEcoextra;
+    }
+    else{
+        cout << "newDisponibleEcoextra debe ser mayor o igual a cero." << endl;
+    }
 }
 
 

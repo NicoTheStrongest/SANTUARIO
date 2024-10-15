@@ -41,11 +41,11 @@ public:
     int getCapacidadSurtidores()const;
 
     //Setters
-    void setNombre(string newNombre);
-    void setCodigoEstacion(string newCodigoEstacion);
-    void setGerente(string newGerente);
-    void setRegion(string newRegion);
-    void setCoordenadas(string newCordenadas);
+    void setNombre(std::string newNombre);
+    void setCodigoEstacion(std::string newCodigoEstacion);
+    void setGerente(std::string newGerente);
+    void setRegion(std::string newRegion);
+    void setCoordenadas(std::string newCoordenadas);
     void setSizeSurtidores(int newSizeSurtidores);
     void setCapacidadSurtidores(int newCapacidadSurtidores);
 
