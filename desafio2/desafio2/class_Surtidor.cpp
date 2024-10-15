@@ -67,8 +67,10 @@ void Surtidor::setModelo(std::string newModelo){
         cout << "newModelo debe ser 'modelo1','modelo2' o 'modelo3'" << endl;
     }
 }
-void Surtidor::setActivo(bool estado){
-    activo = estado;
+void Surtidor::setEstado(bool condicion){
+    if(condicion != estado){
+        estado = condicion;
+    }
 }
 void Surtidor::setSizeVentas(int newSizeVentas){
     if(newSizeVentas > 0){
@@ -103,7 +105,10 @@ void Surtidor::setPrecioEcoExtra(double newPrecioEcoextra){
     }
 }
 
-void Surtidor:: expandirVentas(Ventas*& arr, int* size){
+//                  METODOS
+
+//Metodo para expandir el arreglo de ventas
+void Surtidor:: expandirVentas(){
     //Metodo privado para expandir el arreglo de ventas
     int nuevaCapacidad = capacidadVentas + 1;
     Ventas* nuevoArr = new Ventas[nuevaCapacidad];
@@ -135,12 +140,55 @@ void Surtidor:: agregarCodSurtidoresLectura(string codigo){
 void Surtidor:: mostrarCodigos(){
     //mostrar los codigos del codSurtidores
     for (int i = 0; i < numCodigosSurtidores; ++i) {
-        cout<<codSurtidores[i];
+        cout << codSurtidores[i];
     }
 }
-
-bool CambiarActivo(){}
+/*
+//Metodo que muestra los detalles de las ventas
+void Surtidor::detallesVentas(){
+    cout << "Fecha y hora: " << arregloVentas->getfechaHora() << endl;
+    cout << "Cantidad de combustible: " << arregloVentas->getCantidadCombustible() << endl;
+    cout << "Categoria de combustible: " << arregloVentas->getTipoCombustible() << endl;
+    cout << "Metodo de pago: " << arregloVentas->getMetodoPago() << endl;
+    cout << "Cliente: " << arregloVentas->getDocumentoCliente() << endl;
+    cout << "Monto: $" << arregloVentas->getMonto() << endl;
+}
+*/
 void registrarVenta(const Ventas& nuevaVenta){}
+void agregarCodSurtidoresLectura(std::string codigo){}
+void mostrarCodigos(){}
+void detallesVentas(){}
+
+//Metodo para eliminar las ventas asociadas a un surtidor
+void Surtidor::eliminarVentaSurtidor(string codigo){
+    int ventaSurtidor = 0;
+    for(int i = 0; i < sizeVentas; i++){
+        if(ventas[i].getCodigoVenta() == codigo){
+            ventaSurtidor++;
+        }
+    }
+    if(ventaSurtidor == 0){
+        cout << "No hay ventas asociadas al surtidor " << codigo << endl;
+        return;
+    }
+    //Inicializa el arreglo
+    int nuevoSizeVentas = sizeVentas - ventaSurtidor;
+    Ventas* nuevoArregloVentas = new Ventas[nuevoSizeVentas];
+    //Copia las ventas que no estan asociadas al surtidor
+    int ventaNoAsociada = 0;
+    for(int i = 0; i < sizeVentas; i++){
+        if(nuevoArregloVentas[i].getCodigoVenta() != codigo){
+            nuevoArregloVentas[ventaNoAsociada] = ventas[i];
+            ventaNoAsociada++;
+        }
+    }
+    //Elimina el arreglo antiguo
+    delete[] ventas;
+    //Actualiza el arreglo
+    ventas = nuevoArregloVentas;
+    //Actualiza el tamaño del arreglo
+    sizeVentas = nuevoSizeVentas;
+}
 
 
 

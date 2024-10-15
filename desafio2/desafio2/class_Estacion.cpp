@@ -7,21 +7,18 @@
 
 #include <fstream>
 #include <string>
-#include <cctype>
 
 using namespace std;
 
 Estacion::Estacion(){}
 
 Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO) {
-    //Constructor que inicializa el arreglo de surtidores
+    //Constructor
     nombre = nombreO;
     codigoEstacion = codigoEstacionO;
     gerente = gerenteO;
     region = regionO;
     coordenadas = coordenadasO;
-    sizeSurtidores += 1;
-    expandirSurtidores(surtidores, &sizeSurtidores);
 }
 
 Estacion::~Estacion() {}
@@ -33,6 +30,7 @@ string Estacion:: getgerente()const{return gerente;}
 string Estacion:: getregion()const{return region;}
 string Estacion:: getcoordenadas()const{return coordenadas;}
 int Estacion:: getsizeSurtidores()const{return sizeSurtidores;}
+int Estacion:: getCapacidadSurtidores()const{return capacidadSurtidores;}
 
 //Setters
 void Estacion::setNombre(std::string newNombre){
@@ -91,51 +89,217 @@ void Estacion::setSizeSurtidores(int newSizeSurtidores){
 //                  METODOS
 
 
-void Estacion:: expandirSurtidores(Surtidor*& arr, int* size) {
+void Estacion:: expandirSurtidores() {
     //Metodo publico para expandir el arreglo de surtidores
-    // Función que expande un arreglo dinámico
     // Crear un nuevo arreglo con una posición más
-    Surtidor* nuevoArr = new Surtidor[(*size) + 1];
+    Surtidor* nuevoArr = new Surtidor[sizeSurtidores + 1];
 
     // Copiar elementos al nuevo arreglo
-    for (int i = 0; i < *size; ++i) {
-        nuevoArr[i] = arr[i];
+    for (int i = 0; i < sizeSurtidores; ++i) {
+        nuevoArr[i] = surtidores[i];
     }
 
     // Liberar la memoria del arreglo original
-    delete[] arr;
+    delete[] surtidores;
 
     // Actualizar el puntero para que apunte al nuevo arreglo
 
-    arr = nuevoArr;
+    surtidores = nuevoArr;
 
     // Aumentar el tamaño
-    *size += 1;
+    sizeSurtidores++;
 }
 
-void agregarSurtidor() {
+
+void Estacion::agregarSurtidor() {
     //Metodo para agregar un surtidor
     string codigo, modelo;
     cout << "Ingrese el codigo para el nuevo surtidor: " << endl;
     cin >> codigo;
-    //verificar codigo valido y no repetido
-    for(int i = 0; i < ){
-
+    //verificar codigo no repetido
+    for(int i = 0; i < sizeSurtidores; i++ ){
+        if(surtidores[i].getCodigoSurtidor() == codigo){
+            cout << "El surtidor " << codigo << " ya existe" << endl;
+            return;
+        }
     }
-    cout << "Ingrese el modelo del nuevo surtidor(modelo1, modelo2, modelo3): " << endl;
-    cin >> modelo;
-    while(modelo != "modelo1" || modelo != "modelo2" || modelo != "modelo3"){
-        cout << "Modelo de surtidor no valido, intente nuevamente: " << endl;
-        cin >> modelo;
-    }
-    //Expansion del arreglo
-    //Estacion::expandirSurtidores();
+    //Menu para seleccionar el modelo del surtidor
+    int opcion;
+    do {
+        cout << "Seleccione el modelo del surtidor: " << endl;
+        cout << "1. Modelo 1 " << endl;
+        cout << "2. Modelo 2 " << endl;
+        cout << "3. Modelo 3 " << endl;
+        cin >> opcion;
+        switch(opcion) {
+        case 1:
+            modelo = "modelo1";
+            break;
+        case 2:
+            modelo = "modelo2";
+            break;
+        case 3:
+            modelo = "modelo3";
+            break;
+        default:
+            cout << "Opcion no valida. Por favor, intente nuevamente. " << endl;
+            break;
+        }
 
+    }while(opcion < 1 || opcion > 3);
 
-
-    surtidores = nuevoArr;
-    capacidadSurtidores = nuevaCapacidad;
+    agregarSurtidorLectura(codigo,modelo,true);
+    cout << "Surtidor " << codigo << " agregado exitosamente." << endl;
 }
+
+//Metodo para agregar surtidor al arreglo
+void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado){
+    if(sizeSurtidores == 0){surtidores = new Surtidor[capacidadSurtidores];}
+    else{
+        if (sizeSurtidores == capacidadSurtidores) {
+            expandirSurtidores();
+        }
+    }
+    surtidores[sizeSurtidores] = Surtidor(codigo, modelo, true);
+    sizeSurtidores++;
+}
+
+//Metodo para obtener codigo del surtidor
+string Estacion::obtenerCodigosurtidor(){
+    string codigo;
+    cout << "Ingrese el codigo del surtidor que desea eliminar: " << endl;
+    cin >> codigo;
+    for(int i = 0; i < sizeSurtidores; i++){
+        if(surtidores[i].getCodigoSurtidor() == codigo){
+            return codigo;
+        }
+    }
+    cout << "El surtidor " << codigo << " no existe." << endl;
+    return "";
+}
+
+
+void Estacion::eliminarSurtidor(string codigo) {
+    //Metodo para eliminar un surtidor
+    int posicion = -1;
+    //Encontrar surtidor en el arreglo
+    for(int i = 0; i < sizeSurtidores; i++){
+        if(surtidores[i].getCodigoSurtidor() == codigo){
+            posicion = i;
+            break;
+        }
+    }
+    if(posicion == -1){
+        cout << "Surtidor " << codigo << " no existe." << endl;
+        return;
+    }
+
+    //Inicializa el arreglo
+    Surtidor* nuevoArregloSurtidores = new Surtidor[ sizeSurtidores - 1];
+    //Copia los elementos hasta encontrar al surtidor
+    for(int i = 0; i < posicion; i++){
+        nuevoArregloSurtidores[i] = surtidores[i];
+    }
+    for(int j = posicion; j < sizeSurtidores - 1; j++){
+        nuevoArregloSurtidores[j] = surtidores[j + 1];
+    }
+    //Elimina el arreglo antiguo
+    delete[] surtidores;
+    //Actualiza el arreglo
+    surtidores = nuevoArregloSurtidores;
+    //Actualiza el tamaño del arreglo
+    sizeSurtidores--;
+    cout << "Surtidor " << codigo << " eliminado con exito." << endl;
+
+}
+
+void Estacion:: activarSurtidor(){
+    // Metodo para activar un surtidor
+    string codigo;
+    cout << "Ingrese el codigo del surtidor que desea activar: " << endl;
+    cin >> codigo;
+    //Verifica si el codigo existe
+    bool surtidorExiste = false;
+    for(int i = 0; i < sizeSurtidores; i++){
+        if(surtidores[i].getCodigoSurtidor() == codigo){
+            surtidorExiste = true;
+            //Verifica si esta desactivado
+            if(!surtidores[i].getEstado()){
+                surtidores[i].setEstado(true);
+                cout << "Surtidor " << codigo << " ha sido activado con exito." << endl;
+            }
+            else{
+                cout << "El surtidor " << codigo << " ya esta activo." << endl;
+            }
+            break;
+        }
+    }
+    if(!surtidorExiste){
+        cout << "Surtidor " << codigo << " no existe." << endl;
+    }
+}
+
+void Estacion::desactivarSurtidor(){
+    //Metodo para desactivar un surtidor
+    string codigo;
+    cout << "Ingrese el codigo del surtidor que desea activar: " << endl;
+    cin >> codigo;
+    //Verifica si el codigo existe
+    bool surtidorExiste = false;
+    for(int i = 0; i < sizeSurtidores; i++){
+        if(surtidores[i].getCodigoSurtidor() == codigo){
+            surtidorExiste = true;
+            //Verifica si esta activo
+            if(surtidores[i].getEstado()){
+                surtidores[i].setEstado(false);
+                cout << "Surtidor " << codigo << " ha sido activado con exito." << endl;
+            }
+            else{
+                cout << "El surtidor " << codigo << " ya esta activo." << endl;
+            }
+            break;
+        }
+    }
+    if(!surtidorExiste){
+        cout << "Surtidor " << codigo << " no existe." << endl;
+    }
+}
+/*
+void Estacion::consultarHistorico(){
+    //metodo publico para imprimir por pantalla o en un archivo de texto plano el historico
+    //de transacciones
+    //Obtener nombre de la estacion
+    cout << "Historial de ventas de la estacion " << nombre << endl;
+    //Recorrer arreglo de surtidores
+    for(int i = 0; i < sizeSurtidores; i++){
+        string codigoSurtidor = surtidores[i].getCodigoSurtidor();
+        cout << "Ventas del surtidor " << codigoSurtidor << endl;
+        //Encontrar ventas asociadas al surtidor
+        bool ventasSurtidor = false;
+        for(int j = 0; j < sizeVentas; j++){
+            if(ventas[j].getCodigoVenta() == codigoSurtidor){
+                ventas[j].detallesVentas();
+                ventasSurtidor = true;
+            }
+        }
+        if(!ventasSurtidor){
+            cout << "no hay ventas registradas para este surtidor" << endl;
+        }
+    }
+}
+*/
+
+void asignarCapacidadTanque(){
+    // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
+    //100 y 200 litros para cada una de las categorías
+
+}
+
+void reportarLitrosVendidos(){
+    // Reportar la cantidad de litros vendida según cada categoría de combustible.
+}
+
+void simularVenta(){}
 
 void Estacion:: expandirNaves() {
     //Metodo privado para expandir el arreglo de surtidores
@@ -156,90 +320,6 @@ void Estacion:: expandirNaves() {
     capacidadNaves = nuevaCapacidad;
 }
 
-void Estacion:: agregarSurtidor(string codigo, string modelo, bool estado) {
-    //Metodo para agregar un surtidor
-    if(sizeSurtidores == 0){surtidores = new Surtidor[capacidadNaves];}
-    else{
-        if (sizeSurtidores == capacidadSurtidores) {
-            expandirSurtidores();  // Si el arreglo está lleno, lo expandimos
-        }
-    }
-    surtidores[sizeSurtidores] = Surtidor(codigo, modelo, estado);
-    sizeSurtidores++;
-
-}
-
-void eliminarSurtidor() {
-    //Metodo para eliminar un surtidor
-    string codigo;
-    cout << "Ingrese el codigo del surtidor que desea eliminar: " << endl;
-    cin >> codigo;
-    int posicion = -1;
-    //Encontrar surtidor en el arreglo
-    for(int i = 0; i < tamanio; i++){
-        if(arreglo[i] == codigo){
-            posicion = i;
-            break;
-        }
-    }
-    if(posicion == -1){
-        cout << "Surtidor " << codigo << "no existe." << endl;
-    }
-    //Inicializa el arreglo
-    string* nuevoArreglo = new string[tamanio -1];
-    //Copia los elementos hasta encontrar al surtidor
-    for(int i = 0; i < posicion; i++){
-        nuevoArreglo[i] = arreglo[i];
-    }
-    for(int j = pos; j < tamanio -1; j++){
-        nuevoArreglo = arreglo[j + 1];
-    }
-    delete arreglo[posicion];
-    arreglo = nuevoArreglo;
-    /*
-    //Desplazar los elementos
-    for(int i = posicion; i < tamanio - 1; i++){
-        arreglo[i] = arreglo[i + 1];
-    }
-    tamanio--;
-    //inicializo el arreglo
-    string* nuevoarreglo = new string[tamanio];
-    //copio los elementos
-    for(int i = 0; i < tamanio; i++){
-        nuevoarreglo[i] = arreglo[i];
-    }
-    //Liberar la memoria
-    delete[] arreglo;
-    //apuntar al nuevo arreglo
-    arreglo = nuevoarreglo;
-*/
-
-}
-
-void activarSurtidor(const std::string& codigoSurtidor){
-    //cuestionable, yo creo que se puede hacer solo con el setter
-}
-
-void desactivarSurtidor(const std::string& codigoSurtidor){
-    //cuestionable, yo creo que se puede hacer solo con el setter
-}
-
-void consultarHistorico(){
-    //metodo publico para imprimir por pantalla o en un archivo de texto plano el historico
-    //de transacciones
-}
-
-void asignarCapacidadTanque(){
-    // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
-    //100 y 200 litros para cada una de las categorías
-}
-
-void reportarLitrosVendidos(){
-    // Reportar la cantidad de litros vendida según cada categoría de combustible.
-}
-
-
-
 void Estacion:: agregarNaveLectura(string codigo){
     //agrega los codios al arreglo de naves
     if(navesActuales == 0){naves = new string[capacidadNaves];}
@@ -257,6 +337,10 @@ void Estacion:: mostrarNaves(){
     for (int i = 0; i < 6; ++i) {
         cout<<naves[i]<<"aa";
     }
+}
+
+void Estacion::mostrarEstaciones(){
+    cout << codigoEstacion << "->\t" << nombre << endl;
 }
 
 

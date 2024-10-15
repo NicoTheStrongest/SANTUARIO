@@ -38,6 +38,7 @@ public:
     void setSizeEstaciones(int newSize);
     int setCapacidadEstaciones();
     //Metodos
+    void agregarEstacion();
     void agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
     void eliminarEstacion(const std::string& codigoEstacion);
     void ventasCombustible();

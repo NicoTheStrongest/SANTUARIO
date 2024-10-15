@@ -10,13 +10,14 @@ using namespace std;
 
 //Constructor
 Ventas::Ventas(){}
-Ventas::Ventas(const string fechaHora, const string tipoCombustible, const string metodoPago, const string documentoCliente, const string codigoSurtidor, double cantidadCombustible, double monto)
-    : fechaHora(fechaHora), tipoCombustible(tipoCombustible), metodoPago(metodoPago), documentoCliente(documentoCliente), codigoSurtidor(codigoSurtidor), cantidadCombustible(cantidadCombustible), monto(monto){}
+Ventas::Ventas(const string codigoVenta,const string fechaHora, const string tipoCombustible, const string metodoPago, const string documentoCliente, double cantidadCombustible, double monto)
+    : codigoVenta(codigoVenta), fechaHora(fechaHora), tipoCombustible(tipoCombustible), metodoPago(metodoPago), documentoCliente(documentoCliente), cantidadCombustible(cantidadCombustible), monto(monto){}
 
 //Destructor
 Ventas::~Ventas(){}
 
 //Getters
+string Ventas:: getCodigoVenta()const {return codigoVenta;}
 string Ventas:: getfechaHora() const {return fechaHora;}
 string Ventas:: getTipoCombustible() const {return tipoCombustible;}
 string Ventas:: getMetodoPago() const {return metodoPago;}
@@ -69,7 +70,7 @@ void Ventas::setMonto(double newMonto){
     }
 }
 
-double setCantidadCombustible(double newCantidadCombustible){
+void Ventas::setCantidadCombustible(double newCantidadCombustible){
     //validar formato del parametro
     if(newCantidadCombustible > 0){
         cantidadCombustible = newCantidadCombustible;
@@ -89,6 +90,8 @@ string fechaHora(){
     strftime(fechaHora, sizeof(fechaHora), "%Y-%m-%d %H:%M:%S", tiempoLocal);
     return string(fechaHora);
 }
+
+//Metodo para mostrar todos los detalles de ventas
 
 
 

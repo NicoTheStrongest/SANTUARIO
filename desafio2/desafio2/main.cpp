@@ -44,16 +44,27 @@ int main(){
             int opcionGestionEstaciones = menuGestionEstaciones();
             switch (opcionGestionEstaciones) {
             case 1: //Agregar surtidor
+                {
+                estacion.agregarSurtidor();
+                }
                 break;
             case 2: //Eliminar surtidor
+                {
+                string codigo = estacion.obtenerCodigosurtidor();
+                estacion.eliminarSurtidor(codigo);
+                surtidor.eliminarVentaSurtidor(codigo);
+                }
                 break;
             case 3: //Consultar Historico de transacciones
                 break;
             case 4: //Reporte de litros vendidos
+
                 break;
             case 5: //Simulador de venta
+
                 break;
             case 6: //Asignar capacidad de tanques
+
                 break;
             case 7: //Sistema nacional de fugas
                 break;
@@ -75,7 +86,6 @@ int main(){
         }
         }
     }
-    system("pause");
     //guardar cambios?
     mensajeSalida();
 }
