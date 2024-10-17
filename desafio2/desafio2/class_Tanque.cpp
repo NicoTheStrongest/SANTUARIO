@@ -9,7 +9,7 @@ using namespace std;
 
 //Constructor
 Tanque::Tanque(){}
-Tanque::Tanque(int capacidad, int combustibleDisponible, double capacidadRegular, double capacidadPremium, double capacidadEcoextra, double disponibleRegular, double disponiblePremium, double disponibleEcoextra)
+Tanque::Tanque(int capacidad, int combustibleDisponible, int capacidadRegular, int capacidadPremium, int capacidadEcoextra, int disponibleRegular, int disponiblePremium, int disponibleEcoextra)
     : capacidadTotal(capacidad),
     combustibleDisponibleTotal(combustibleDisponible),
     capacidadRegular(capacidadRegular),
@@ -26,12 +26,12 @@ Tanque::~Tanque(){}
 //Getter
 int Tanque:: getCapacidadTotal() const {return capacidadTotal;}
 int Tanque:: getCombustibleDisponibleTotal() const {return combustibleDisponibleTotal;}
-double Tanque:: getCapacidadRegular() const {return capacidadRegular;}
-double Tanque:: getCapacidadPremium() const {return capacidadPremium;}
-double Tanque:: getCapacidadEcoextra() const {return capacidadEcoextra;}
-double Tanque:: getDisponibleRegular() const {return disponibleRegular;}
-double Tanque:: getDisponiblePremium() const {return disponiblePremium;}
-double Tanque:: getDisponibleEcoexptra() const {return disponibleEcoextra;}
+int Tanque:: getCapacidadRegular() const {return capacidadRegular;}
+int Tanque:: getCapacidadPremium() const {return capacidadPremium;}
+int Tanque:: getCapacidadEcoextra() const {return capacidadEcoextra;}
+int Tanque:: getDisponibleRegular() const {return disponibleRegular;}
+int Tanque:: getDisponiblePremium() const {return disponiblePremium;}
+int Tanque:: getDisponibleEcoexptra() const {return disponibleEcoextra;}
 
 //Setter
 
@@ -55,7 +55,7 @@ void Tanque::setCombustibleDisponibleTotal(int newCombustibleDisponibleTotal){
     }
 }
 
-void Tanque::setCapacidadRegular(double newCapacidadRegular){
+void Tanque::setCapacidadRegular(int newCapacidadRegular){
     //validar formato del parametro
     if(newCapacidadRegular > 0 && (newCapacidadRegular >= 100 || newCapacidadRegular <= 200)){
         capacidadRegular = newCapacidadRegular;
@@ -65,7 +65,7 @@ void Tanque::setCapacidadRegular(double newCapacidadRegular){
     }
 }
 
-void Tanque::setCapacidadPremium(double newCapacidadPremium){
+void Tanque::setCapacidadPremium(int newCapacidadPremium){
     //validar formato del parametro
     if(newCapacidadPremium > 0 && (newCapacidadPremium >= 100 || newCapacidadPremium <= 200)){
         capacidadPremium = newCapacidadPremium;
@@ -75,7 +75,7 @@ void Tanque::setCapacidadPremium(double newCapacidadPremium){
     }
 }
 
-void Tanque::setCapacidadEcoextra(double newCapacidadEcoextra){
+void Tanque::setCapacidadEcoextra(int newCapacidadEcoextra){
     //validar formato del parametro
     if(newCapacidadEcoextra > 0 && (newCapacidadEcoextra >= 100 || newCapacidadEcoextra <= 200)){
         capacidadEcoextra = newCapacidadEcoextra;
@@ -85,7 +85,7 @@ void Tanque::setCapacidadEcoextra(double newCapacidadEcoextra){
     }
 }
 
-void Tanque::setDisponibleRegular(double newDisponibleRegular){
+void Tanque::setDisponibleRegular(int newDisponibleRegular){
     //validar formato del parametro
     if(newDisponibleRegular >= 0){
         disponibleRegular = newDisponibleRegular;
@@ -95,7 +95,7 @@ void Tanque::setDisponibleRegular(double newDisponibleRegular){
     }
 }
 
-void Tanque::setDisponiblePremium(double newDisponiblePremium){
+void Tanque::setDisponiblePremium(int newDisponiblePremium){
     //validar formato del parametro
     if(newDisponiblePremium >= 0){
         disponiblePremium = newDisponiblePremium;
@@ -105,7 +105,7 @@ void Tanque::setDisponiblePremium(double newDisponiblePremium){
     }
 }
 
-void Tanque::setDisponibleEcoextra(double newDisponibleEcoextra){
+void Tanque::setDisponibleEcoextra(int newDisponibleEcoextra){
     //validar formato del parametro
     if(newDisponibleEcoextra >= 0){
         disponibleEcoextra = newDisponibleEcoextra;
@@ -114,7 +114,14 @@ void Tanque::setDisponibleEcoextra(double newDisponibleEcoextra){
         cout << "newDisponibleEcoextra debe ser mayor o igual a cero." << endl;
     }
 }
+ //                 METODOS
 
+void Tanque:: disminuirDisponible(string combustible, int cantidad){
+    if(combustible == "regular"){disponibleRegular -= cantidad;}
+    else if(combustible == "premium"){disponiblePremium -= cantidad;}
+    else if (combustible == "ecoextra"){disponibleEcoextra -= cantidad;}
+    else{cout << "Combustible no valido." << endl;}
+}
 
 
 

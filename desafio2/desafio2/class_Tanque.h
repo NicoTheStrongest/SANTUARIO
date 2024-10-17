@@ -10,36 +10,39 @@ class Tanque{
 private:
     int capacidadTotal;
     int combustibleDisponibleTotal;
-    double capacidadRegular;
-    double capacidadPremium;
-    double capacidadEcoextra;
-    double disponibleRegular;
-    double disponiblePremium;
-    double disponibleEcoextra;
+    int capacidadRegular;
+    int capacidadPremium;
+    int capacidadEcoextra;
+    int disponibleRegular;
+    int disponiblePremium;
+    int disponibleEcoextra;
 public:
     //Constructor
     Tanque();
-    Tanque(int capacidad, int combustibleDisponible, double capacidadRegular, double capacidadPremium, double capacidadEcoextra, double disponibleRegular, double disponiblePremium, double disponibleEcoextra);
+    Tanque(int capacidad, int combustibleDisponible, int  capacidadRegular, int  capacidadPremium, int  capacidadEcoextra, int  disponibleRegular, int  disponiblePremium, int  disponibleEcoextra);
     //Destructor
     ~Tanque();
     //Getter
     int getCapacidadTotal() const;
     int getCombustibleDisponibleTotal() const;
-    double getCapacidadRegular() const;
-    double getCapacidadPremium() const;
-    double getCapacidadEcoextra() const;
-    double getDisponibleRegular() const;
-    double getDisponiblePremium() const;
-    double getDisponibleEcoexptra() const;
+    int getCapacidadRegular() const;
+    int getCapacidadPremium() const;
+    int getCapacidadEcoextra() const;
+    int getDisponibleRegular() const;
+    int getDisponiblePremium() const;
+    int getDisponibleEcoexptra() const;
     //Setter
     void setCapacidadTotal (int newCapacidad);
     void setCombustibleDisponibleTotal (int newCombustibleDisponibleTotal);
-    void setCapacidadRegular (double newCapacidadRegular);
-    void setCapacidadPremium(double newCapacidadPremium);
-    void setCapacidadEcoextra(double newCapacidadEcoextra);
-    void setDisponibleRegular(double newDisponibleRegular);
-    void setDisponiblePremium(double newDisponiblePremium);
-    void setDisponibleEcoextra(double newDisponibleEcoextra);
+    void setCapacidadRegular (int newCapacidadRegular);
+    void setCapacidadPremium(int newCapacidadPremium);
+    void setCapacidadEcoextra(int newCapacidadEcoextra);
+    void setDisponibleRegular(int newDisponibleRegular);
+    void setDisponiblePremium(int newDisponiblePremium);
+    void setDisponibleEcoextra(int newDisponibleEcoextra);
+    //Metodos
+    void disminuirDisponible(std::string combustible,int cantidad);
+
 };
 
 #endif // CLASS_TANQUE_H

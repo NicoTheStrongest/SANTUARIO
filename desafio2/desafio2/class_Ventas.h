@@ -16,7 +16,7 @@ private:
 public:
     //Constructor
     Ventas();
-    Ventas(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
+    Ventas(string codigoVentas, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
     //Destructor
     ~Ventas();
 
@@ -26,21 +26,22 @@ public:
     std::string getTipoCombustible() const;
     std::string getMetodoPago() const;
     std::string getDocumentoCliente() const;
-    double getMonto() const;
-    double getCantidadCombustible() const;
+    int getMonto() const;
+    int getCantidadCombustible() const;
 
     //Setters
     void setFechaHora(std::string newFechaHora);
     void setTipoCombustible(std::string newTipoCombustible);
     void setMetodoPago(std::string newMetodoPago);
     void setDocumentoCliente(std::string newDocumentoCliente);
-    void setMonto(double newMonto);
-    void setCantidadCombustible(double newCantidadCombustible);
+    void setMonto(int newMonto);
+    void setCantidadCombustible(int newCantidadCombustible);
 
     //metodos
     std::string calcularFechaHora();
     void mostrarVentas();
     void detallesVentas();
+    void discriminarVentas(int &totalRegular, int &totalPremium, int &totalEcoextra);
 };
 
 #endif // CLASS_VENTAS_H

@@ -22,8 +22,8 @@ string Ventas:: getfechaHora() const {return fechaHora;}
 string Ventas:: getTipoCombustible() const {return tipoCombustible;}
 string Ventas:: getMetodoPago() const {return metodoPago;}
 string Ventas:: getDocumentoCliente() const {return documentoCliente;}
-double Ventas:: getMonto() const {return monto;}
-double Ventas:: getCantidadCombustible() const {return cantidadCombustible;}
+int Ventas:: getMonto() const {return monto;}
+int Ventas:: getCantidadCombustible() const {return cantidadCombustible;}
 
 //Setters
 void Ventas::setFechaHora(string newFechaHora){
@@ -60,7 +60,7 @@ void Ventas:: setDocumentoCliente(string newDocumentoCliente){
     }
 }
 
-void Ventas::setMonto(double newMonto){
+void Ventas::setMonto(int newMonto){
     //validar formato del parametro
     if(newMonto > 0){
         monto = newMonto;
@@ -70,7 +70,7 @@ void Ventas::setMonto(double newMonto){
     }
 }
 
-void Ventas:: setCantidadCombustible(double newCantidadCombustible){
+void Ventas:: setCantidadCombustible(int newCantidadCombustible){
     //validar formato del parametro
     if(newCantidadCombustible > 0){
         cantidadCombustible = newCantidadCombustible;
@@ -94,6 +94,31 @@ string fechaHora(){
 void Ventas:: mostrarVentas(){
     cout<<codigoVentas<<"//"<<tipoCombustible<<"//"<<fechaHora<<"//"<<metodoPago<<"//"<<documentoCliente<<"//"<<cantidadCombustible<<"//"<<monto;
     cout<<endl;
+}
+
+void Ventas::detallesVentas(){
+    //Metodo que muestra los detalles de las ventas
+    cout << "Surtidor: " << codigoVentas << endl;
+    cout << "Fecha y hora: " << fechaHora << endl;
+    cout << "Cantidad de combustible: " << cantidadCombustible << " litros" << endl;
+    cout << "Categoria de combustible: " << tipoCombustible << endl;
+    cout << "Metodo de pago: " << metodoPago << endl;
+    cout << "Cliente: " << documentoCliente << endl;
+    cout << "Monto: $" << monto << endl;
+}
+
+void Ventas::discriminarVentas(int &totalRegular, int &totalPremium, int &totalEcoextra){
+    //Metodo para sumar las ventas por combustible
+    string combustible = getTipoCombustible();
+    if(combustible == "regular"){
+        totalRegular += getCantidadCombustible();
+    }
+    else if(combustible == "premium"){
+        totalPremium += getCantidadCombustible();
+    }
+    else if(combustible == "ecoextra"){
+        totalEcoextra += getCantidadCombustible();
+    }
 }
 
 /*

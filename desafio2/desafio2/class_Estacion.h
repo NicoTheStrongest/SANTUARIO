@@ -22,7 +22,7 @@ private:
     int navesActuales = 0;
     int capacidadNaves = 1;
     string* naves;
-
+    Tanque tanque;
     void expandirSurtidores();
     void expandirNaves();
 public:
@@ -39,6 +39,7 @@ public:
     std::string getcoordenadas()const;
     int getsizeSurtidores()const;
     int getCapacidadSurtidores()const;
+    Surtidor* getSurtidores() const;
 
     //Setters
     void setNombre(std::string newNombre);
@@ -50,23 +51,24 @@ public:
     void setCapacidadSurtidores(int newCapacidadSurtidores);
 
     //Metodos
-    void agregarSurtidor();
+    void agregarCodSurtidoresLectura(string codigo);
+    void agregarSurtidor(string codigoEstacion);
     void agregarSurtidorLectura(string codigo, string modelo, bool estado);
     void eliminarSurtidor(string codigo);
     void activarSurtidor();
     void desactivarSurtidor();
-    string obtenerCodigosurtidor();
-    void consultarHistorico();
+    string obtenerCodigoSurtidor(string codigoEstacion);
+    void consultarHistorico(Ventas* ventas, int sizeVentas, string codEstacion);
     void reportarLitrosVendidos();
     void simularVenta();
     void asignarCapacidadTanque();
+    void verificarFugas(Ventas* ventas, int sizeVentas,string estacion);
     void mostrarEstaciones();
     void agregarNaveLectura(string codigo);
     void mostrarNaves();
-
     bool surtidoresInactivos(string codigoEstacion);
     void eliminarSurtidoresNavesEstacion(bool eliminar, string codigo);
-    Surtidor* getSurtidores() const;
+
 };
 
 #endif // CLASS_ESTACION_H
