@@ -37,9 +37,9 @@ RedNacional::~RedNacional(){
 }
 
 //                  Getters - Setters
-int RedNacional:: getSizetaciones() const {
-    return sizeEstaciones;
-}
+int RedNacional:: getSizetaciones() const {return sizeEstaciones;}
+Estacion* RedNacional:: getEstaciones() const {return estaciones;}
+int RedNacional:: getCapacidadEstaciones() const {return capacidadEstaciones;}
 
 void RedNacional:: setSizeEstaciones(int newSize){
     // validar el nuevo numero entero.
@@ -50,7 +50,14 @@ void RedNacional:: setSizeEstaciones(int newSize){
         cout << "newSize debe ser mayor a cero." << endl;
     }
 }
-int setCapacidadEstaciones(){}
+int RedNacional::setCapacidadEstaciones(int newCapacidad){
+    if (newCapacidad > 0){
+        capacidadEstaciones = newCapacidad;
+    }
+    else{
+        cout << "newCapacidad debe ser mayor a cero.";
+    }
+}
 
 //                      Metodos
 
@@ -221,7 +228,6 @@ void Estacion::eliminarSurtidor(Surtidor*& arr, int* size) {
 
 }
 */
-
 void RedNacional:: ventasCombustible(){
     //Metodo publico para calcular el monto total de ventas por estacion segun el combustible
 }
@@ -240,16 +246,25 @@ void RedNacional:: fijarPrecios(){
     }
 }
 
-bool RedNacional::verificarFugas(const string& codigoEstacion){
-    //Metodo publico para verificar fugas en las esatciones
-}
+
 
 void RedNacional:: mostrarArregloEstaciones(){
-    //
     for (int i = 0; i < sizeEstaciones; ++i) {
         estaciones[i].mostrarEstaciones();
     }
 }
+
+string RedNacional::elegirEstacion(){
+    //Metodo para elegir la estacion
+    string estacion;
+    cout << "Ingrese el codigo de la estacion en la que esta trabajando: " << endl;
+    for (int i = 0; i < sizeEstaciones; ++i) {
+       estaciones[i].mostrarEstaciones();
+    }
+    cin >> estacion;
+    return estacion;
+}
+
 
 
 void RedNacional::agregarRegiones(string arreglo[]){
@@ -258,7 +273,7 @@ void RedNacional::agregarRegiones(string arreglo[]){
     }
 }
 
-Estacion* RedNacional:: getEstaciones() const {return estaciones;}
+
 
 void RedNacional:: asignarCapacidadTanque(){
     // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre

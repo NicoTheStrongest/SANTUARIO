@@ -35,8 +35,9 @@ public:
 
     //Getters - Setters
     int getSizetaciones()const;
+    int getCapacidadEstaciones()const;
     void setSizeEstaciones(int newSize);
-    int setCapacidadEstaciones();
+    int setCapacidadEstaciones(int newCapacidad);
     Estacion* getEstaciones()const;
 
     //Metodos
@@ -50,6 +51,7 @@ public:
     bool verificarFugas(const std::string& codigoEstacion);
     void mostrarArregloEstaciones();
     void agregarRegiones(string arreglo[]);
+    string elegirEstacion();
     void asignarCapacidadTanque();
     int calcularMontoPago(string tipoCombustible, int litros, string region);
 };

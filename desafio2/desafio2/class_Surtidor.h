@@ -18,7 +18,7 @@ private:
     int capacidadVentas = 1;
     std::string codSurtidores[13];
     int numCodigosSurtidores = 0;
-    double precioRegular,precioPremium,precioEcoExtra;
+    int precioRegular,precioPremium,precioEcoextra;
 
     void expandirVentas();
 public:
@@ -32,28 +32,29 @@ public:
     std::string getModelo() const;
     bool getEstado() const;
     int getSizeVentas() const;
-    double getPrecioRegular() const;
-    double getPrecioPremium() const;
-    double getPrecioEcoExtra() const;
+    int getPrecioRegular() const;
+    int getPrecioPremium() const;
+    int getPrecioEcoExtra() const;
+    Ventas* getVentas() const;
 
     //setters
     void setCodigoSurtidor(std::string newCodigoSurtidor);
     void setModelo(std::string newModelo);
     void setEstado(bool estado);
     void setSizeVentas(int newSizeVentas);
-    void setPrecioRegular(double newPrecioRegular);
-    void setPrecioPremium(double newPrecioPremium);
-    void setPrecioEcoExtra(double newPrecioEcoextra);
+    void setPrecioRegular(int newPrecioRegular);
+    void setPrecioPremium(int newPrecioPremium);
+    void setPrecioEcoExtra(int newPrecioEcoextra);
 
     //Metodos
-    void registrarVenta(const Ventas& nuevaVenta);
-    void agregarCodSurtidoresLectura(std::string codigo);
+    void discriminarVentas(int& totalRegular, int& totalPremium, int& totalEcoextra);
+    void agregarCodSurtidoresLectura(string codigo);
     void mostrarCodigos();
     void mostrarAtributos();
     void agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
-    Ventas* getVentas() const;
-    void detallesVentas();
     void eliminarVentaSurtidor(string codigo);
+    void mostrarVentasSurtidor(string codigo, Ventas& ventas);
+    void detallesVentas();
 };
 
 #endif // CLASS_SURTIDOR_H

@@ -16,7 +16,7 @@ private:
 public:
     //Constructor
     Ventas();
-    Ventas(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
+    Ventas(string codigoVentas, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
     //Destructor
     ~Ventas();
 
@@ -41,6 +41,7 @@ public:
     std::string calcularFechaHora();
     void mostrarVentas();
     void detallesVentas();
+    void discriminarVentas(int &totalRegular, int &totalPremium, int &totalEcoextra);
 };
 
 #endif // CLASS_VENTAS_H

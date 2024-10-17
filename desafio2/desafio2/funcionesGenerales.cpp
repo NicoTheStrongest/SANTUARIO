@@ -109,8 +109,8 @@ int menuGestionEstaciones(){
     leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
     string mensaje2 = "Opción no valida, intenta de nuevo.";
-    const int size = 8;
-    string opcionesValidas[size] = {"1", "2", "3", "4", "5", "6", "7", "0"};
+    const int size = 10;
+    string opcionesValidas[size] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
     return opcionElegida;
 }
