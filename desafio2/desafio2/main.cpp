@@ -66,29 +66,51 @@ int main(){
             int opcionGestionEstaciones = menuGestionEstaciones();
             switch (opcionGestionEstaciones) {
             case 1: //Agregar surtidor
-                // {
-                // estacion.agregarSurtidor();
-                // }
+                {
+                string codigoEstacion1= redNacional.elegirEstacion();
+                estacion.agregarSurtidor(codigoEstacion1);
+                }
                 break;
             case 2: //Eliminar surtidor
-                // {
-                // string codigo = estacion.obtenerCodigoSurtidor();
-                // estacion.eliminarSurtidor(codigo);
-                // surtidor.eliminarVentaSurtidor(codigo);
-                // }
+                {
+                string codigo_Estacion = redNacional.elegirEstacion();
+                string codigo = estacion.obtenerCodigoSurtidor(codigo_Estacion);
+                estacion.eliminarSurtidor(codigo);
+                surtidor.eliminarVentaSurtidor(codigo);
+                }
                 break;
-            case 3: //Consultar Historico de transacciones
+            case 3: //Activar surtidor
+                {
+                estacion.activarSurtidor();
+                }
                 break;
-            case 4: //Reporte de litros vendidos
+            case 4: //Desactivar surtidor
+                {
+                estacion.desactivarSurtidor();
+                }
+                break;
+            case 5: //Consultar Historico de transacciones
+                {
+                Ventas* ventas5 = surtidor.getVentas();
+                int sizeVentas = surtidor.getSizeVentas();
+                string codEstacion = redNacional.elegirEstacion();
+                estacion.consultarHistorico(ventas5, sizeVentas, codEstacion);
+                }
+                break;
+            case 6: //Reporte de litros vendidos
 
                 break;
-            case 5: //Simulador de venta
-
+            case 7: //Simulador de venta
                 break;
-            case 6: //Asignar capacidad de tanques
-
+            case 8://Asignar capacidad de tanques
                 break;
-            case 7: //Sistema nacional de fugas
+            case 9://Sistema nacional de fugas
+                {
+                string codEstacion = redNacional.elegirEstacion();
+                Ventas* ventas7 = surtidor.getVentas();
+                int sizeVentas = surtidor.getSizeVentas();
+                estacion.verificarFugas(ventas7, sizeVentas,codEstacion);
+                }
                 break;
             case 0: //Salir
                 sesionActiva = false;

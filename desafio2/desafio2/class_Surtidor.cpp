@@ -15,7 +15,7 @@ Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado)
     //constructor que inicializa el arreglo de ventas
     precioRegular = 0;
     precioPremium = 0;
-    precioEcoExtra = 0;
+    precioEcoextra = 0;
 }
 
 Surtidor::~Surtidor(){
@@ -32,11 +32,13 @@ bool Surtidor:: getEstado() const {return estado;}
 
 int Surtidor:: getSizeVentas() const {return sizeVentas;}
 
-double Surtidor:: getPrecioRegular() const {return precioRegular;}
+int Surtidor:: getPrecioRegular() const {return precioRegular;}
 
-double Surtidor:: getPrecioPremium() const {return precioRegular;}
+int Surtidor:: getPrecioPremium() const {return precioRegular;}
 
-double Surtidor:: getPrecioEcoExtra() const {return precioEcoExtra;}
+int Surtidor:: getPrecioEcoExtra() const {return precioEcoextra;}
+
+Ventas* Surtidor:: getVentas() const {return ventas;}
 
 //Setters
 void Surtidor::setCodigoSurtidor(std::string newCodigoSurtidor){
@@ -69,7 +71,7 @@ void Surtidor::setSizeVentas(int newSizeVentas){
         cout << "newSizeVentas de ser mayor a cero" << endl;
     }
 }
-void Surtidor::setPrecioRegular(double newPrecioRegular){
+void Surtidor::setPrecioRegular(int newPrecioRegular){
     if(newPrecioRegular > 0){
             precioRegular = newPrecioRegular;
     }
@@ -77,7 +79,7 @@ void Surtidor::setPrecioRegular(double newPrecioRegular){
         cout << "newPrecioRegular de ser mayor a cero" << endl;
     }
 }
-void Surtidor::setPrecioPremium(double newPrecioPremium){
+void Surtidor::setPrecioPremium(int newPrecioPremium){
     if(newPrecioPremium > 0){
         precioPremium = newPrecioPremium;
     }
@@ -85,9 +87,9 @@ void Surtidor::setPrecioPremium(double newPrecioPremium){
         cout << "newPrecioPremium de ser mayor a cero" << endl;
     }
 }
-void Surtidor::setPrecioEcoExtra(double newPrecioEcoextra){
+void Surtidor::setPrecioEcoExtra(int newPrecioEcoextra){
     if(newPrecioEcoextra > 0){
-        precioEcoExtra = newPrecioEcoextra;
+        precioEcoextra = newPrecioEcoextra;
     }
     else{
         cout << "newPrecioEcoextra de ser mayor a cero" << endl;
@@ -96,7 +98,7 @@ void Surtidor::setPrecioEcoExtra(double newPrecioEcoextra){
 
 //                  METODOS
 
-//Metodo para expandir el arreglo de ventas
+
 void Surtidor:: expandirVentas(){
     //Metodo privado para expandir el arreglo de ventas
     int nuevaCapacidad = capacidadVentas + 1;
@@ -116,7 +118,7 @@ void Surtidor:: expandirVentas(){
 }
 
 void Surtidor:: agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto){
-    //
+    //Metodo para agregar venta al arreglo
     if(sizeVentas == 0){ventas = new Ventas[capacidadVentas];}
     else{
         if (sizeVentas == capacidadVentas) {
@@ -131,10 +133,10 @@ void Surtidor:: agregarCodSurtidoresLectura(string codigo){
     //Agregar codigos al arreglo de surtidores.
     if(numCodigosSurtidores <= 12){
         codSurtidores[numCodigosSurtidores] = codigo;
-        numCodigosSurtidores += 1;
+        numCodigosSurtidores++;
     }
     else{
-        cout<<"No se pueden agregar mas sutidores";
+        cout<<"No se pueden agregar mas sutidores" << endl;
     }
 }
 
@@ -144,33 +146,24 @@ void Surtidor:: mostrarCodigos(){
         cout << codSurtidores[i];
     }
 }
-/*
-//Metodo que muestra los detalles de las ventas
-void Surtidor::detallesVentas(){
-    cout << "Fecha y hora: " << arregloVentas->getfechaHora() << endl;
-    cout << "Cantidad de combustible: " << arregloVentas->getCantidadCombustible() << endl;
-    cout << "Categoria de combustible: " << arregloVentas->getTipoCombustible() << endl;
-    cout << "Metodo de pago: " << arregloVentas->getMetodoPago() << endl;
-    cout << "Cliente: " << arregloVentas->getDocumentoCliente() << endl;
-    cout << "Monto: $" << arregloVentas->getMonto() << endl;
-}
-*/
-void registrarVenta(const Ventas& nuevaVenta){}
-void agregarCodSurtidoresLectura(std::string codigo){}
-void mostrarCodigos(){}
-void detallesVentas(){}
 
-//Metodo para eliminar las ventas asociadas a un surtidor
-/*
+
+
+void mostrarCodigos(){}
+
+
+
 void Surtidor::eliminarVentaSurtidor(string codigo){
+    //Metodo para eliminar las ventas asociadas a un surtidor
     int ventaSurtidor = 0;
     for(int i = 0; i < sizeVentas; i++){
-        if(ventas[i].getCodigoVenta() == codigo){
+        if(ventas[i].getCodigoVentas() == codigo){
             ventaSurtidor++;
         }
     }
     if(ventaSurtidor == 0){
         cout << "No hay ventas asociadas al surtidor " << codigo << endl;
+        system("pause");
         return;
     }
     //Inicializa el arreglo
@@ -179,7 +172,7 @@ void Surtidor::eliminarVentaSurtidor(string codigo){
     //Copia las ventas que no estan asociadas al surtidor
     int ventaNoAsociada = 0;
     for(int i = 0; i < sizeVentas; i++){
-        if(nuevoArregloVentas[i].getCodigoVenta() != codigo){
+        if(ventas[i].getCodigoVentas() != codigo){
             nuevoArregloVentas[ventaNoAsociada] = ventas[i];
             ventaNoAsociada++;
         }
@@ -190,11 +183,33 @@ void Surtidor::eliminarVentaSurtidor(string codigo){
     ventas = nuevoArregloVentas;
     //Actualiza el tamaño del arreglo
     sizeVentas = nuevoSizeVentas;
+    cout << "Ventas asociadas a el surtidor " << codigo << " eliminadas con exito." << endl;
+    system("pause");
+}
+
+/*
+void Surtidor::mostrarVentasSurtidor(string codigo, Ventas& ventas){
+    cout << "Ventas del surtidor " << codigo << endl;
+    //Encontrar ventas asociadas al surtidor
+    bool ventasSurtidor = false;
+    for(int j = 0; j < sizeVentas; j++){
+        if(ventas[j].getCodigoVentas() == codigo){
+            ventas[j].detallesVentas();
+            ventasSurtidor = true;
+        }
+    }
+    if(!ventasSurtidor){
+        cout << "no hay ventas registradas para este surtidor" << endl;
+    }
 }
 */
+
+//void discriminarVenta(){}
+
+
 
 void Surtidor:: mostrarAtributos(){
     cout<<codigoSurtidor<<"->\t"<<modelo<<"->\t"<<estado<<endl;
 }
 
-Ventas* Surtidor:: getVentas() const {return ventas;}
+

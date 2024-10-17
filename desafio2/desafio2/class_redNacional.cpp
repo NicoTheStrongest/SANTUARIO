@@ -37,9 +37,9 @@ RedNacional::~RedNacional(){
 }
 
 //                  Getters - Setters
-int RedNacional:: getSizetaciones() const {
-    return sizeEstaciones;
-}
+int RedNacional:: getSizetaciones() const {return sizeEstaciones;}
+Estacion* RedNacional:: getEstaciones() const {return estaciones;}
+int RedNacional:: getCapacidadEstaciones() const {return capacidadEstaciones;}
 
 void RedNacional:: setSizeEstaciones(int newSize){
     // validar el nuevo numero entero.
@@ -50,7 +50,14 @@ void RedNacional:: setSizeEstaciones(int newSize){
         cout << "newSize debe ser mayor a cero." << endl;
     }
 }
-int setCapacidadEstaciones(){}
+int RedNacional::setCapacidadEstaciones(int newCapacidad){
+    if (newCapacidad > 0){
+        capacidadEstaciones = newCapacidad;
+    }
+    else{
+        cout << "newCapacidad debe ser mayor a cero.";
+    }
+}
 
 //                      Metodos
 
@@ -168,44 +175,6 @@ string RedNacional:: obtenerCodigoEstacion(){
     return codigoEliminar;
 }
 
-/*
-void Estacion::eliminarSurtidor(Surtidor*& arr, int* size) {
-    //Metodo para eliminar un surtidor
-    string codigo;
-    cout << "Ingrese el codigo del surtidor que desea eliminar: " << endl;
-    cin >> codigo;
-    int posicion = -1;
-    //Encontrar surtidor en el arreglo
-    for(int i = 0; i < (*size); i++){
-        if(arr[i].getCodigoSurtidor() == codigo){
-            posicion = i;
-            break;
-        }
-    }
-    if(posicion == -1){
-        cout << "Surtidor " << codigo << " no existe." << endl;
-        return;
-    }
-    //Inicializa el arreglo
-    Surtidor* nuevoArr = new Surtidor[(*size) - 1];
-    //Copia los elementos hasta encontrar al surtidor
-    for(int i = 0; i < posicion; i++){
-        nuevoArr[i] = arr[i];
-    }
-    for(int j = posicion; j < (*size) - 1; j++){
-        nuevoArr[j] = arr[j + 1];
-    }
-    //Elimina el arreglo antiguo
-    delete[] arr;
-    //Actualiza el arreglo
-    arr = nuevoArr;
-    //Actualiza el tamaño del arreglo
-    (*size)--;
-    cout << "Surtidor " << codigo << " eliminado con exito." << endl;
-
-}
-*/
-
 void RedNacional:: ventasCombustible(){
     //Metodo publico para calcular el monto total de ventas por estacion segun el combustible
 }
@@ -214,16 +183,25 @@ void RedNacional:: fijarPrecios(double precioRegular,double precioPremium,double
     //Metodo publico para fijar los precios del combustible
 }
 
-bool RedNacional::verificarFugas(const string& codigoEstacion){
-    //Metodo publico para verificar fugas en las esatciones
-}
+
 
 void RedNacional:: mostrarArregloEstaciones(){
-    //
     for (int i = 0; i < sizeEstaciones; ++i) {
         estaciones[i].mostrarEstaciones();
     }
 }
+
+string RedNacional::elegirEstacion(){
+    //Metodo para elegir la estacion
+    string estacion;
+    cout << "Ingrese el codigo de la estacion en la que esta trabajando: " << endl;
+    for (int i = 0; i < sizeEstaciones; ++i) {
+       estaciones[i].mostrarEstaciones();
+    }
+    cin >> estacion;
+    return estacion;
+}
+
 
 
 void RedNacional::agregarRegiones(string arreglo[]){
@@ -232,7 +210,7 @@ void RedNacional::agregarRegiones(string arreglo[]){
     }
 }
 
-Estacion* RedNacional:: getEstaciones() const {return estaciones;}
+
 
 /*
 void expandirArreglo(string**& arr, int& size) {
