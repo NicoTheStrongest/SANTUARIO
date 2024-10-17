@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>  // Para rand() y srand()
+#include <ctime>    // Para time()
 
 #include "class_Estacion.h"
 #include "class_Surtidor.h"
@@ -32,6 +34,7 @@ string Estacion:: getcoordenadas()const{return coordenadas;}
 int Estacion:: getsizeSurtidores()const{return sizeSurtidores;}
 int Estacion:: getCapacidadSurtidores()const{return capacidadSurtidores;}
 Surtidor* Estacion:: getSurtidores() const {return surtidores;}
+Tanque Estacion:: getTanqueAsociado()const{return tanqueAsociado;}
 
 //Setters
 void Estacion::setNombre(std::string newNombre){
@@ -361,14 +364,13 @@ void Estacion::consultarHistorico(Ventas* ventas, int sizeVentas, string estacio
         system("pause");
     }
 }
-
 void Estacion:: asignarCapacidadTanque(){
     // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
     //100 y 200 litros para cada una de las categorías
-
 }
-
-
+void Estacion:: reportarLitrosVendidos(){
+    // Reportar la cantidad de litros vendida según cada categoría de combustible.
+}
 
 void Estacion:: simularVenta(){}
 
@@ -482,6 +484,16 @@ bool Estacion:: surtidoresInactivos(string codigoEstacion){
     return true;
 }
 
+
+
+void Estacion:: asignarTanque(){
+    //Crea el tanque asociado con las capacidades aleatorias de 100 a 200 litros.
+    srand(static_cast<unsigned int>(time(0)));
+    int capacidadRegular = rand() % (200 - 100 + 1) + 100;
+    int capacidadPremium = rand() % (200 - 100 + 1) + 100;
+    int capacidadEcoextra = rand() % (200 - 100 + 1) + 100;
+    tanqueAsociado = Tanque(capacidadRegular, capacidadPremium, capacidadEcoextra, capacidadRegular, capacidadPremium, capacidadEcoextra);
+}
 
 
 /*

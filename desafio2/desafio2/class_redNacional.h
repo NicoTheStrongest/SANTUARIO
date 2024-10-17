@@ -22,7 +22,7 @@ private:
     int sizeEstaciones = 0; // cantidad de estaciones
     int capacidadEstaciones = 2;
 
-    double precios[3][3];
+    int precios[3][3];
 
     static const int sizeRegion = 3;
     string regiones[sizeRegion];
@@ -45,12 +45,15 @@ public:
     void agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
     void eliminarEstacion(bool bandera, string codigoEliminar);
     string obtenerCodigoEstacion();
+    string obtenerRegionEstacion();
     void ventasCombustible();
-    void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra);
+    void fijarPrecios();
     bool verificarFugas(const std::string& codigoEstacion);
     void mostrarArregloEstaciones();
     void agregarRegiones(string arreglo[]);
     string elegirEstacion();
+    void asignarCapacidadTanque();
+    int calcularMontoPago(string tipoCombustible, int litros, string region);
 };
 
 #endif // CLASS_REDNACIONAL_H

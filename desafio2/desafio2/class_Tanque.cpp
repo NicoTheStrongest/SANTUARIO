@@ -9,15 +9,16 @@ using namespace std;
 
 //Constructor
 Tanque::Tanque(){}
-Tanque::Tanque(int capacidad, int combustibleDisponible, int capacidadRegular, int capacidadPremium, int capacidadEcoextra, int disponibleRegular, int disponiblePremium, int disponibleEcoextra)
-    : capacidadTotal(capacidad),
-    combustibleDisponibleTotal(combustibleDisponible),
-    capacidadRegular(capacidadRegular),
+
+Tanque::Tanque(int capacidadRegular, int capacidadPremium, int capacidadEcoextra, int disponibleRegular, int disponiblePremium, int disponibleEcoextra)
+    : capacidadRegular(capacidadRegular),
     capacidadPremium(capacidadPremium),
     capacidadEcoextra(capacidadEcoextra),
     disponibleRegular(disponibleRegular),
     disponiblePremium(disponiblePremium),
     disponibleEcoextra(disponibleEcoextra) {
+    capacidadTotal = capacidadRegular + capacidadPremium + capacidadEcoextra;
+    combustibleDisponibleTotal = disponibleRegular + disponiblePremium + disponibleEcoextra;
 }
 
 //Destructor
@@ -122,8 +123,6 @@ void Tanque:: disminuirDisponible(string combustible, int cantidad){
     else if (combustible == "ecoextra"){disponibleEcoextra -= cantidad;}
     else{cout << "Combustible no valido." << endl;}
 }
-
-
 
 
 

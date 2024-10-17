@@ -8,18 +8,18 @@
 
 class Tanque{
 private:
-    int capacidadTotal;
-    int combustibleDisponibleTotal;
-    int capacidadRegular;
-    int capacidadPremium;
-    int capacidadEcoextra;
-    int disponibleRegular;
-    int disponiblePremium;
-    int disponibleEcoextra;
+    int capacidadTotal = 0;
+    int combustibleDisponibleTotal = 0;
+    int capacidadRegular = 0;
+    int capacidadPremium = 0;
+    int capacidadEcoextra = 0;
+    int disponibleRegular = 0;
+    int disponiblePremium = 0;
+    int disponibleEcoextra = 0;
 public:
     //Constructor
     Tanque();
-    Tanque(int capacidad, int combustibleDisponible, int  capacidadRegular, int  capacidadPremium, int  capacidadEcoextra, int  disponibleRegular, int  disponiblePremium, int  disponibleEcoextra);
+    Tanque(int capacidadRegular, int capacidadPremium, int capacidadEcoextra, int disponibleRegular, int disponiblePremium, int disponibleEcoextra);
     //Destructor
     ~Tanque();
     //Getter

@@ -54,6 +54,7 @@ public:
     void agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
     void eliminarVentaSurtidor(string codigo);
     void mostrarVentasSurtidor(string codigo, Ventas& ventas);
+    void detallesVentas();
 };
 
 #endif // CLASS_SURTIDOR_H
