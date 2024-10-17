@@ -22,8 +22,8 @@ string Ventas:: getfechaHora() const {return fechaHora;}
 string Ventas:: getTipoCombustible() const {return tipoCombustible;}
 string Ventas:: getMetodoPago() const {return metodoPago;}
 string Ventas:: getDocumentoCliente() const {return documentoCliente;}
-double Ventas:: getMonto() const {return monto;}
-double Ventas:: getCantidadCombustible() const {return cantidadCombustible;}
+int Ventas:: getMonto() const {return monto;}
+int Ventas:: getCantidadCombustible() const {return cantidadCombustible;}
 
 //Setters
 void Ventas::setFechaHora(string newFechaHora){
@@ -60,7 +60,7 @@ void Ventas:: setDocumentoCliente(string newDocumentoCliente){
     }
 }
 
-void Ventas::setMonto(double newMonto){
+void Ventas::setMonto(int newMonto){
     //validar formato del parametro
     if(newMonto > 0){
         monto = newMonto;
@@ -70,7 +70,7 @@ void Ventas::setMonto(double newMonto){
     }
 }
 
-void Ventas:: setCantidadCombustible(double newCantidadCombustible){
+void Ventas:: setCantidadCombustible(int newCantidadCombustible){
     //validar formato del parametro
     if(newCantidadCombustible > 0){
         cantidadCombustible = newCantidadCombustible;

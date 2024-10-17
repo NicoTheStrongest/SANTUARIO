@@ -23,6 +23,7 @@ private:
     int capacidadNaves = 1;
     string* naves;
 
+    Tanque tanqueAsociado;
     void expandirSurtidores();
     void expandirNaves();
 public:
@@ -39,6 +40,7 @@ public:
     std::string getcoordenadas()const;
     int getsizeSurtidores()const;
     int getCapacidadSurtidores()const;
+    Tanque getTanqueAsociado()const;
 
     //Setters
     void setNombre(std::string newNombre);
@@ -48,6 +50,7 @@ public:
     void setCoordenadas(std::string newCoordenadas);
     void setSizeSurtidores(int newSizeSurtidores);
     void setCapacidadSurtidores(int newCapacidadSurtidores);
+    Tanque setTanqueAsociado();
 
     //Metodos
     void agregarSurtidor();
@@ -59,10 +62,10 @@ public:
     void consultarHistorico();
     void reportarLitrosVendidos();
     void simularVenta();
-    void asignarCapacidadTanque();
     void mostrarEstaciones();
     void agregarNaveLectura(string codigo);
     void mostrarNaves();
+    void asignarTanque();
 
     bool surtidoresInactivos(string codigoEstacion);
     void eliminarSurtidoresNavesEstacion(bool eliminar, string codigo);

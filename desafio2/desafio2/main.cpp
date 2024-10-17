@@ -17,6 +17,11 @@ int main(){
     Tanque tanque;
     Ventas ventas;
     leerArchivoClases(redNacional, estacion, surtidor, tanque, ventas);
+    Surtidor* nico = estacion.getSurtidores();
+    int size = estacion.getsizeSurtidores();
+    for (int i = 0; i < size; ++i) {
+        nico[i].mostrarAtributos();
+    }
     bool sesionActiva = true;
     while(sesionActiva == true){
         int inicioValido = inicioSesion();
@@ -50,7 +55,7 @@ int main(){
                 break;
             case 4: //Fijar precios de combustible
                 {
-                //
+                redNacional.fijarPrecios();
                 }
                 break;
             case 0: //Salir
@@ -66,27 +71,43 @@ int main(){
             int opcionGestionEstaciones = menuGestionEstaciones();
             switch (opcionGestionEstaciones) {
             case 1: //Agregar surtidor
-                // {
-                // estacion.agregarSurtidor();
-                // }
+                {
+                estacion.agregarSurtidor();
+                }
                 break;
             case 2: //Eliminar surtidor
-                // {
-                // string codigo = estacion.obtenerCodigoSurtidor();
-                // estacion.eliminarSurtidor(codigo);
-                // surtidor.eliminarVentaSurtidor(codigo);
-                // }
+                {
+                string codigo = estacion.obtenerCodigosurtidor();
+                estacion.eliminarSurtidor(codigo);
+                surtidor.eliminarVentaSurtidor(codigo);
+                }
                 break;
             case 3: //Consultar Historico de transacciones
                 break;
             case 4: //Reporte de litros vendidos
-
+                {
+                string codigo = redNacional.obtenerCodigoEstacion();
+                Ventas* ventas6 = surtidor.getVentas();
+                int size = surtidor.getSizeVentas();
+                mostrarLitrosTotales(ventas6, size, codigo);
+                }
                 break;
             case 5: //Simulador de venta
-
+                {
+                string region = redNacional.obtenerRegionEstacion();
+                //Estacion* Estacion5 = redNacional.getEstaciones();
+                //int sizeEstaciones = redNacional.getSizetaciones();
+                Surtidor* Surtidores4 = estacion.getSurtidores();
+                int sizeSurtidores = estacion.getsizeSurtidores();
+                Ventas* ventas5 = surtidor.getVentas();
+                int sizeVentas = surtidor.getSizeVentas();
+                simularVentas(Surtidores4, sizeSurtidores, ventas5, sizeVentas, &redNacional, region);
+                }
                 break;
-            case 6: //Asignar capacidad de tanques
-
+            case 6: //Asignar capacidad de tanque
+                {
+                redNacional.asignarCapacidadTanque();
+                }
                 break;
             case 7: //Sistema nacional de fugas
                 break;

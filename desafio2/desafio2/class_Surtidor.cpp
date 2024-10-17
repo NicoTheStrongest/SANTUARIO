@@ -160,12 +160,11 @@ void agregarCodSurtidoresLectura(std::string codigo){}
 void mostrarCodigos(){}
 void detallesVentas(){}
 
-//Metodo para eliminar las ventas asociadas a un surtidor
-/*
 void Surtidor::eliminarVentaSurtidor(string codigo){
+    //Metodo para eliminar las ventas asociadas a un surtidor
     int ventaSurtidor = 0;
     for(int i = 0; i < sizeVentas; i++){
-        if(ventas[i].getCodigoVenta() == codigo){
+        if(ventas[i].getCodigoVentas() == codigo){
             ventaSurtidor++;
         }
     }
@@ -179,7 +178,7 @@ void Surtidor::eliminarVentaSurtidor(string codigo){
     //Copia las ventas que no estan asociadas al surtidor
     int ventaNoAsociada = 0;
     for(int i = 0; i < sizeVentas; i++){
-        if(nuevoArregloVentas[i].getCodigoVenta() != codigo){
+        if(ventas[i].getCodigoVentas() != codigo){
             nuevoArregloVentas[ventaNoAsociada] = ventas[i];
             ventaNoAsociada++;
         }
@@ -191,10 +190,28 @@ void Surtidor::eliminarVentaSurtidor(string codigo){
     //Actualiza el tamaño del arreglo
     sizeVentas = nuevoSizeVentas;
 }
-*/
 
 void Surtidor:: mostrarAtributos(){
     cout<<codigoSurtidor<<"->\t"<<modelo<<"->\t"<<estado<<endl;
 }
 
 Ventas* Surtidor:: getVentas() const {return ventas;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

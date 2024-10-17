@@ -53,7 +53,7 @@ public:
     void agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
     Ventas* getVentas() const;
     void detallesVentas();
-    void eliminarVentaSurtidor(std::string codigo);
+    void eliminarVentaSurtidor(string codigo);
 };
 
 #endif // CLASS_SURTIDOR_H

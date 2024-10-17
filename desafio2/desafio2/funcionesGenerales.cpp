@@ -6,16 +6,16 @@
 
 using namespace std;
 
-void formatoDocumento(string* documento){
+void formatoDocumentoGerente(string* documento){
     //Valida que una cadena solo tengo numero y que tengo size 10;
     string documento2;
-    bool docValido = validarNumeros(*documento);
+    bool docValido = validarNumerosGenerales(*documento);
     if ((int)(*documento).size() != 10){docValido = false;}
     while (docValido == false){
         cout<<"Formato Invalido\n";
         cout<<"Ingrese documento del gerente de la estacion: ";
         getline(cin, documento2);
-        docValido = validarNumeros(documento2);
+        docValido = validarNumerosGenerales(documento2);
         if ((int)documento2.size() != 10){docValido = false;}
         if (docValido == true){*documento = documento2;}
     }
@@ -143,7 +143,7 @@ int inicioSesion(){
     return opcionElegida;
 }
 
-bool validarNumeros(string cadena){
+bool validarNumerosGenerales(string cadena){
     //valida que una cadena solo contenga numeros
     for (int i = 0; i < (int)cadena.size(); ++i) {
         if (!(cadena[i]>=48  && cadena[i]<=57)){return false;}

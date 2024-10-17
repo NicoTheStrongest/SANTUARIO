@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>  // Para rand() y srand()
+#include <ctime>    // Para time()
 
 #include "class_Estacion.h"
 #include "class_Surtidor.h"
@@ -31,6 +33,7 @@ string Estacion:: getregion()const{return region;}
 string Estacion:: getcoordenadas()const{return coordenadas;}
 int Estacion:: getsizeSurtidores()const{return sizeSurtidores;}
 int Estacion:: getCapacidadSurtidores()const{return capacidadSurtidores;}
+Tanque Estacion:: getTanqueAsociado()const{return tanqueAsociado;}
 
 //Setters
 void Estacion::setNombre(std::string newNombre){
@@ -153,7 +156,7 @@ void Estacion:: agregarSurtidorLectura(string codigo, string modelo, bool estado
             expandirSurtidores();
         }
     }
-    surtidores[sizeSurtidores] = Surtidor(codigo, modelo, true);
+    surtidores[sizeSurtidores] = Surtidor(codigo, modelo, estado);
     sizeSurtidores++;
 }
 
@@ -321,12 +324,6 @@ void Estacion::consultarHistorico(){
 }
 */
 
-void Estacion:: asignarCapacidadTanque(){
-    // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
-    //100 y 200 litros para cada una de las categorías
-
-}
-
 void Estacion:: reportarLitrosVendidos(){
     // Reportar la cantidad de litros vendida según cada categoría de combustible.
 }
@@ -386,6 +383,16 @@ bool Estacion:: surtidoresInactivos(string codigoEstacion){
 }
 
 Surtidor* Estacion:: getSurtidores() const {return surtidores;}
+
+void Estacion:: asignarTanque(){
+    //Crea el tanque asociado con las capacidades aleatorias de 100 a 200 litros.
+    srand(static_cast<unsigned int>(time(0)));
+    int capacidadRegular = rand() % (200 - 100 + 1) + 100;
+    int capacidadPremium = rand() % (200 - 100 + 1) + 100;
+    int capacidadEcoextra = rand() % (200 - 100 + 1) + 100;
+    tanqueAsociado = Tanque(capacidadRegular, capacidadPremium, capacidadEcoextra, capacidadRegular, capacidadPremium, capacidadEcoextra);
+}
+
 
 /*
 Estacion::Estacion(int capacidadInicialSurtidores, const string& nombre, const string& codigoEstacion, const string& gerente, const string& region, const string& coordenadas)
