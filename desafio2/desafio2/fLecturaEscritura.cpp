@@ -19,7 +19,7 @@ void limpiarPantallaLectura(){
     }
 }
 
-void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& surtidor, Tanque& tanque, Ventas& ventas){
+void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& surtidor){
     //Lectura del archivo de texto para guardar en los arreglo de las clases
     string nombreArchivo = "./../../simulacionBaseDatos.txt";
     fstream archivo(nombreArchivo, ios::in);
@@ -122,8 +122,10 @@ void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& s
         Estacion* aux = redNacional.getEstaciones();
         int sizeAux = redNacional.getSizetaciones();
         for (int i = 0; i < sizeAux; ++i) {
-            if(aux[i].getcodigoEstacion() == to_string(codigoVentas[0])){
+            string cod(1, codigoVentas[0]);
+            if(aux[i].getcodigoEstacion() == cod){
                 aux[i].disminuirTanque(tipoCombustible, litrosVendidos);
+                break;
             }
         }
     }
@@ -181,7 +183,7 @@ void mostrarLitrosTotales(Ventas* ventas6, int size, string codigo){
     system("pause");
 }
 
-void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int sizeVentas, RedNacional* redNacional, string region, string codEstacion, Estacion* ptrEstaciones, int sizeEstaciones){
+void simularVentas(Surtidor* surtidores, int sizeSurtidores, RedNacional* redNacional, string region, string codEstacion, Estacion* ptrEstaciones, int sizeEstaciones){
     //Simula la venta dada una estacion, escogiendo surtidor aleatorio y pudiendo los datos necesarios
     //surtidores activos
     int activos = 0;
@@ -218,10 +220,9 @@ void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int
                     cout<<mensaje<<endl<<"Escoja una opcion: ";
                     cin>>combustible;
                 }
-                int montoPago;
-                if(combustible == 1){tipoCombustible = "Premium"; montoPago = redNacional->calcularMontoPago("Premium", litros, region);}
-                else if(combustible == 2){tipoCombustible = "Regular"; montoPago = redNacional->calcularMontoPago("Regular", litros, region);}
-                else if(combustible == 3){tipoCombustible = "Ecoextra"; montoPago = redNacional->calcularMontoPago("Ecoextra", litros, region);}
+                if(combustible == 1){tipoCombustible = "Premium";}
+                if(combustible == 2){tipoCombustible = "Regular";}
+                if(combustible == 3){tipoCombustible = "Ecoextra";}
                 mensaje = "Metodo de pago: \n"
                     "1 -> Efectivo\n"
                     "2 -> Tarjeta Debito\n"
@@ -239,16 +240,35 @@ void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int
                 else if(combustible == 2){metodoPago = "Tarjeta Debito";}
                 else if(combustible == 3){metodoPago = "Tarjeta Credito";}
                 string fechaHora = calcularFechaHoraSimulador();
-                mostrarTransaccion(codigoVenta, tipoCombustible, fechaHora, metodoPago, docCliente, montoPago, litros);
                 cout<<endl;
+                int montoPago;
                 for (int i = 0; i < sizeSurtidores; ++i) {
                     if(surtidores[i].getCodigoSurtidor() == codigoVenta){
-                        surtidores[i].agregarVentaLectura(codigoVenta, tipoCombustible, fechaHora, litros, metodoPago, docCliente, montoPago);
                         for (int j = 0; j < sizeEstaciones; ++j) {
-                            if(to_string((ptrEstaciones+j)->getcodigoEstacion()[0]) == codEstacion){
-                                (ptrEstaciones+j)->disminuirTanque(tipoCombustible, litros);
+                            string cod(1, (ptrEstaciones+j)->getcodigoEstacion()[0]);
+                            if(cod == codEstacion){
+                                int venderResto = (ptrEstaciones+j)->venderResto(tipoCombustible, litros);
+                                if(venderResto == 0){
+                                    if(combustible == 1){montoPago = redNacional->calcularMontoPago(tipoCombustible, litros, region);}
+                                    else if(combustible == 2){montoPago = redNacional->calcularMontoPago(tipoCombustible, litros, region);}
+                                    else if(combustible == 3){montoPago = redNacional->calcularMontoPago(tipoCombustible, litros, region);}
+                                    surtidores[i].agregarVentaLectura(codigoVenta, tipoCombustible, fechaHora, litros, metodoPago, docCliente, montoPago);
+                                    (ptrEstaciones+j)->disminuirTanque(tipoCombustible, litros);
+                                    mostrarTransaccion(codigoVenta, tipoCombustible, fechaHora, metodoPago, docCliente, montoPago, litros);
+                                    break;
+                                } else {
+                                    litros = venderResto;
+                                    if(combustible == 1){tipoCombustible = "Premium"; montoPago = redNacional->calcularMontoPago("Premium", litros, region);}
+                                    else if(combustible == 2){tipoCombustible = "Regular"; montoPago = redNacional->calcularMontoPago("Regular", litros, region);}
+                                    else if(combustible == 3){tipoCombustible = "Ecoextra"; montoPago = redNacional->calcularMontoPago("Ecoextra", litros, region);}
+                                    surtidores[i].agregarVentaLectura(codigoVenta, tipoCombustible, fechaHora, litros, metodoPago, docCliente, montoPago);
+                                    (ptrEstaciones+j)->disminuirTanque(tipoCombustible, litros);
+                                    mostrarTransaccion(codigoVenta, tipoCombustible, fechaHora, metodoPago, docCliente, montoPago, litros);
+                                    break;
+                                }
                             }
                         }
+                        break;
                     }
                 }
                 system("pause");

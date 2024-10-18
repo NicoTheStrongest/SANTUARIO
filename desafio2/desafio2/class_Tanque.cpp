@@ -112,11 +112,17 @@ void Tanque::setDisponibleEcoextra(int newDisponibleEcoextra){
 //                 METODOS
 
 void Tanque:: disminuirDisponible(string combustible, int cantidad){
-    if(combustible == "Regular"){disponibleRegular -= cantidad;}
-    else if(combustible == "Premium"){disponiblePremium -= cantidad;}
-    else if (combustible == "Ecoextra"){disponibleEcoextra -= cantidad;}
+    if(combustible == "Regular" || combustible == "regular"){disponibleRegular -= cantidad;}
+    else if(combustible == "Premium" || combustible == "premium"){disponiblePremium -= cantidad;}
+    else if (combustible == "Ecoextra" || combustible == "ecoextra"){disponibleEcoextra -= cantidad;}
 }
 
+int Tanque:: litrosActuales(string tipoCombustible){
+    //verifica la capacidad de algun tanque.
+    if(tipoCombustible == "Regular"){return disponibleRegular;}
+    else if(tipoCombustible == "Premium"){return disponiblePremium;}
+    else{return disponibleEcoextra;}
+}
 
 
 

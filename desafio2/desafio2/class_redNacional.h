@@ -40,15 +40,14 @@ public:
 
     //                  SETTERS
     void setSizeEstaciones(int newSize);
-    int setCapacidadEstaciones(int newCapacidad);
+    void setCapacidadEstaciones(int newCapacidad);
 
     //                  METODOS
     void agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
     void agregarEstacion();
     void eliminarEstacion(bool bandera, string codigoEliminar);
     string obtenerCodigoEstacion();
-    string obtenerRegionEstacion();
-    void ventasCombustible();
+    string obtenerRegionEstacion(string* codigoEstacion);
     void fijarPrecios();
     void mostrarArregloEstaciones();
     string elegirEstacion();

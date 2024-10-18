@@ -51,7 +51,7 @@ void RedNacional:: setSizeEstaciones(int newSize){
         cout << "newSize debe ser mayor a cero." << endl;
     }
 }
-int RedNacional:: setCapacidadEstaciones(int newCapacidad){
+void RedNacional:: setCapacidadEstaciones(int newCapacidad){
     if (newCapacidad > 0){
         capacidadEstaciones = newCapacidad;
     }
@@ -92,7 +92,6 @@ void RedNacional:: agregarEstacionLectura(string nombreO, string codigoEstacionO
     }
     estaciones[sizeEstaciones] = Estacion(nombreO, codigoEstacionO, gerenteO, regionO, coordenadasO);
     sizeEstaciones++;
-
 }
 
 void RedNacional:: agregarEstacion(){
@@ -184,23 +183,18 @@ string RedNacional:: obtenerCodigoEstacion(){
     return codigoEliminar;
 }
 
-string RedNacional:: obtenerRegionEstacion(){
+string RedNacional:: obtenerRegionEstacion(string* codigoEstacion){
     limpiarPantalla();
+    string region;
     cout<<"**********MENU DE ESTACIONES**********"<<endl<<endl;
     mostrarArregloEstaciones();
-    string codigoEliminar;
-    string region;
     cout<<"Escoja una opcion: ";
     cin.ignore();
-    getline(cin, codigoEliminar);
+    getline(cin, *codigoEstacion);
     for (int i = 0; i < sizeEstaciones; ++i) {
-        if(estaciones[i].getcodigoEstacion() == codigoEliminar){region = estaciones[i].getregion();}
-        return region, codigoEliminar;
+        if(estaciones[i].getcodigoEstacion() == *codigoEstacion){region = estaciones[i].getregion();}
+        return region;
     }
-}
-
-void RedNacional:: ventasCombustible(){
-    //Metodo publico para calcular el monto total de ventas por estacion segun el combustible
 }
 
 void RedNacional:: fijarPrecios(){
