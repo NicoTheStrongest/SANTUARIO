@@ -147,11 +147,7 @@ void Surtidor:: mostrarCodigos(){
     }
 }
 
-
-
 void mostrarCodigos(){}
-
-
 
 void Surtidor::eliminarVentaSurtidor(string codigo){
     //Metodo para eliminar las ventas asociadas a un surtidor
@@ -202,7 +198,6 @@ void Surtidor::mostrarVentasSurtidor(string codigo, Ventas& ventas){
         cout << "no hay ventas registradas para este surtidor" << endl;
     }
 }
-*/
 
 //void discriminarVenta(){}
 
@@ -212,4 +207,5 @@ void Surtidor:: mostrarAtributos(){
     cout<<codigoSurtidor<<"->\t"<<modelo<<"->\t"<<estado<<endl;
 }
 
-
+Ventas* Surtidor:: getVentas() const {return ventas;}
+*/

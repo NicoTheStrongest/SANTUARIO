@@ -7,8 +7,8 @@
 6,nasa,1029384756,centro,52°22'26"N 4°53'27"E
 n1_1,n1_2,n2_1,n3_1,n3_2,n4_1,n5_1,n6_1
 s1_1_1,modelo1,activo
-s1_1_2,modelo1,desactivado
-s1_1_3,modelo1,desactivado
+s1_1_2,modelo1,activo
+s1_1_3,modelo1,activo
 s1_2_1,modelo2,desactivado
 s1_2_2,modelo2,desactivado
 s1_2_3,modelo2,desactivado
