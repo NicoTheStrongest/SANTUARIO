@@ -47,6 +47,7 @@ public:
 
     //                  METODOS
     void disminuirDisponible(string combustible, int cantidad);
+    int litrosActuales(string tipoCombustible);
 };
 
 #endif // CLASS_TANQUE_H

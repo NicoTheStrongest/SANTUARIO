@@ -64,8 +64,6 @@ public:
     void activarSurtidor(string codSurtidor);
     void desactivarSurtidor(string codSurtidor);
     void consultarHistorico(Ventas* ventas, int sizeVentas, string codEstacion);
-    void asignarCapacidadTanque();
-    void reportarLitrosVendidos();
     void simularVenta();
     void verificarFugas(Ventas* ventas, int sizeVentas,string estacion);
     void agregarNaveLectura(string codigo);
@@ -73,6 +71,7 @@ public:
     bool surtidoresInactivos(string codigoEstacion);
     void asignarTanque();
     void disminuirTanque(string tipoCombustible, int litros);
+    int venderResto(string tipoCombustible, int litros);
 };
 
 #endif // CLASS_ESTACION_H

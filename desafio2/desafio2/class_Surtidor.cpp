@@ -14,7 +14,7 @@ Surtidor::Surtidor(){}
 
 Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado)
     : codigoSurtidor(codigoSurtidor), modelo(modelo), estado(estado){
-    //constructor que inicializa el arreglo de ventas
+    ventas = new Ventas[capacidadVentas];
     precioRegular = 0;
     precioPremium = 0;
     precioEcoextra = 0;

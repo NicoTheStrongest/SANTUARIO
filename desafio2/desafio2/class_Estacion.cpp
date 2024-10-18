@@ -18,7 +18,8 @@ using namespace std;
 Estacion::Estacion(){}
 
 Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO) {
-    //Constructor
+    surtidores = new Surtidor[capacidadSurtidores];
+    naves = new string[capacidadNaves];
     nombre = nombreO;
     codigoEstacion = codigoEstacionO;
     gerente = gerenteO;
@@ -91,8 +92,6 @@ void Estacion::setSizeSurtidores(int newSizeSurtidores){
         cout << "sizeSurtidores debe ser mayor a cero." << endl;
     }
 }
-void Estacion:: setCapacidadSurtidores(int newCapacidadSurtidores){} //**********
-Tanque Estacion:: setTanqueAsociado(){}                              //***********
 
 //                  METODOS (PRIVADOS)
 
@@ -399,15 +398,6 @@ void Estacion:: consultarHistorico(Ventas* ventas, int sizeVentas, string estaci
     system("pause");
 }
 
-void Estacion:: asignarCapacidadTanque(){
-    // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
-    //100 y 200 litros para cada una de las categorías
-}
-
-void Estacion:: reportarLitrosVendidos(){
-    // Reportar la cantidad de litros vendida según cada categoría de combustible.
-}
-
 void Estacion:: simularVenta(){}
 
 void Estacion:: verificarFugas(Ventas* ventas, int sizeVentas, string estacion){
@@ -511,6 +501,36 @@ void Estacion:: asignarTanque(){
 }
 
 void Estacion:: disminuirTanque(string tipoCombustible, int litros){tanqueAsociado.disminuirDisponible(tipoCombustible, litros);}
+
+int Estacion:: venderResto(string tipoCombustible, int litros){
+    //valida que halla gasolina para vender.
+    int restante = tanqueAsociado.litrosActuales(tipoCombustible);
+    if(litros > restante){return restante;}
+    else{return 0;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

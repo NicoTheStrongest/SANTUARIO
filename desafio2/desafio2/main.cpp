@@ -14,9 +14,7 @@ int main(){
     RedNacional redNacional;
     Estacion estacion;
     Surtidor surtidor;
-    Ventas ventas;
-    Tanque tanque;
-    leerArchivoClases(redNacional, estacion, surtidor, tanque, ventas);
+    leerArchivoClases(redNacional, estacion, surtidor);
     bool sesionActiva = true;
     while(sesionActiva == true){
         int inicioValido = inicioSesion();
@@ -118,14 +116,13 @@ int main(){
             case 7: //Simulador de venta
                 {
                 limpiarPantalla();
-                string region, codigo = redNacional.obtenerRegionEstacion();
+                string codigo;
+                string region = redNacional.obtenerRegionEstacion(&codigo);
                 Surtidor* Surtidores4 = estacion.getSurtidores();
                 int sizeSurtidores = estacion.getsizeSurtidores();
-                Ventas* ventas5 = surtidor.getVentas();
-                int sizeVentas = surtidor.getSizeVentas();
                 Estacion* estaciones7 = redNacional.getEstaciones();
                 int sizeEstaciones = redNacional.getSizetaciones();
-                simularVentas(Surtidores4, sizeSurtidores, ventas5, sizeVentas, &redNacional, region, codigo, estaciones7, sizeEstaciones);
+                simularVentas(Surtidores4, sizeSurtidores, &redNacional, region, codigo, estaciones7, sizeEstaciones);
                 }
                 break;
             case 8://Asignar capacidad de tanques
