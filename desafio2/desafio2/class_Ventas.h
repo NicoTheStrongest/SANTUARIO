@@ -9,36 +9,34 @@ using namespace std;
 
 class Ventas{
 private:
-    //Atributos
-    std::string codigoVentas, tipoCombustible, fechaHora, metodoPago, documentoCliente;
+    //                  ATRIBUTOS
+    string codigoVentas, tipoCombustible, fechaHora, metodoPago, documentoCliente;
     int cantidadCombustible;
     int  monto;
 public:
-    //Constructor
+    //                  CONSTRUCTOR Y DESTRUCTOR
     Ventas();
     Ventas(string codigoVentas, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
-    //Destructor
     ~Ventas();
 
-    //Getters
+    //                  GETTERS
     string getCodigoVentas() const;
-    std::string getfechaHora() const;
-    std::string getTipoCombustible() const;
-    std::string getMetodoPago() const;
-    std::string getDocumentoCliente() const;
+    string getfechaHora() const;
+    string getTipoCombustible() const;
+    string getMetodoPago() const;
+    string getDocumentoCliente() const;
     int getMonto() const;
     int getCantidadCombustible() const;
 
-    //Setters
-    void setFechaHora(std::string newFechaHora);
-    void setTipoCombustible(std::string newTipoCombustible);
-    void setMetodoPago(std::string newMetodoPago);
-    void setDocumentoCliente(std::string newDocumentoCliente);
+    //                  SETTERS
+    void setFechaHora(string newFechaHora);
+    void setTipoCombustible(string newTipoCombustible);
+    void setMetodoPago(string newMetodoPago);
+    void setDocumentoCliente(string newDocumentoCliente);
     void setMonto(int newMonto);
     void setCantidadCombustible(int newCantidadCombustible);
 
-    //metodos
-    std::string calcularFechaHora();
+    //                  METODOS
     void mostrarVentas();
     void detallesVentas();
     void discriminarVentas(int &totalRegular, int &totalPremium, int &totalEcoextra);

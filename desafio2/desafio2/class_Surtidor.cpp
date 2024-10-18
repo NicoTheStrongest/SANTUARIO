@@ -8,6 +8,8 @@
 
 using namespace std;
 
+//                  CONSTRUCTOR Y DESTRUCTOR
+
 Surtidor::Surtidor(){}
 
 Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado)
@@ -18,29 +20,21 @@ Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado)
     precioEcoextra = 0;
 }
 
-Surtidor::~Surtidor(){
-    //Destructor, liberar dinamicos
-    //liberarVentas();
-}
+Surtidor::~Surtidor(){/*delete[] ventas;*/}
 
-//Getters
+//                  GETTERS
+
 string Surtidor:: getCodigoSurtidor() const {return codigoSurtidor;}
-
 string Surtidor:: getModelo() const {return modelo;}
-
 bool Surtidor:: getEstado() const {return estado;}
-
 int Surtidor:: getSizeVentas() const {return sizeVentas;}
-
 int Surtidor:: getPrecioRegular() const {return precioRegular;}
-
 int Surtidor:: getPrecioPremium() const {return precioRegular;}
-
 int Surtidor:: getPrecioEcoExtra() const {return precioEcoextra;}
-
 Ventas* Surtidor:: getVentas() const {return ventas;}
 
-//Setters
+//                  SETTERS
+
 void Surtidor::setCodigoSurtidor(std::string newCodigoSurtidor){
     //Validar formato del parametro
     if(newCodigoSurtidor.length() == 6){
@@ -96,8 +90,7 @@ void Surtidor::setPrecioEcoExtra(int newPrecioEcoextra){
     }
 }
 
-//                  METODOS
-
+//                  METODOS (PRIVADOS)
 
 void Surtidor:: expandirVentas(){
     //Metodo privado para expandir el arreglo de ventas
@@ -116,6 +109,8 @@ void Surtidor:: expandirVentas(){
     ventas = nuevoArr;
     capacidadVentas = nuevaCapacidad;
 }
+
+//                  METODOS (PUBLICOS)
 
 void Surtidor:: agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto){
     //Metodo para agregar venta al arreglo
@@ -147,9 +142,7 @@ void Surtidor:: mostrarCodigos(){
     }
 }
 
-void mostrarCodigos(){}
-
-void Surtidor::eliminarVentaSurtidor(string codigo){
+void Surtidor:: eliminarVentaSurtidor(string codigo){
     //Metodo para eliminar las ventas asociadas a un surtidor
     int ventaSurtidor = 0;
     for(int i = 0; i < sizeVentas; i++){
@@ -183,29 +176,3 @@ void Surtidor::eliminarVentaSurtidor(string codigo){
     system("pause");
 }
 
-/*
-void Surtidor::mostrarVentasSurtidor(string codigo, Ventas& ventas){
-    cout << "Ventas del surtidor " << codigo << endl;
-    //Encontrar ventas asociadas al surtidor
-    bool ventasSurtidor = false;
-    for(int j = 0; j < sizeVentas; j++){
-        if(ventas[j].getCodigoVentas() == codigo){
-            ventas[j].detallesVentas();
-            ventasSurtidor = true;
-        }
-    }
-    if(!ventasSurtidor){
-        cout << "no hay ventas registradas para este surtidor" << endl;
-    }
-}
-
-//void discriminarVenta(){}
-
-
-
-void Surtidor:: mostrarAtributos(){
-    cout<<codigoSurtidor<<"->\t"<<modelo<<"->\t"<<estado<<endl;
-}
-
-Ventas* Surtidor:: getVentas() const {return ventas;}
-*/

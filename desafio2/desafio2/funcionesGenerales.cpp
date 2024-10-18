@@ -21,8 +21,6 @@ void formatoDocumentoGerente(string* documento){
     }
 }
 
-//              Menu y funciones de interfaz
-
 void leerArchivoPorLinea(const string& fileName) {
     // Función que abre un archivo, lo imprime y lo cierra
     ifstream archivo(fileName);
@@ -72,7 +70,7 @@ bool menuSalida(){
     string nombre = "./../../prints/MenuSalida.txt";
     leerArchivoPorLinea(nombre);
     string mensaje1 = "Elige una opcion (1, 2): ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 2;
     string opcionesValidas[size] = {"1", "2"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
@@ -94,7 +92,7 @@ int menuGestionDeRed(){
     prints = "./../../prints/MenuGestionDeRed.txt";
     leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 5;
     string opcionesValidas[size] = {"1", "2", "3", "4", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
@@ -108,7 +106,7 @@ int menuGestionEstaciones(){
     prints = "./../../prints/MenuGestionDeEstaciones.txt";
     leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 10;
     string opcionesValidas[size] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
@@ -136,7 +134,7 @@ int inicioSesion(){
     prints = "./../../prints/MenuPrincipal.txt";
     leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 6;
     string opcionesValidas[size] = {"1", "2", "3", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);

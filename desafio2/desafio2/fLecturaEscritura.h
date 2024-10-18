@@ -15,21 +15,14 @@
 //              Funciones de lectura y escritura
 
 void limpiarPantallaLectura();
-
 void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& surtidor, Tanque& tanque, Ventas& ventas);
-
 void mostrarMontoTotal(Estacion* ptrEstacion, int sizeEstacion, Ventas* ptrVentas, int sizeVentas);
-
 void mostrarLitrosTotales(Ventas* ventas6, int size, string codigo);
-
-void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int sizeVentas, RedNacional* redNacional, string region);
-
+void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int sizeVentas, RedNacional* redNacional, string region, string codEstacion, Estacion* ptrEstaciones, int sizeEstaciones);
+string calcularFechaHoraSimulador();
 void mostrarTransaccion(string codigoVenta, string tipoCombustible, string fechaHora, string metodoPago, string docCliente, int montoPago, int litros);
-
 bool validarNumeros(string cadena);
-
 void formatoDocumento(string* documento);
 
-string calcularFechaHoraSimulador();
 
 #endif // FLECTURAESCRITURA_H

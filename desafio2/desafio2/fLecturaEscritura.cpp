@@ -12,6 +12,13 @@
 #include "class_Tanque.h"
 #include "class_Ventas.h"
 
+void limpiarPantallaLectura(){
+    // Imprime varias líneas en blanco para dar la ilusión de limpiar la pantalla
+    for (int i = 0; i < 50; ++i) {
+        cout << endl;
+    }
+}
+
 void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& surtidor, Tanque& tanque, Ventas& ventas){
     //Lectura del archivo de texto para guardar en los arreglo de las clases
     string nombreArchivo = "./../../simulacionBaseDatos.txt";
@@ -112,13 +119,13 @@ void leerArchivoClases(RedNacional& redNacional, Estacion& estacion, Surtidor& s
         int monto = stoi(transaccion);
         int litrosVendidos = stoi(litros);
         surtidor.agregarVentaLectura(codigoVentas, tipoCombustible, fechaHora, litrosVendidos, metodoPago, docCliente, monto);
-    }
-}
-
-void limpiarPantallaLectura(){
-    // Imprime varias líneas en blanco para dar la ilusión de limpiar la pantalla
-    for (int i = 0; i < 50; ++i) {
-        cout << endl;
+        Estacion* aux = redNacional.getEstaciones();
+        int sizeAux = redNacional.getSizetaciones();
+        for (int i = 0; i < sizeAux; ++i) {
+            if(aux[i].getcodigoEstacion() == to_string(codigoVentas[0])){
+                aux[i].disminuirTanque(tipoCombustible, litrosVendidos);
+            }
+        }
     }
 }
 
@@ -128,7 +135,7 @@ void mostrarMontoTotal(Estacion* ptrEstacion, int sizeEstacion, Ventas* ptrVenta
     int montoRegular = 0;
     int montoEcoextra = 0;
     limpiarPantallaLectura();
-    cout<<"\tMONTO TOTAL DE VENTAS POR ESTACION"<<endl<<endl;
+    cout<<"**********MONTO TOTAL DE VENTAS POR ESTACION**********"<<endl<<endl;
     string cod1, cod2;
     for (int i = 0; i < sizeEstacion; ++i) {
         (ptrEstacion+i)->mostrarEstaciones();
@@ -144,7 +151,7 @@ void mostrarMontoTotal(Estacion* ptrEstacion, int sizeEstacion, Ventas* ptrVenta
         }
         cout<<"Premium: "<<montoPremium<<endl;
         cout<<"Regular: "<<montoRegular<<endl;
-        cout<<"Ecoextra: "<<montoEcoextra<<endl<<endl;
+        cout<<"Ecoextra: "<<montoEcoextra<<endl<<endl<<endl;
         montoPremium = 0;
         montoRegular = 0;
         montoEcoextra = 0;
@@ -158,7 +165,7 @@ void mostrarLitrosTotales(Ventas* ventas6, int size, string codigo){
     int litrosRegular = 0;
     int litrosEcoextra = 0;
     limpiarPantallaLectura();
-    cout<<"\tLITROS TOTALES VENDIDOS POR ESTACION"<<endl<<endl;
+    cout<<"**********LITROS TOTALES VENDIDOS POR ESTACION**********"<<endl<<endl;
     string cod1;
     for (int i = 0; i < size; ++i) {
         cod1 = (ventas6+i)->getCodigoVentas()[0];
@@ -174,7 +181,7 @@ void mostrarLitrosTotales(Ventas* ventas6, int size, string codigo){
     system("pause");
 }
 
-void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int sizeVentas, RedNacional* redNacional, string region){
+void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int sizeVentas, RedNacional* redNacional, string region, string codEstacion, Estacion* ptrEstaciones, int sizeEstaciones){
     //Simula la venta dada una estacion, escogiendo surtidor aleatorio y pudiendo los datos necesarios
     //surtidores activos
     int activos = 0;
@@ -233,9 +240,15 @@ void simularVentas(Surtidor* surtidores, int sizeSurtidores, Ventas* ventas, int
                 else if(combustible == 3){metodoPago = "Tarjeta Credito";}
                 string fechaHora = calcularFechaHoraSimulador();
                 mostrarTransaccion(codigoVenta, tipoCombustible, fechaHora, metodoPago, docCliente, montoPago, litros);
+                cout<<endl;
                 for (int i = 0; i < sizeSurtidores; ++i) {
                     if(surtidores[i].getCodigoSurtidor() == codigoVenta){
                         surtidores[i].agregarVentaLectura(codigoVenta, tipoCombustible, fechaHora, litros, metodoPago, docCliente, montoPago);
+                        for (int j = 0; j < sizeEstaciones; ++j) {
+                            if(to_string((ptrEstaciones+j)->getcodigoEstacion()[0]) == codEstacion){
+                                (ptrEstaciones+j)->disminuirTanque(tipoCombustible, litros);
+                            }
+                        }
                     }
                 }
                 system("pause");
