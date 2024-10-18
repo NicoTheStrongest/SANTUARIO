@@ -6,22 +6,20 @@
 
 using namespace std;
 
-void formatoDocumento(string* documento){
+void formatoDocumentoGerente(string* documento){
     //Valida que una cadena solo tengo numero y que tengo size 10;
     string documento2;
-    bool docValido = validarNumeros(*documento);
+    bool docValido = validarNumerosGenerales(*documento);
     if ((int)(*documento).size() != 10){docValido = false;}
     while (docValido == false){
         cout<<"Formato Invalido\n";
         cout<<"Ingrese documento del gerente de la estacion: ";
         getline(cin, documento2);
-        docValido = validarNumeros(documento2);
+        docValido = validarNumerosGenerales(documento2);
         if ((int)documento2.size() != 10){docValido = false;}
         if (docValido == true){*documento = documento2;}
     }
 }
-
-//              Menu y funciones de interfaz
 
 void leerArchivoPorLinea(const string& fileName) {
     // Función que abre un archivo, lo imprime y lo cierra
@@ -72,7 +70,7 @@ bool menuSalida(){
     string nombre = "./../../prints/MenuSalida.txt";
     leerArchivoPorLinea(nombre);
     string mensaje1 = "Elige una opcion (1, 2): ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 2;
     string opcionesValidas[size] = {"1", "2"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
@@ -94,7 +92,7 @@ int menuGestionDeRed(){
     prints = "./../../prints/MenuGestionDeRed.txt";
     leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 5;
     string opcionesValidas[size] = {"1", "2", "3", "4", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
@@ -108,7 +106,7 @@ int menuGestionEstaciones(){
     prints = "./../../prints/MenuGestionDeEstaciones.txt";
     leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 10;
     string opcionesValidas[size] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
@@ -136,14 +134,14 @@ int inicioSesion(){
     prints = "./../../prints/MenuPrincipal.txt";
     leerArchivoPorLinea(prints);
     string mensaje1 = "Escoja un opcion: ";
-    string mensaje2 = "Opción no valida, intenta de nuevo.";
+    string mensaje2 = "Opcion no valida, intenta de nuevo.";
     const int size = 6;
     string opcionesValidas[size] = {"1", "2", "3", "0"};
     int opcionElegida = opcionesMenuGeneral(mensaje1, mensaje2, opcionesValidas, size);
     return opcionElegida;
 }
 
-bool validarNumeros(string cadena){
+bool validarNumerosGenerales(string cadena){
     //valida que una cadena solo contenga numeros
     for (int i = 0; i < (int)cadena.size(); ++i) {
         if (!(cadena[i]>=48  && cadena[i]<=57)){return false;}

@@ -4,12 +4,14 @@
 
 1->	Agregar surtidor
 2->	Eliminar surtidor
-3->	Consultar historico de
+3->	Activar surtidor
+4->	Desactivar surtidor
+5->	Consultar historico de
 	transacciones
-4->	Reporte de litros vendidos
-5->	Simulador de venta
-6->	Asignar capacidad de tanques
-7->	Verificacion de fugas
+6->	Reporte de litros vendidos
+7->	Simulador de venta
+8->	Asignar capacidad de tanques
+9->	Verificacion de fugas
 
 Presione 0 para finalizar ejecucion.
 =======================================

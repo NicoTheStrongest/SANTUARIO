@@ -13,33 +13,34 @@
 
 using namespace std;
 
-//                  Constructor y destructor
+//                  CONSTRUCTOR Y DESTRUCTOR
 
 RedNacional::RedNacional() : sizeEstaciones(0), capacidadEstaciones(2){
     estaciones = new Estacion[capacidadEstaciones];
 
     // Inicializar los precios (Ejemplo)
-    precios[0][0] = 1.10;  // Norte, Regular
-    precios[0][1] = 1.50;  // Norte, Premium
-    precios[0][2] = 1.30;  // Norte, EcoExtra
+    precios[0][0] = 10000;  // Norte, Regular
+    precios[0][1] = 20000;  // Norte, Premium
+    precios[0][2] = 9000;  // Norte, EcoExtra
 
-    precios[1][0] = 1.00;  // Centro, Regular
-    precios[1][1] = 1.40;  // Centro, Premium
-    precios[1][2] = 1.25;  // Centro, EcoExtra
+    precios[1][0] = 9000;  // Centro, Regular
+    precios[1][1] = 18000;  // Centro, Premium
+    precios[1][2] = 8000;  // Centro, EcoExtra
 
-    precios[2][0] = 1.20;  // Sur, Regular
-    precios[2][1] = 1.60;  // Sur, Premium
-    precios[2][2] = 1.35;  // Sur, EcoExtra
+    precios[2][0] = 15000;  // Sur, Regular
+    precios[2][1] = 25000;  // Sur, Premium
+    precios[2][2] = 12000;  // Sur, EcoExtra
 }
 
-RedNacional::~RedNacional(){
-    //Destructor para liberar arreglo de estaciones luego de guardarlas
-}
+RedNacional::~RedNacional(){delete[] estaciones;}
 
-//                  Getters - Setters
+//                  GETTERS
+
 int RedNacional:: getSizetaciones() const {return sizeEstaciones;}
-Estacion* RedNacional:: getEstaciones() const {return estaciones;}
 int RedNacional:: getCapacidadEstaciones() const {return capacidadEstaciones;}
+Estacion* RedNacional:: getEstaciones() const {return estaciones;}
+
+//                  SETTERS
 
 void RedNacional:: setSizeEstaciones(int newSize){
     // validar el nuevo numero entero.
@@ -50,7 +51,7 @@ void RedNacional:: setSizeEstaciones(int newSize){
         cout << "newSize debe ser mayor a cero." << endl;
     }
 }
-int RedNacional::setCapacidadEstaciones(int newCapacidad){
+int RedNacional:: setCapacidadEstaciones(int newCapacidad){
     if (newCapacidad > 0){
         capacidadEstaciones = newCapacidad;
     }
@@ -59,8 +60,7 @@ int RedNacional::setCapacidadEstaciones(int newCapacidad){
     }
 }
 
-//                      Metodos
-
+//                  METODOS (PRIVADOS)
 
 void RedNacional:: expandirEstaciones(){
     //Metodo publico para expandir el arreglo de estaciones
@@ -80,6 +80,8 @@ void RedNacional:: expandirEstaciones(){
     estaciones = nuevoArr;
 }
 
+//                  METODOS (PUBLICOS)
+
 void RedNacional:: agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO){
     //Metodo publico para agregar una estacion
     if(sizeEstaciones == 0){estaciones = new Estacion[capacidadEstaciones];}
@@ -95,18 +97,19 @@ void RedNacional:: agregarEstacionLectura(string nombreO, string codigoEstacionO
 
 void RedNacional:: agregarEstacion(){
     //Pide y valida todos los datos del una estacion para luego agregarla
+    limpiarPantalla();
     string nombre, documento, codigo, region, gps;
     int cod = sizeEstaciones + 1;
     codigo = to_string(cod);
-
+    cout<<"************AGREGAR ESTACION************\n\n";
     cout<<"Ingrese nombre de la estacion: ";
     cin.ignore();
     getline(cin, nombre);
 
-    cout<<"Ingrese documento del gerente de la estacion: ";
+    cout<<"\nIngrese documento del gerente de la estacion: ";
     getline(cin, documento);
-    formatoDocumento(&documento);
-
+    formatoDocumentoGerente(&documento);
+    cout<<endl;
     string prints;
     prints = "./../../prints/MenuRegion.txt";
     leerArchivoPorLinea(prints);
@@ -119,7 +122,7 @@ void RedNacional:: agregarEstacion(){
     if(opcionElegida == 2){region = "Centro";}
     if(opcionElegida == 3){region = "Sur";}
 
-    cout<<"Ingrese las coordenadas de la estacion: ";
+    cout<<"\nIngrese las coordenadas de la estacion: ";
     cin.ignore();
     getline(cin, gps);
 
@@ -128,12 +131,17 @@ void RedNacional:: agregarEstacion(){
     }
     estaciones[sizeEstaciones] = Estacion(nombre, codigo, documento, region, gps);
     sizeEstaciones += 1;
+
+    cout<<endl;
+    prints = "./../../prints/EstacionAgregada.txt";
+    leerArchivoPorLinea(prints);
+    system("pause");
 }
 
 void RedNacional:: eliminarEstacion(bool bandera, string codigoEliminar){
     //Metodo publico para eliminar una estacion (sólo si no posee surtidores activos).
     int posicion = -1;
-    //Encontrar surtidor en el arreglo
+    //Encontrar estacion  en el arreglo
     for(int i = 0; i < sizeEstaciones; i++){
         if(estaciones[i].getcodigoEstacion() == codigoEliminar){
             posicion = i;
@@ -141,7 +149,7 @@ void RedNacional:: eliminarEstacion(bool bandera, string codigoEliminar){
         }
     }
     if(bandera == false){
-        cout << "Estacion " << codigoEliminar << " no se puede eliminar" << endl;
+        cout << "\nEstacion " << codigoEliminar << " no se puede eliminar o no existe" << endl;
         return;
     }
     else{
@@ -167,23 +175,53 @@ void RedNacional:: eliminarEstacion(bool bandera, string codigoEliminar){
 string RedNacional:: obtenerCodigoEstacion(){
     //Pide un codigo de estacion y lo retorna
     limpiarPantalla();
+    cout<<"**********MENU DE ESTACIONES**********"<<endl<<endl;
     mostrarArregloEstaciones();
     string codigoEliminar;
-    cout<<"Escoja una opcion: ";
+    cout<<"\nEscoja una opcion: ";
     cin.ignore();
     getline(cin, codigoEliminar);
     return codigoEliminar;
+}
+
+string RedNacional:: obtenerRegionEstacion(){
+    limpiarPantalla();
+    cout<<"**********MENU DE ESTACIONES**********"<<endl<<endl;
+    mostrarArregloEstaciones();
+    string codigoEliminar;
+    string region;
+    cout<<"Escoja una opcion: ";
+    cin.ignore();
+    getline(cin, codigoEliminar);
+    for (int i = 0; i < sizeEstaciones; ++i) {
+        if(estaciones[i].getcodigoEstacion() == codigoEliminar){region = estaciones[i].getregion();}
+        return region, codigoEliminar;
+    }
 }
 
 void RedNacional:: ventasCombustible(){
     //Metodo publico para calcular el monto total de ventas por estacion segun el combustible
 }
 
-void RedNacional:: fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra){
+void RedNacional:: fijarPrecios(){
     //Metodo publico para fijar los precios del combustible
+    limpiarPantalla();
+    cout<<"*********FIJAR PRECIOS*********"<<endl<<endl;
+    for (int i = 0; i < sizeRegion; ++i) {
+        cout<<"Para la region "<<regiones[i]<<": \n";
+        cout<<"precio Regular: ";
+        cin>>precios[i][0];
+        cout<<"precio Premium: ";
+        cin>>precios[i][1];
+        cout<<"precio Ecoextra: ";
+        cin>>precios[i][2];
+        cout<<endl;
+    }
+    cout<<endl;
+    string prints = "./../../prints/FijarPrecios.txt";
+    leerArchivoPorLinea(prints);
+    system("pause");
 }
-
-
 
 void RedNacional:: mostrarArregloEstaciones(){
     for (int i = 0; i < sizeEstaciones; ++i) {
@@ -191,58 +229,57 @@ void RedNacional:: mostrarArregloEstaciones(){
     }
 }
 
-string RedNacional::elegirEstacion(){
+string RedNacional:: elegirEstacion(){
     //Metodo para elegir la estacion
     string estacion;
     cout << "Ingrese el codigo de la estacion en la que esta trabajando: " << endl;
     for (int i = 0; i < sizeEstaciones; ++i) {
        estaciones[i].mostrarEstaciones();
     }
+    cout<<"\nElija una opcion: ";
     cin >> estacion;
     return estacion;
 }
 
-
-
-void RedNacional::agregarRegiones(string arreglo[]){
+void RedNacional:: agregarRegiones(string arreglo[]){
     for (int i = 0; i < sizeRegion ; ++i) {
         regiones[i] = arreglo[i];
     }
 }
 
-
-
-/*
-void expandirArreglo(string**& arr, int& size) {
-    // Función que expande un arreglo dinámico
-    // Crear un nuevo arreglo con una posición más
-    string** nuevoArr = new string*[size + 1];
-    for (int i = 0; i < size+1; ++i) {
-        nuevoArr[i] = new string[4];
-    }
-
-    // Copiar elementos al nuevo arreglo
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            nuevoArr[i][j] = arr[i][j];
+void RedNacional:: asignarCapacidadTanque(){
+    // Asignar la capacidad del tanque de suministro, con un valor aleatorio entre
+    //100 y 200 litros para cada una de las categorías
+    string codigo = obtenerCodigoEstacion();
+    for (int i = 0; i < sizeEstaciones; ++i) {
+        if(estaciones[i].getcodigoEstacion() == codigo){
+            limpiarPantalla();
+            estaciones[i].asignarTanque();
+            cout<<"Las capacidades del Tanque de la estacion "<<codigo<<" son: "<<endl<<endl;
+            Tanque tanque = estaciones[i].getTanqueAsociado();
+            cout<<"Capacidad Regular: "<<tanque.getCapacidadRegular()<<endl;
+            cout<<"Capacidad Premium: "<<tanque.getCapacidadPremium()<<endl;
+            cout<<"Capacidad Ecoextra: "<<tanque.getCapacidadEcoextra()<<endl<<endl;
+            cout<<"Combustible Total Disponible: "<<tanque.getCombustibleDisponibleTotal()<<endl;
+            cout<<"Capacidad Total Disponible: "<<tanque.getCapacidadTotal()<<endl<<endl;
+            system("pause");
+            return;
         }
     }
-
-    // Liberar la memoria del arreglo original
-    for (int i = 0; i < size; ++i) {
-        delete[] arr[i];
-    }
-    delete[] arr;
-
-    // Actualizar el puntero para que apunte al nuevo arreglo
-    arr = nuevoArr;
-
-    // Aumentar el tamaño
-    size += 1;
 }
-*/
 
-
+int RedNacional:: calcularMontoPago(string tipoCombustible, int litrosVendidos, string region){
+    //calcula un monto de pago dependiendo del tipo de combustible y los litros vendidos
+    int monto = litrosVendidos;
+    for (int i = 0; i < 3; ++i) {
+        if(regiones[i] == region){
+            if(tipoCombustible == "Regular"){monto = monto*precios[i][0];}
+            else if(tipoCombustible == "Premium"){monto = monto*precios[i][1];}
+            else if(tipoCombustible == "Ecoextra"){monto = monto*precios[i][3];}
+            return monto;
+        }
+    }
+}
 
 
 

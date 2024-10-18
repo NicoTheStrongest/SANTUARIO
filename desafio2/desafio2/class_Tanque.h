@@ -6,23 +6,26 @@
 #include <fstream>
 #include <string>
 
+using namespace std;
+
 class Tanque{
 private:
-    int capacidadTotal;
-    int combustibleDisponibleTotal;
-    int capacidadRegular;
-    int capacidadPremium;
-    int capacidadEcoextra;
-    int disponibleRegular;
-    int disponiblePremium;
-    int disponibleEcoextra;
+    //                  ATRIBUTOS
+    int capacidadTotal = 300;
+    int combustibleDisponibleTotal = 300;
+    int capacidadRegular = 100;
+    int capacidadPremium = 100;
+    int capacidadEcoextra = 100;
+    int disponibleRegular = 100;
+    int disponiblePremium = 100;
+    int disponibleEcoextra = 100;
 public:
-    //Constructor
+    //                  CONSTRUCTOR Y DESTRUCTOR
     Tanque();
-    Tanque(int capacidad, int combustibleDisponible, int  capacidadRegular, int  capacidadPremium, int  capacidadEcoextra, int  disponibleRegular, int  disponiblePremium, int  disponibleEcoextra);
-    //Destructor
+    Tanque(int capacidadRegular, int capacidadPremium, int capacidadEcoextra, int disponibleRegular, int disponiblePremium, int disponibleEcoextra);
     ~Tanque();
-    //Getter
+
+    //                  GETTERS
     int getCapacidadTotal() const;
     int getCombustibleDisponibleTotal() const;
     int getCapacidadRegular() const;
@@ -31,7 +34,8 @@ public:
     int getDisponibleRegular() const;
     int getDisponiblePremium() const;
     int getDisponibleEcoexptra() const;
-    //Setter
+
+    //                  SETTERS
     void setCapacidadTotal (int newCapacidad);
     void setCombustibleDisponibleTotal (int newCombustibleDisponibleTotal);
     void setCapacidadRegular (int newCapacidadRegular);
@@ -40,9 +44,9 @@ public:
     void setDisponibleRegular(int newDisponibleRegular);
     void setDisponiblePremium(int newDisponiblePremium);
     void setDisponibleEcoextra(int newDisponibleEcoextra);
-    //Metodos
-    void disminuirDisponible(std::string combustible,int cantidad);
 
+    //                  METODOS
+    void disminuirDisponible(string combustible, int cantidad);
 };
 
 #endif // CLASS_TANQUE_H

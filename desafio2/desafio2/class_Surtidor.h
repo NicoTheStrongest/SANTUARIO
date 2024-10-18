@@ -8,10 +8,12 @@
 #include <fstream>
 #include <string>
 
+using namespace std;
+
 class Surtidor{
 private:
-    //Atributos
-    std::string codigoSurtidor, modelo;
+    //                  ATRIBUTOS
+    string codigoSurtidor, modelo;
     bool estado;
     Ventas* ventas;
     int sizeVentas = 0;
@@ -22,12 +24,12 @@ private:
 
     void expandirVentas();
 public:
-    //Constructor
+    //                  CONSTRUCTOR Y DESTRUCTOR
     Surtidor();
-    Surtidor(std::string codigoSurtidor, std::string modelo, bool estado = true);
-    //Destructor
+    Surtidor(string codigoSurtidor, string modelo, bool estado = true);
     ~Surtidor();
-    //Getters
+
+    //                  GETTERS
     std::string getCodigoSurtidor() const;
     std::string getModelo() const;
     bool getEstado() const;
@@ -37,7 +39,7 @@ public:
     int getPrecioEcoExtra() const;
     Ventas* getVentas() const;
 
-    //setters
+    //                  SETTERS
     void setCodigoSurtidor(std::string newCodigoSurtidor);
     void setModelo(std::string newModelo);
     void setEstado(bool estado);
@@ -46,14 +48,15 @@ public:
     void setPrecioPremium(int newPrecioPremium);
     void setPrecioEcoExtra(int newPrecioEcoextra);
 
-    //Metodos
-    void discriminarVentas(int& totalRegular, int& totalPremium, int& totalEcoextra);
+    //                  METODOS
+    void agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
     void agregarCodSurtidoresLectura(string codigo);
     void mostrarCodigos();
-    void mostrarAtributos();
-    void agregarVentaLectura(string codigoSurtidor, string tipoCombustible, string fechaHora, int cantidadCombustible, string metodoPago, string documentoCliente, int monto);
     void eliminarVentaSurtidor(string codigo);
-    void mostrarVentasSurtidor(string codigo, Ventas& ventas);
+    //void discriminarVentas(int& totalRegular, int& totalPremium, int& totalEcoextra);
+    //void mostrarAtributos();
+    //void mostrarVentasSurtidor(string codigo, Ventas& ventas);
+    //void detallesVentas();
 };
 
 #endif // CLASS_SURTIDOR_H

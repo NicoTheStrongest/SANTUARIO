@@ -17,40 +17,44 @@ using namespace std;
 //Clase para gestionar la red nacional
 class RedNacional{
 private:
-    //Atributos
+    //                  ATRIBUTOS
     Estacion* estaciones; // arreglo dinamico de estaciones
     int sizeEstaciones = 0; // cantidad de estaciones
     int capacidadEstaciones = 2;
 
-    double precios[3][3];
+    int precios[3][3];
 
     static const int sizeRegion = 3;
     string regiones[sizeRegion];
 
     void expandirEstaciones();
 public:
-    //Constructor - Destructor
+    //                  CONSTRUCTOR Y DESTRUCTOR
     RedNacional();
     ~RedNacional();
 
-    //Getters - Setters
+    //                  GETTERS
     int getSizetaciones()const;
     int getCapacidadEstaciones()const;
-    void setSizeEstaciones(int newSize);
-    int setCapacidadEstaciones(int newCapacidad);
     Estacion* getEstaciones()const;
 
-    //Metodos
-    void agregarEstacion();
+    //                  SETTERS
+    void setSizeEstaciones(int newSize);
+    int setCapacidadEstaciones(int newCapacidad);
+
+    //                  METODOS
     void agregarEstacionLectura(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
+    void agregarEstacion();
     void eliminarEstacion(bool bandera, string codigoEliminar);
     string obtenerCodigoEstacion();
+    string obtenerRegionEstacion();
     void ventasCombustible();
-    void fijarPrecios(double precioRegular,double precioPremium,double precioEcoExtra);
-    bool verificarFugas(const std::string& codigoEstacion);
+    void fijarPrecios();
     void mostrarArregloEstaciones();
-    void agregarRegiones(string arreglo[]);
     string elegirEstacion();
+    void agregarRegiones(string arreglo[]);
+    void asignarCapacidadTanque();
+    int calcularMontoPago(string tipoCombustible, int litros, string region);
 };
 
 #endif // CLASS_REDNACIONAL_H

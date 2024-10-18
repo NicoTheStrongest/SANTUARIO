@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "funcionesGenerales.h"
 #include "class_Surtidor.h"
 #include "class_Tanque.h"
 #include "class_Ventas.h"
@@ -14,34 +15,36 @@ using namespace std;
 
 class Estacion{
 private:
-    //Atributos
+    //                  ATRIBUTOS
     Surtidor* surtidores; // Arreglo dinamico de surtidores de la estacion
-    std::string nombre, codigoEstacion, gerente, region, coordenadas; // atributos surtidor
+    string nombre, codigoEstacion, gerente, region, coordenadas; // atributos surtidor
     int sizeSurtidores = 0;
     int capacidadSurtidores = 1;
     int navesActuales = 0;
     int capacidadNaves = 1;
     string* naves;
-    Tanque tanque;
+
+    Tanque tanqueAsociado;
     void expandirSurtidores();
     void expandirNaves();
 public:
-    //Constructor
+    //                  CONSTRUCTOR Y DESTRUCTOR
     Estacion();
     Estacion(string nombreO, string codigoEstacionO, string gerenteO, string regionO, string coordenadasO);
-    //Destructor
     ~Estacion();
-    //Getters
-    std::string getnombre()const;
-    std::string getcodigoEstacion()const;
-    std::string getgerente()const;
-    std::string getregion()const;
-    std::string getcoordenadas()const;
+
+    //                  GETTERS
+    string getnombre()const;
+    string getcodigoEstacion()const;
+    string getgerente()const;
+    string getregion()const;
+    string getcoordenadas()const;
     int getsizeSurtidores()const;
     int getCapacidadSurtidores()const;
     Surtidor* getSurtidores() const;
+    Tanque getTanqueAsociado()const;
 
-    //Setters
+    //                  SETTERS
     void setNombre(std::string newNombre);
     void setCodigoEstacion(std::string newCodigoEstacion);
     void setGerente(std::string newGerente);
@@ -49,26 +52,27 @@ public:
     void setCoordenadas(std::string newCoordenadas);
     void setSizeSurtidores(int newSizeSurtidores);
     void setCapacidadSurtidores(int newCapacidadSurtidores);
+    Tanque setTanqueAsociado();
 
-    //Metodos
-    void agregarCodSurtidoresLectura(string codigo);
+    //                  METODOS
     void agregarSurtidor(string codigoEstacion);
     void agregarSurtidorLectura(string codigo, string modelo, bool estado);
-    void eliminarSurtidor(string codigo);
-    void activarSurtidor();
-    void desactivarSurtidor();
+    void mostrarEstaciones();
     string obtenerCodigoSurtidor(string codigoEstacion);
+    void eliminarSurtidor(string codigo);
+    void eliminarSurtidoresNavesEstacion(bool eliminar, string codigo);
+    void activarSurtidor(string codSurtidor);
+    void desactivarSurtidor(string codSurtidor);
     void consultarHistorico(Ventas* ventas, int sizeVentas, string codEstacion);
+    void asignarCapacidadTanque();
     void reportarLitrosVendidos();
     void simularVenta();
-    void asignarCapacidadTanque();
     void verificarFugas(Ventas* ventas, int sizeVentas,string estacion);
-    void mostrarEstaciones();
     void agregarNaveLectura(string codigo);
     void mostrarNaves();
     bool surtidoresInactivos(string codigoEstacion);
-    void eliminarSurtidoresNavesEstacion(bool eliminar, string codigo);
-
+    void asignarTanque();
+    void disminuirTanque(string tipoCombustible, int litros);
 };
 
 #endif // CLASS_ESTACION_H
