@@ -27,7 +27,10 @@ Estacion::Estacion(string nombreO, string codigoEstacionO, string gerenteO, stri
     coordenadas = coordenadasO;
 }
 
-Estacion::~Estacion(){/*delete[] surtidores; delete[] naves;*/}
+Estacion::~Estacion(){
+    if(sizeSurtidores > 0){delete[] surtidores;}
+    if(navesActuales > 0){delete[] naves;}
+}
 
 //                  GETTERS
 

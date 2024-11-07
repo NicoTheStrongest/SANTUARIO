@@ -1,0 +1,66 @@
+
+		BASICO CON SURTIDORES ACTIVOS Y VENTAS NORMALES
+
+-norte,centro,sur
+1,badbunny,1001735201,norte,41°24'12.2"N 2°10'26.5"E
+2,sanlucas,1007534567,sur,45°24'12.2"N 4°10'26.5"S
+3,mora,1008976534,norte,51°30'30"N 0°7'33"O
+4,amapolas,1234567890,centro,52°31'N 28"N;13°24'38"E
+5,polaris,1206745265,sur,41°53'30"N 12°29'39"E
+6,nasa,1029384756,centro,52°22'26"N 4°53'27"E
+n1_1,n1_2,n2_1,n3_1,n3_2,n4_1,n5_1,n6_1
+s1_1_1,modelo1,activo
+s1_1_2,modelo1,activo
+s1_1_3,modelo1,activo
+s1_2_1,modelo2,activo
+s1_2_2,modelo2,activo
+s1_2_3,modelo2,activo
+s2_1_1,modelo1,activo
+s2_1_2,modelo1,activo
+s3_1_1,modelo3,activo
+s3_1_2,modelo3,activo
+s3_2_1,modelo3,activo
+s3_2_2,modelo3,activo
+s3_2_3,modelo3,activo
+s4_1_1,modelo2,activo
+s4_1_2,modelo2,activo
+s5_1_1,modelo1,activo
+s5_1_2,modelo1,activo
+s6_1_1,modelo3,activo
+s6_1_2,modelo3,activo
+
+ventas nomales
+v1_1_1,regular,2024-07-01 00:00:00,10,Efectivo,1010101010,100000
+v1_1_2,regular,2024-07-01 00:10:00,12,TDebito,1111111111,120000
+v2_1_2,ecoextra,2024-07-01 00:00:00,16,TCredito,1212121212,192000
+v2_1_2,premium,2024-04-01 00:00:00,15,Efectivo,1313131313,375000
+
+
+ventas vender resto cuando el tanque se acaba (tanque regular norte se acaba)
+v1_1_1,regular,2024-07-01 00:00:00,10,Efectivo,1010101010,100000
+v1_1_2,regular,2024-07-01 00:10:00,89,TDebito,1111111111,890000
+v2_1_2,ecoextra,2024-07-01 00:00:00,16,TCredito,1212121212,192000
+v2_1_2,premium,2024-04-01 00:00:00,15,Efectivo,1313131313,375000
+
+
+
+
+			UNA ESTACION UN SURTIDOR UNA VENTA
+-norte,centro,sur
+1,badbunny,1001735201,norte,41°24'12.2"N 2°10'26.5"E
+s1_1_1,modelo1,activo
+
+ventas
+v1_1_1,regular,2024-07-01 00:00:00,10,Efectivo,1010101010,100000
+
+
+
+
+
+
+
+
+
+
+
+

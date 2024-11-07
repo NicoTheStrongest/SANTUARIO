@@ -16,7 +16,7 @@ using namespace std;
 //                  CONSTRUCTOR Y DESTRUCTOR
 
 RedNacional::RedNacional() : sizeEstaciones(0), capacidadEstaciones(2){
-    estaciones = new Estacion[capacidadEstaciones];
+    //estaciones = new Estacion[capacidadEstaciones];
 
     // Inicializar los precios (Ejemplo)
     precios[0][0] = 10000;  // Norte, Regular
@@ -32,7 +32,9 @@ RedNacional::RedNacional() : sizeEstaciones(0), capacidadEstaciones(2){
     precios[2][2] = 12000;  // Sur, EcoExtra
 }
 
-RedNacional::~RedNacional(){delete[] estaciones;}
+RedNacional::~RedNacional(){
+    if(sizeEstaciones > 0){delete[] estaciones;}
+}
 
 //                  GETTERS
 
