@@ -20,7 +20,7 @@ private:
     //                  ATRIBUTOS
     Estacion* estaciones; // arreglo dinamico de estaciones
     int sizeEstaciones = 0; // cantidad de estaciones
-    int capacidadEstaciones = 2;
+    int capacidadEstaciones = 1;
 
     int precios[3][3];
 

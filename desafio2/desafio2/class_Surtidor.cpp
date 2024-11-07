@@ -20,7 +20,9 @@ Surtidor::Surtidor(string codigoSurtidor, string modelo, bool estado)
     precioEcoextra = 0;
 }
 
-Surtidor::~Surtidor(){/*delete[] ventas;*/}
+Surtidor::~Surtidor(){
+    if(sizeVentas > 0){delete[] ventas;}
+}
 
 //                  GETTERS
 
